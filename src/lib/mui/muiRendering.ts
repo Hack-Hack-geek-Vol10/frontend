@@ -1,3 +1,4 @@
+export * from "@mui/material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
