@@ -1,5 +1,5 @@
 overwrite: true
-schema: "path/to/your/schema.graphql"
+schema: "./schema.graphql"
 documents: "./codegen"
 generates:
   src/generated/graphql.ts:
