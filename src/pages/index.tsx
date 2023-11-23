@@ -4,9 +4,5 @@ import { Box } from "@/lib/mui/muiRendering";
 
 //チュートリアルとか
 export default function Home() {
-  return (
-    <>
-      <Box>チュートリアル</Box>
-    </>
-  );
+  return <Box>aa</Box>;
 }
