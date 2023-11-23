@@ -1,5 +1,4 @@
 import firebase, { getApps, initializeApp } from "firebase/app";
-import "firebase/auth";
 import { getAuth } from "firebase/auth";
 import "firebase/auth";
 
@@ -13,5 +12,5 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-const auth = initializeApp(firebaseConfig);
-export const app = getAuth(auth);
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);

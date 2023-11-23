@@ -5,50 +5,62 @@ import React, {
   useState,
   ReactNode,
 } from "react";
-import firebase from "firebase/app";
-import "firebase/auth";
-
-// ユーザー情報の型定義
-interface User {
-  userId: string;
-  name: string | null;
-  icon: string | null;
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  User,
+} from "firebase/auth";
+import { auth } from "../lib/firebase/client";
+interface AuthContextType {
+  currentUser: User | null;
+  login: () => Promise<void>;
+  logout: () => Promise<void>;
 }
 
-// Contextの型定義
-interface FirebaseContextType {
-  user: User | null;
-}
+const AuthContext = createContext<AuthContextType | null>(null);
 
-export const FirebaseContext = createContext<FirebaseContextType | null>(null);
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
-interface FirebaseProviderProps {
+interface AuthProviderProps {
   children: ReactNode;
 }
 
-const FirebaseProvider: React.FC<FirebaseProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // ログイン処理
+  const login = async () => {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(auth, provider);
+  };
+  // ログアウト処理
+  const logout = async () => {
+    await signOut(auth);
+  };
 
   useEffect(() => {
-    const unsubscribe = firebase
-      .auth()
-      .onAuthStateChanged((currentUser: any) => {
-        if (currentUser) {
-          const { uid, displayName, photoURL } = currentUser;
-          setUser({ userId: uid, name: displayName, icon: photoURL });
-        } else {
-          setUser(null);
-        }
-      });
+    // ログイン状態の変化を監視
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      setLoading(false);
+    });
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
+  const value = {
+    currentUser,
+    login,
+    logout,
+  };
+
   return (
-    <FirebaseContext.Provider value={{ user }}>
-      {children}
-    </FirebaseContext.Provider>
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
   );
 };
-
-export default FirebaseProvider;
