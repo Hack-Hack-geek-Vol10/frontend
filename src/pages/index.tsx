@@ -1,9 +1,10 @@
 import Image from "next/image";
-
 import { Box } from "@/lib/mui/muiRendering";
-import SignInWithGoogle from "@/components/SignInWithGoogle";
-
-//チュートリアルとか
+import Header from "@/components/Header";
 export default function Home() {
-  return <SignInWithGoogle />;
+  return (
+    <Box>
+      <Header />
+    </Box>
+  );
 }

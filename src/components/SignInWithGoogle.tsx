@@ -1,24 +1,24 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import useAuth from "@/hooks/useFirebase";
 import { AuthContext } from "@/store/AuthContext";
+import { Box, Typography, Button } from "@/lib/mui/muiRendering";
 
 const SignInWithGoogle = () => {
   const { currentUser } = useContext(AuthContext);
   const signInWithGoogle = useAuth().signInWithGoogle;
 
   return (
-    <div>
+    <>
       {currentUser ? (
-        <div>
-          <p>ログイン中</p>
-          <p>{currentUser.displayName}</p>
-          <p>{currentUser.email}</p>
-          <p>{currentUser.photoURL}</p>
-        </div>
+        <Box>
+          <Typography>ログイン中</Typography>
+
+          <Typography>{currentUser.uid}</Typography>
+        </Box>
       ) : (
-        <button onClick={signInWithGoogle}>Googleでログイン</button>
+        <Button onClick={signInWithGoogle}>Googleでログイン</Button>
       )}
-    </div>
+    </>
   );
 };
 
