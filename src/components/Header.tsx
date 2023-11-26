@@ -16,23 +16,7 @@ const Header = () => {
       justifyContent='space-between'
       padding={2}
       bgcolor='#123456'
-    >
-      {/* Left: Logo and Text */}
-
-      <Box display='flex' alignItems='center' gap={2}>
-        {currentUser !== null ? <LogoutButton /> : <LoginButton />}
-        <Button
-          variant='outlined'
-          sx={{
-            width: "100px",
-            height: "35px",
-            fontSize: "10px",
-
-            zIndex: 100,
-          }}
-        ></Button>
-      </Box>
-    </Box>
+    ></Box>
   );
 };
 
