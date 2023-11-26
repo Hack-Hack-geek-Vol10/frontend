@@ -60,25 +60,25 @@ const AuthProvider: VFC<{ children: ReactNode }> = ({ children }) => {
     });
   }, [setSignInCheck, currentUser]);
 
-  if (signInCheck) {
-    return (
-      <AuthContext.Provider value={{ currentUser, signInCheck, logout, login }}>
-        {children}
-      </AuthContext.Provider>
-    );
-  } else {
-    // ログイン確認中
-    // 自分で作ったローディングコンポーネントをレンダリングする
-    return (
-      <>
-        <AuthContext.Provider
-          value={{ currentUser, signInCheck, logout, login }}
-        >
-          <Top />
-        </AuthContext.Provider>
-      </>
-    );
-  }
+  // if (signInCheck) {
+  return (
+    <AuthContext.Provider value={{ currentUser, signInCheck, logout, login }}>
+      {children}
+    </AuthContext.Provider>
+  );
+  // } else {
+  //   // ログイン確認中
+  //   // 自分で作ったローディングコンポーネントをレンダリングする
+  //   return (
+  //     <>
+  //       <AuthContext.Provider
+  //         value={{ currentUser, signInCheck, logout, login }}
+  //       >
+  //         <Top />
+  //       </AuthContext.Provider>
+  //     </>
+  //   );
+  // }
 };
 
 export { AuthContext, AuthProvider };
