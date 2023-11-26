@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "@/store/AuthContext";
 import { Box, Button, IconButton } from "@/lib/mui/muiRendering";
 import { useRouter } from "next/router";
-import { linkWithPopup } from "firebase/auth";
-
+import LoginButton from "@/components/commons/LoginButton";
+import LogoutButton from "@/components/commons/LogoutButton";
 const Header = () => {
   const router = useRouter();
-  const [user, setUser] = useState(null); // ユーザー情報を保持するstate
-
-  const currentPage = router.pathname.replace(/\//g, "");
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <Box
-      sx={{ position: "sticky", height: "40px", top: 0 }}
+      sx={{ position: "sticky", height: "62px", top: 0 }}
       display='flex'
       alignItems='center'
       justifyContent='space-between'
@@ -19,23 +18,9 @@ const Header = () => {
       bgcolor='#123456'
     >
       {/* Left: Logo and Text */}
-      <Box display='flex' alignItems='center' gap={2}>
-        <img src='/path/to/your/logo.png' alt='Logo' width={50} />
-        <span style={{ color: "white", fontWeight: "bold" }}>
-          SchemaCreator
-        </span>
-      </Box>
 
       <Box display='flex' alignItems='center' gap={2}>
-        {user ? (
-          <IconButton aria-label='notifications'>
-            <LogoutButton />
-          </IconButton>
-        ) : (
-          <IconButton>
-            <LoginButton />
-          </IconButton>
-        )}
+        {currentUser !== null ? <LogoutButton /> : <LoginButton />}
         <Button
           variant='outlined'
           sx={{

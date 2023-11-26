@@ -1,12 +1,10 @@
 import Image from "next/image";
-
 import { Box } from "@/lib/mui/muiRendering";
-
-//チュートリアルとか
+import Header from "@/components/Header";
 export default function Home() {
   return (
     <Box>
-      <p>ee</p>
+      <Header />
     </Box>
   );
 }
