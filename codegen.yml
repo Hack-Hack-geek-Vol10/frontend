@@ -2,7 +2,7 @@ overwrite: true
 schema: "schema.graphql"
 documents: "src/**/*.gql"
 generates:
-  generated/graphql.ts:
+  src/generated/graphql.ts:
     plugins:
       - "typescript"
       - "typescript-operations"
