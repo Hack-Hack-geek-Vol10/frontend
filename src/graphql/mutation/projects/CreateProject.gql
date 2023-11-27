@@ -1,0 +1,11 @@
+# src/mutations/CreateProject.graphql
+
+mutation CreateProject($title: String!) {
+  createProject(title: $title) {
+    projectId
+    title
+    lastImage
+    isPersonal
+    updatedAt
+  }
+}

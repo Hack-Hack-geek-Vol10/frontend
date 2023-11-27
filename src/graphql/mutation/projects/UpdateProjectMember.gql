@@ -1,0 +1,13 @@
+# src/mutations/UpdateProjectMember.graphql
+
+mutation UpdateProjectMember($projectId: ID!, $userId: ID!, $authority: Auth) {
+  updateProjectMember(
+    projectId: $projectId
+    userId: $userId
+    authority: $authority
+  ) {
+    projectId
+    userId
+    authority
+  }
+}
