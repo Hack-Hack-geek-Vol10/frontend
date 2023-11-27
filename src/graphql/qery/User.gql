@@ -1,0 +1,7 @@
+query GetUser($user_id: String!) {
+  user(user_id: $user_id) {
+    user_id
+    email
+    name
+  }
+}

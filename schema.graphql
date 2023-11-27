@@ -13,6 +13,7 @@ type Query {
 
 input NewUser {
   name: String!
+  email: String!
 }
 
 type Mutation {
