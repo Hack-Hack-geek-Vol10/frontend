@@ -2,7 +2,6 @@ import firebase from "firebase/app";
 import { createContext, useEffect, useState, VFC, ReactNode } from "react";
 import { auth } from "@/lib/firebase/client";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import Top from "@/components/top";
 export type User = firebase.User;
 
 type AuthContextProps = {
@@ -30,7 +29,6 @@ const AuthProvider: VFC<{ children: ReactNode }> = ({ children }) => {
     try {
       auth.signOut();
       setSignInCheck(false);
-      console.log(signInCheck);
       console.log("logout");
     } catch (err) {
       console.log(err);
@@ -66,19 +64,6 @@ const AuthProvider: VFC<{ children: ReactNode }> = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-  // } else {
-  //   // ログイン確認中
-  //   // 自分で作ったローディングコンポーネントをレンダリングする
-  //   return (
-  //     <>
-  //       <AuthContext.Provider
-  //         value={{ currentUser, signInCheck, logout, login }}
-  //       >
-  //         <Top />
-  //       </AuthContext.Provider>
-  //     </>
-  //   );
-  // }
 };
 
 export { AuthContext, AuthProvider };

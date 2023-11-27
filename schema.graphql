@@ -43,8 +43,12 @@ type Mutation {
   createProject(title: String!): Project
   updateProject(projectId: ID!, title: String, lastImage: Upload): Project
   deleteProject(projectId: ID!): String
-  createInviteLink(projectId: ID!,authority:Auth!): String
+  createInviteLink(projectId: ID!, authority: Auth!): String
   createProjectMember(token: String!): ProjectMember
-  updateProjectMember(projectId: ID!, userId: ID!, authority: Auth): ProjectMember
+  updateProjectMember(
+    projectId: ID!
+    userId: ID!
+    authority: Auth
+  ): ProjectMember
   deleteProjectMember(projectId: ID!, userId: ID!): String
 }

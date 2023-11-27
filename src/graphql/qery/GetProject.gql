@@ -1,0 +1,11 @@
+# GetProject.graphql
+
+query GetProject($projectId: ID!) {
+  project(projectId: $projectId) {
+    projectId
+    title
+    lastImage
+    isPersonal
+    updatedAt
+  }
+}

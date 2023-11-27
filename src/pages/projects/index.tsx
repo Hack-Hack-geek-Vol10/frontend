@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
+
 const index = () => {
   const { currentUser } = useContext(AuthContext);
   console.log(currentUser);

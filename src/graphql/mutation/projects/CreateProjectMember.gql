@@ -1,0 +1,9 @@
+# src/mutations/CreateProjectMember.graphql
+
+mutation CreateProjectMember($token: String!) {
+  createProjectMember(token: $token) {
+    projectId
+    userId
+    authority
+  }
+}

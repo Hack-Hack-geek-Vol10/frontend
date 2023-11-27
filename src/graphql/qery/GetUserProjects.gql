@@ -1,0 +1,11 @@
+# GetUserProjects.graphql
+
+query GetUserProjects($userId: ID!) {
+  projects(userId: $userId) {
+    projectId
+    title
+    lastImage
+    isPersonal
+    updatedAt
+  }
+}
