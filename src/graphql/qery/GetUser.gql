@@ -1,0 +1,9 @@
+# GetUser.graphql
+
+query GetUser($userId: ID!) {
+  user(userId: $userId) {
+    userId
+    email
+    name
+  }
+}
