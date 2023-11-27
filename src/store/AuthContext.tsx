@@ -66,19 +66,7 @@ const AuthProvider: VFC<{ children: ReactNode }> = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-  // } else {
-  //   // ログイン確認中
-  //   // 自分で作ったローディングコンポーネントをレンダリングする
-  //   return (
-  //     <>
-  //       <AuthContext.Provider
-  //         value={{ currentUser, signInCheck, logout, login }}
-  //       >
-  //         <Top />
-  //       </AuthContext.Provider>
-  //     </>
-  //   );
-  // }
+
 };
 
 export { AuthContext, AuthProvider };
