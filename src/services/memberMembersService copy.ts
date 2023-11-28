@@ -32,6 +32,14 @@ class MembersService {
 
     return response.data.updateProjectMember;
   }
+  async deleteProjectMember(projectId: string, userId: string) {
+    const response = await this.client.mutate({
+      mutation: UPDATE_PROJECT_MEMBER,
+      variables: { projectId, userId },
+    });
+
+    return response.data.deleteProjectMember;
+  }
 }
 
 export default MembersService;
