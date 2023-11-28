@@ -4,7 +4,7 @@ import {
   UPDATE_PROJECT_MEMBER,
 } from "@/repositories/membersRepositories";
 
-class MembersMembersServices {
+class MemberMutationServices {
   private client: ApolloClient<NormalizedCacheObject>;
 
   constructor(client: ApolloClient<NormalizedCacheObject>) {
@@ -42,4 +42,4 @@ class MembersMembersServices {
   }
 }
 
-export default MembersMembersServices;
+export default MemberMutationServices;

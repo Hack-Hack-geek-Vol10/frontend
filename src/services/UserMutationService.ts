@@ -5,7 +5,7 @@ import {
   DELETE_USER,
 } from "@/repositories/userRepositories";
 
-class UsersMutationServices {
+class UserMutationServices {
   private client: ApolloClient<NormalizedCacheObject>;
 
   constructor(client: ApolloClient<NormalizedCacheObject>) {
@@ -37,4 +37,4 @@ class UsersMutationServices {
   }
 }
 
-export default UsersMutationServices;
+export default UserMutationServices;

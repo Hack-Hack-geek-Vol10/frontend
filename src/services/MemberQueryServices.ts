@@ -2,7 +2,7 @@ import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 
 import { GET_PROJECT_MEMBERS } from "@/repositories/membersRepositories";
 
-class MembersQueryServices {
+class MemberQueryServices {
   private client: ApolloClient<NormalizedCacheObject>;
   constructor(client: ApolloClient<NormalizedCacheObject>) {
     this.client = client;
@@ -16,4 +16,4 @@ class MembersQueryServices {
     return response.data.projectMembers;
   }
 }
-export default MembersQueryServices;
+export default MemberQueryServices;

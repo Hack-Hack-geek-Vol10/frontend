@@ -6,7 +6,7 @@ import {
   CREATE_INVITE_LINK,
 } from "@/repositories/projectsRepositories";
 
-class ProjectsMembersServices {
+class ProjectMutationServices {
   private client: ApolloClient<NormalizedCacheObject>;
 
   constructor(client: ApolloClient<NormalizedCacheObject>) {
@@ -47,4 +47,4 @@ class ProjectsMembersServices {
   }
 }
 
-export default ProjectsMembersServices;
+export default ProjectMutationServices;
