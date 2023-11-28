@@ -1,9 +1,8 @@
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import {
-  GET_PROJECT_MEMBERS,
   CREATE_PROJECT_MEMBER,
   UPDATE_PROJECT_MEMBER,
-} from "@/repositories/membersRepository";
+} from "@/repositories/membersRepositories";
 
 class MembersService {
   private client: ApolloClient<NormalizedCacheObject>;

@@ -1,6 +1,6 @@
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 
-import { GET_PROJECT_MEMBERS } from "@/repositories/membersRepositories";
+import { GET_USER } from "@/repositories/userRepositories";
 
 class MemberQuery {
   private client: ApolloClient<NormalizedCacheObject>;
@@ -8,10 +8,10 @@ class MemberQuery {
     this.client = client;
   }
 
-  async getProjectMembers(projectId: string) {
+  async getUser(userId: string) {
     const response = await this.client.query({
-      query: GET_PROJECT_MEMBERS,
-      variables: { projectId },
+      query: GET_USER,
+      variables: { userId },
     });
     return response.data.projectMembers;
   }
