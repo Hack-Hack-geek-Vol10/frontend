@@ -1,9 +1,0 @@
-# src/mutations/UpdateUser.graphql
-
-mutation UpdateUser($userId: ID!, $name: String) {
-  updateUser(userId: $userId, name: $name) {
-    userId
-    email
-    name
-  }
-}
