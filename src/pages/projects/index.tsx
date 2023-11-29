@@ -1,17 +1,15 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
 
-const index = () => {
+const Index = () => {
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
 
   return (
     <div>
       <h1>projects</h1>
-      <p>currentUser: {currentUser?.i}</p>
+      <p>currentUser: {currentUser?.uid}</p>
     </div>
   );
 };
 
-export default index;
+export default Index;

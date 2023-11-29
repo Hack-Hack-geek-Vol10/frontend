@@ -1,6 +1,8 @@
 import useUserRepository from "@/repository/UsersRepositories";
-
+import { useContext } from "react";
+import { AuthContext } from "@/store/AuthContext";
 export function useUseService() {
+  const { currentUser } = useContext(AuthContext);
   const { GetUser, CreateUser, UpdateUser, DeleteUser } = useUserRepository();
 
   const useGetUser = (userId: string) => {
@@ -20,8 +22,14 @@ export function useUseService() {
 
   const useCreateUser = async (name: string) => {
     try {
-      const response = await CreateUser(name);
-      return response;
+      await GetUser(currentUser.uid);
+      switch (!currentUser.uid) {
+        case true:
+          const response = await CreateUser(name);
+          return response;
+        case false:
+          break;
+      }
     } catch (error) {
       console.log("ServicesError" + error);
     }
