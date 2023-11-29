@@ -23,7 +23,7 @@ import {
   DeleteUserDocument,
 } from "@/generated/graphql";
 
-export function useUserService() {
+export default function useUserService() {
   const [createUser] = useMutation<
     CreateUserMutation,
     CreateUserMutationVariables
@@ -39,22 +39,22 @@ export function useUserService() {
     DeleteUserMutationVariables
   >(DeleteUserDocument);
 
-  function useGetUser(id: string) {
+  function GetUser(id: string) {
     return useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, {
       variables: { userId: id },
     });
   }
 
-  function useCreateUser(name: string) {
+  function CreateUser(name: string) {
     return createUser({ variables: { name } });
   }
 
-  function useUpdateUser(userId: string, name: string) {
+  function UpdateUser(userId: string, name: string) {
     return updateUser({ variables: { userId, name } });
   }
-  function useDeleteUser(userId: string) {
+  function DeleteUser(userId: string) {
     return deleteUser({ variables: { userId } });
   }
 
-  return { useGetUser, useCreateUser, useUpdateUser, useDeleteUser };
+  return { GetUser, CreateUser, UpdateUser, DeleteUser };
 }
