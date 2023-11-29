@@ -1,5 +1,0 @@
-# src/mutations/DeleteProject.graphql
-
-mutation DeleteProject($projectId: ID!) {
-  deleteProject(projectId: $projectId)
-}

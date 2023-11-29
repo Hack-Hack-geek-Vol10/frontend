@@ -1,5 +1,0 @@
-# src/mutations/CreateInviteLink.graphql
-
-mutation CreateInviteLink($projectId: ID!, $authority: Auth!) {
-  createInviteLink(projectId: $projectId, authority: $authority)
-}

@@ -1,0 +1,32 @@
+# GetProjectMembers.graphql
+
+query GetProjectMembers($projectId: ID!) {
+  projectMembers(projectId: $projectId) {
+    projectId
+    userId
+    authority
+  }
+}
+mutation CreateProjectMember($token: String!) {
+  createProjectMember(token: $token) {
+    projectId
+    userId
+    authority
+  }
+}
+
+mutation UpdateProjectMember($projectId: ID!, $userId: ID!, $authority: Auth) {
+  updateProjectMember(
+    projectId: $projectId
+    userId: $userId
+    authority: $authority
+  ) {
+    projectId
+    userId
+    authority
+  }
+}
+
+mutation DeleteProjectMember($projectId: ID!, $userId: ID!) {
+  deleteProjectMember(projectId: $projectId, userId: $userId)
+}

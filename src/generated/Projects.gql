@@ -1,0 +1,43 @@
+# src/mutations/CreateProject.graphql
+
+query GetProject($projectId: ID!) {
+  project(projectId: $projectId) {
+    projectId
+    title
+    lastImage
+    isPersonal
+    updatedAt
+  }
+}
+query GetUserProjects($userId: ID!) {
+  projects(userId: $userId) {
+    projectId
+    title
+    lastImage
+    isPersonal
+    updatedAt
+  }
+}
+
+mutation CreateProject($title: String!) {
+  createProject(title: $title) {
+    projectId
+    title
+    lastImage
+    isPersonal
+    updatedAt
+  }
+}
+
+mutation UpdateProject($projectId: ID!, $title: String, $lastImage: Upload) {
+  updateProject(projectId: $projectId, title: $title, lastImage: $lastImage) {
+    projectId
+    title
+    lastImage
+    isPersonal
+    updatedAt
+  }
+}
+mutation DeleteProject($projectId: ID!) {
+  deleteProject(projectId: $projectId)
+}

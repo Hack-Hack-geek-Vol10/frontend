@@ -1,9 +1,0 @@
-# src/mutations/DeleteUser.graphql
-
-mutation DeleteUser($userId: ID!) {
-  deleteUser(userId: $userId) {
-    userId
-    email
-    name
-  }
-}
