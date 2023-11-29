@@ -20,7 +20,7 @@ import {
   DeleteProjectDocument,
 } from "@/generated/graphql";
 
-export function useProjectService() {
+export default function ProjectRepository() {
   const [createProject] = useMutation<
     CreateProjectMutation,
     CreateProjectMutationVariables
@@ -36,7 +36,7 @@ export function useProjectService() {
     DeleteProjectMutationVariables
   >(DeleteProjectDocument);
 
-  function useGetProject(id: string) {
+  function GetProject(id: string) {
     return useQuery<GetProjectQuery, GetProjectQueryVariables>(
       GetProjectDocument,
       {
@@ -45,25 +45,21 @@ export function useProjectService() {
     );
   }
 
-  function useCreateProject(title: string) {
+  function CreateProject(title: string) {
     return createProject({ variables: { title: title } });
   }
 
-  function useUpdateProject(
-    projectId: string,
-    title: string,
-    lastImage: string
-  ) {
+  function UpdateProject(projectId: string, title: string, lastImage: string) {
     return updateProject({ variables: { projectId, title, lastImage } });
   }
-  function useDeleteProject(projectId: string) {
+  function DeleteProject(projectId: string) {
     return deleteProject({ variables: { projectId } });
   }
 
   return {
-    useGetProject,
-    useCreateProject,
-    useUpdateProject,
-    useDeleteProject,
+    GetProject,
+    CreateProject,
+    UpdateProject,
+    DeleteProject,
   };
 }

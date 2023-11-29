@@ -25,7 +25,7 @@ import {
   DeleteProjectMemberDocument,
 } from "@/generated/graphql";
 
-export function useProjectMemberService() {
+export default function ProjectMemberRepository() {
   const [createProjectMember] = useMutation<
     CreateProjectMemberMutation,
     CreateProjectMemberMutationVariables
@@ -41,7 +41,7 @@ export function useProjectMemberService() {
     DeleteProjectMemberMutationVariables
   >(DeleteProjectMemberDocument);
 
-  function useGetProjectMembers(id: string) {
+  function GetProjectMembers(id: string) {
     return useQuery<GetProjectMembersQuery, GetProjectMembersQueryVariables>(
       GetProjectMembersDocument,
       {
@@ -50,11 +50,11 @@ export function useProjectMemberService() {
     );
   }
 
-  function useCreateProjectMember(token: string) {
+  function CreateProjectMember(token: string) {
     return createProjectMember({ variables: { token } });
   }
 
-  function useUpdateProjectMember(
+  function UpdateProjectMember(
     projectId: string,
     userId: string,
     authority: Auth
@@ -64,14 +64,14 @@ export function useProjectMemberService() {
     });
   }
 
-  function useDeleteProjectMember(projectId: string, userId: string) {
+  function DeleteProjectMember(projectId: string, userId: string) {
     return deleteProjectMember({ variables: { projectId, userId } });
   }
 
   return {
-    useGetProjectMembers,
-    useCreateProjectMember,
-    useUpdateProjectMember,
-    useDeleteProjectMember,
+    GetProjectMembers,
+    CreateProjectMember,
+    UpdateProjectMember,
+    DeleteProjectMember,
   };
 }
