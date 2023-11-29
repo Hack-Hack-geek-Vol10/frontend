@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { auth } from "@/lib/firebase/client";
-import GoogleButton from "react-google-button";
 import "firebase/auth";
 import { Button } from "@mui/material";
 import { AuthContext } from "@/store/AuthContext";
