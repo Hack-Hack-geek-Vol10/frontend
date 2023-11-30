@@ -8,7 +8,7 @@ export function useProjectService() {
     DeleteProjectRepository,
   } = ProjectRepository();
 
-  const useGetProject = (projectId: string) => {
+  const GetProjectService = (projectId: string) => {
     try {
       const { data, loading, error } = GetProjectRepository(projectId);
       if (loading) {
@@ -23,7 +23,7 @@ export function useProjectService() {
     }
   };
 
-  const useCreateProject = async (title: string) => {
+  const CreateProjectService = async (title: string) => {
     try {
       const response = await CreateProjectRepository(title);
       return response;
@@ -32,7 +32,7 @@ export function useProjectService() {
     }
   };
 
-  const useUpdateProject = async (
+  const UpdateProjectService = async (
     projectId: string,
     title: string,
     lastImage: string
@@ -49,7 +49,7 @@ export function useProjectService() {
     }
   };
 
-  const useDeleteProject = async (projectId: string) => {
+  const DeleteProjectService = async (projectId: string) => {
     try {
       const response = await DeleteProjectRepository(projectId);
       return response;
@@ -59,9 +59,9 @@ export function useProjectService() {
   };
 
   return {
-    useGetProject,
-    useCreateProject,
-    useUpdateProject,
-    useDeleteProject,
+    GetProjectService,
+    CreateProjectService,
+    UpdateProjectService,
+    DeleteProjectService,
   };
 }

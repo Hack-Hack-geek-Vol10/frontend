@@ -3,15 +3,15 @@ import { Auth } from "@/generated/graphql";
 
 export function useProjectMemberService() {
   const {
-    GetProjectMembers,
-    CreateProjectMember,
-    UpdateProjectMember,
-    DeleteProjectMember,
+    GetProjectMembersRepository,
+    CreateProjectMemberRepository,
+    UpdateProjectMemberRepository,
+    DeleteProjectMemberRepository,
   } = ProjectMemberRepository();
 
-  const useGetProjectMembers = (projectId: string) => {
+  const GetProjectMembersService = (projectId: string) => {
     try {
-      const { data, loading, error } = GetProjectMembers(projectId);
+      const { data, loading, error } = GetProjectMembersRepository(projectId);
       if (loading) {
         console.log("Loading");
       }
@@ -24,31 +24,38 @@ export function useProjectMemberService() {
     }
   };
 
-  const useCreateProjectMember = async (token: string) => {
+  const CreateProjectMemberService = async (token: string) => {
     try {
-      const response = await CreateProjectMember(token);
+      const response = await CreateProjectMemberRepository(token);
       return response;
     } catch (error) {
       console.log("ServicesError" + error);
     }
   };
 
-  const useUpdateProjectMember = async (
+  const UpdateProjectMemberService = async (
     projectId: string,
     userId: string,
     authority: Auth
   ) => {
     try {
-      const response = await UpdateProjectMember(projectId, userId, authority);
+      const response = await UpdateProjectMemberRepository(
+        projectId,
+        userId,
+        authority
+      );
       return response;
     } catch (error) {
       console.log("ServicesError" + error);
     }
   };
 
-  const useDeleteProjectMember = async (projectId: string, userId: string) => {
+  const DeleteProjectMemberService = async (
+    projectId: string,
+    userId: string
+  ) => {
     try {
-      const response = await DeleteProjectMember(projectId, userId);
+      const response = await DeleteProjectMemberRepository(projectId, userId);
       return response;
     } catch (error) {
       console.log("ServicesError" + error);
@@ -56,9 +63,9 @@ export function useProjectMemberService() {
   };
 
   return {
-    useGetProjectMembers,
-    useCreateProjectMember,
-    useUpdateProjectMember,
-    useDeleteProjectMember,
+    GetProjectMembersService,
+    CreateProjectMemberService,
+    UpdateProjectMemberService,
+    DeleteProjectMemberService,
   };
 }

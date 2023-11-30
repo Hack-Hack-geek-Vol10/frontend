@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import { AuthContext } from "@/store/AuthContext";
 import useUseService from "@/service/UserServices";
 const LoginButton = () => {
-  const { CreateUser } = useUseService();
+  const { CreateUserService } = useUseService();
   const { login, currentUser } = useContext(AuthContext);
   const userId = currentUser?.uid;
   const userName = currentUser?.displayName;

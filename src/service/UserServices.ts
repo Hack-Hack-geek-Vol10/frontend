@@ -11,7 +11,7 @@ export default function useUseService() {
     DeleteUserRepository,
   } = useUserRepository();
 
-  const useGetUser = (userId: string) => {
+  const GetUserService = (userId: string) => {
     try {
       const { data, loading, error } = GetUserRepository(userId);
       if (loading) {
@@ -26,7 +26,7 @@ export default function useUseService() {
     }
   };
 
-  const useCreateUser = async (uid: string, name: string) => {
+  const CreateUserService = async (uid: string, name: string) => {
     try {
       GetUserRepository(uid);
       switch (!currentUser?.uid) {
@@ -41,7 +41,7 @@ export default function useUseService() {
     }
   };
 
-  const useUpdateUser = async (userId: string, name: string) => {
+  const UpdateUserService = async (userId: string, name: string) => {
     try {
       const response = await UpdateUserRepository(userId, name);
       return response;
@@ -50,7 +50,7 @@ export default function useUseService() {
     }
   };
 
-  const useDeleteUser = async (userId: string) => {
+  const DeleteUserService = async (userId: string) => {
     try {
       const response = await DeleteUserRepository(userId);
       return response;
@@ -59,5 +59,10 @@ export default function useUseService() {
     }
   };
 
-  return { useGetUser, useCreateUser, useUpdateUser, useDeleteUser };
+  return {
+    GetUserService,
+    CreateUserService,
+    UpdateUserService,
+    DeleteUserService,
+  };
 }
