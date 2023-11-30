@@ -1,12 +1,16 @@
 import ProjectRepository from "@/repository/ProjectRepositories";
 
 export function useProjectService() {
-  const { GetProject, CreateProject, UpdateProject, DeleteProject } =
-    ProjectRepository();
+  const {
+    GetProjectRepository,
+    CreateProjectRepository,
+    UpdateProjectRepository,
+    DeleteProjectRepository,
+  } = ProjectRepository();
 
   const useGetProject = (projectId: string) => {
     try {
-      const { data, loading, error } = GetProject(projectId);
+      const { data, loading, error } = GetProjectRepository(projectId);
       if (loading) {
         console.log("Loading");
       }
@@ -21,7 +25,7 @@ export function useProjectService() {
 
   const useCreateProject = async (title: string) => {
     try {
-      const response = await CreateProject(title);
+      const response = await CreateProjectRepository(title);
       return response;
     } catch (error) {
       console.log("ServicesError" + error);
@@ -34,7 +38,11 @@ export function useProjectService() {
     lastImage: string
   ) => {
     try {
-      const response = await UpdateProject(projectId, title, lastImage);
+      const response = await UpdateProjectRepository(
+        projectId,
+        title,
+        lastImage
+      );
       return response;
     } catch (error) {
       console.log("ServicesError" + error);
@@ -43,7 +51,7 @@ export function useProjectService() {
 
   const useDeleteProject = async (projectId: string) => {
     try {
-      const response = await DeleteProject(projectId);
+      const response = await DeleteProjectRepository(projectId);
       return response;
     } catch (error) {
       console.log("ServicesError" + error);

@@ -39,22 +39,27 @@ export default function UsersRepository() {
     DeleteUserMutationVariables
   >(DeleteUserDocument);
 
-  function GetUser(id: string) {
+  function GetUserRepository(id: string) {
     return useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, {
       variables: { userId: id },
     });
   }
 
-  function CreateUser(name: string) {
+  function CreateUserRepository(name: string) {
     return createUser({ variables: { name } });
   }
 
-  function UpdateUser(userId: string, name: string) {
+  function UpdateUserRepository(userId: string, name: string) {
     return updateUser({ variables: { userId, name } });
   }
-  function DeleteUser(userId: string) {
+  function DeleteUserRepository(userId: string) {
     return deleteUser({ variables: { userId } });
   }
 
-  return { GetUser, CreateUser, UpdateUser, DeleteUser };
+  return {
+    GetUserRepository,
+    CreateUserRepository,
+    UpdateUserRepository,
+    DeleteUserRepository,
+  };
 }

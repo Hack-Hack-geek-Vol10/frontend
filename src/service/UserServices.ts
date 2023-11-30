@@ -1,13 +1,19 @@
 import useUserRepository from "@/repository/UsersRepositories";
 import { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
-export function useUseService() {
+
+export default function useUseService() {
   const { currentUser } = useContext(AuthContext);
-  const { GetUser, CreateUser, UpdateUser, DeleteUser } = useUserRepository();
+  const {
+    GetUserRepository,
+    CreateUserRepository,
+    UpdateUserRepository,
+    DeleteUserRepository,
+  } = useUserRepository();
 
   const useGetUser = (userId: string) => {
     try {
-      const { data, loading, error } = GetUser(userId);
+      const { data, loading, error } = GetUserRepository(userId);
       if (loading) {
         console.log("Loading");
       }
@@ -20,12 +26,12 @@ export function useUseService() {
     }
   };
 
-  const useCreateUser = async (name: string) => {
+  const useCreateUser = async (uid: string, name: string) => {
     try {
-      await GetUser(currentUser.uid);
-      switch (!currentUser.uid) {
+      GetUserRepository(uid);
+      switch (!currentUser?.uid) {
         case true:
-          const response = await CreateUser(name);
+          const response = await CreateUserRepository(name);
           return response;
         case false:
           break;
@@ -37,7 +43,7 @@ export function useUseService() {
 
   const useUpdateUser = async (userId: string, name: string) => {
     try {
-      const response = await UpdateUser(userId, name);
+      const response = await UpdateUserRepository(userId, name);
       return response;
     } catch (error) {
       console.log("ServicesError" + error);
@@ -46,7 +52,7 @@ export function useUseService() {
 
   const useDeleteUser = async (userId: string) => {
     try {
-      const response = await DeleteUser(userId);
+      const response = await DeleteUserRepository(userId);
       return response;
     } catch (error) {
       console.log("ServicesError" + error);

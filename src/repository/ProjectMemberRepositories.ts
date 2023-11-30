@@ -41,7 +41,7 @@ export default function ProjectMemberRepository() {
     DeleteProjectMemberMutationVariables
   >(DeleteProjectMemberDocument);
 
-  function GetProjectMembers(id: string) {
+  function GetProjectMembersRepository(id: string) {
     return useQuery<GetProjectMembersQuery, GetProjectMembersQueryVariables>(
       GetProjectMembersDocument,
       {
@@ -50,11 +50,11 @@ export default function ProjectMemberRepository() {
     );
   }
 
-  function CreateProjectMember(token: string) {
+  function CreateProjectMemberRepository(token: string) {
     return createProjectMember({ variables: { token } });
   }
 
-  function UpdateProjectMember(
+  function UpdateProjectMemberRepository(
     projectId: string,
     userId: string,
     authority: Auth
@@ -64,14 +64,14 @@ export default function ProjectMemberRepository() {
     });
   }
 
-  function DeleteProjectMember(projectId: string, userId: string) {
+  function DeleteProjectMemberRepository(projectId: string, userId: string) {
     return deleteProjectMember({ variables: { projectId, userId } });
   }
 
   return {
-    GetProjectMembers,
-    CreateProjectMember,
-    UpdateProjectMember,
-    DeleteProjectMember,
+    GetProjectMembersRepository,
+    CreateProjectMemberRepository,
+    UpdateProjectMemberRepository,
+    DeleteProjectMemberRepository,
   };
 }

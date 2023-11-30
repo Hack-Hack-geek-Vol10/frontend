@@ -36,7 +36,7 @@ export default function ProjectRepository() {
     DeleteProjectMutationVariables
   >(DeleteProjectDocument);
 
-  function GetProject(id: string) {
+  function GetProjectRepository(id: string) {
     return useQuery<GetProjectQuery, GetProjectQueryVariables>(
       GetProjectDocument,
       {
@@ -45,21 +45,25 @@ export default function ProjectRepository() {
     );
   }
 
-  function CreateProject(title: string) {
+  function CreateProjectRepository(title: string) {
     return createProject({ variables: { title: title } });
   }
 
-  function UpdateProject(projectId: string, title: string, lastImage: string) {
+  function UpdateProjectRepository(
+    projectId: string,
+    title: string,
+    lastImage: string
+  ) {
     return updateProject({ variables: { projectId, title, lastImage } });
   }
-  function DeleteProject(projectId: string) {
+  function DeleteProjectRepository(projectId: string) {
     return deleteProject({ variables: { projectId } });
   }
 
   return {
-    GetProject,
-    CreateProject,
-    UpdateProject,
-    DeleteProject,
+    GetProjectRepository,
+    CreateProjectRepository,
+    UpdateProjectRepository,
+    DeleteProjectRepository,
   };
 }
