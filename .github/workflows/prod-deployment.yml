@@ -53,7 +53,7 @@ jobs:
     
       - name: Change manifest
         run: |
-          cd configs/config/manifest/product
+          cd frontend/product
           yq -i '.spec.template.spec.containers[0].image = "${{ secrets.HARBOR_REGISTRY }}/${{ github.repository }}:${{ github.sha }}"' 'deployment.yaml'
       
       - name: push repository
