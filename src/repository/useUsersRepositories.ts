@@ -23,7 +23,7 @@ import {
   DeleteUserDocument,
 } from "@/generated/graphql";
 
-export default function UsersRepository() {
+export default function useUsersRepository() {
   const [createUser] = useMutation<
     CreateUserMutation,
     CreateUserMutationVariables

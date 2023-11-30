@@ -1,5 +1,4 @@
-import ProjectMemberRepository from "@/repository/ProjectMemberRepositories";
-import React from "react";
+import ProjectMemberRepository from "@/repository/useProjectMemberRepositories";
 import { Auth } from "@/generated/graphql";
 
 export function useProjectMemberService() {
@@ -33,27 +32,33 @@ export function useProjectMemberService() {
     }
   };
 
-  const UpdateProjectMemberService = async (projectId: string, userId: string, authority: Auth) => {
-      try {
-        const response = UpdateProjectMemberRepository(
-          projectId,
-          userId,
-          authority
-        );
-        return response;
-      } catch (error) {
-        console.log("ServicesError" + error);
-      }
-    
-  const DeleteProjectMemberService = async (projectId: string, userId: string) => {
-      try {
-        const response = await DeleteProjectMemberRepository(projectId, userId);
-        return response;
-      } catch (error) {
-        console.log("ServicesError" + error);
-      }
-    },
-    
+  const UpdateProjectMemberService = async (
+    projectId: string,
+    userId: string,
+    authority: Auth
+  ) => {
+    try {
+      const response = UpdateProjectMemberRepository(
+        projectId,
+        userId,
+        authority
+      );
+      return response;
+    } catch (error) {
+      console.log("ServicesError" + error);
+    }
+  };
+  const DeleteProjectMemberService = async (
+    projectId: string,
+    userId: string
+  ) => {
+    try {
+      const response = await DeleteProjectMemberRepository(projectId, userId);
+      return response;
+    } catch (error) {
+      console.log("ServicesError" + error);
+    }
+  };
 
   return {
     GetProjectMembersService,
