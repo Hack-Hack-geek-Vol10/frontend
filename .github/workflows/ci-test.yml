@@ -1,0 +1,35 @@
+name: test and format code
+
+on:
+  pull_request:
+    branches: 
+      - main
+      - master    # master branchなかったら消していいよん :)
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    - name: Install Dependencies
+      uses: actions/setup-node@v3
+      with:
+        node-version: "20.7.0"
+    - name: Install Dependencis
+      run: |
+        npm clean-install
+        npm install -g eslint
+    # - name: format code
+    #   run: |
+    #     npm run format
+    # - name: test
+    #   run: |
+    #     npm run test
+    - name: check build
+      run: |
+        npm run build
