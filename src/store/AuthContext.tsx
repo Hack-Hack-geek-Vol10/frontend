@@ -1,4 +1,3 @@
-import firebase from "firebase/app";
 import { createContext, useEffect, useState, VFC, ReactNode } from "react";
 import { auth } from "@/lib/firebase/client";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -60,14 +59,12 @@ const AuthProvider: VFC<{ children: ReactNode }> = ({ children }) => {
           photoURL: user.photoURL || "",
         });
         setSignInCheck(true);
-        console.log(currentUser);
       } else {
         setSignInCheck(false);
       }
     });
   }, [setSignInCheck, currentUser]);
 
-  // if (signInCheck) {
   return (
     <AuthContext.Provider value={{ currentUser, signInCheck, logout, login }}>
       {children}

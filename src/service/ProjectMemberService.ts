@@ -1,4 +1,5 @@
 import ProjectMemberRepository from "@/repository/ProjectMemberRepositories";
+import React from "react";
 import { Auth } from "@/generated/graphql";
 
 export function useProjectMemberService() {
@@ -9,7 +10,7 @@ export function useProjectMemberService() {
     DeleteProjectMemberRepository,
   } = ProjectMemberRepository();
 
-  const GetProjectMembersService = (projectId: string) => {
+  const GetProjectMembersService = async (projectId: string) => {
     try {
       const { data, loading, error } = GetProjectMembersRepository(projectId);
       if (loading) {
@@ -23,44 +24,36 @@ export function useProjectMemberService() {
       console.log("ServicesError" + error);
     }
   };
-
   const CreateProjectMemberService = async (token: string) => {
     try {
-      const response = await CreateProjectMemberRepository(token);
+      const response = CreateProjectMemberRepository(token);
       return response;
     } catch (error) {
       console.log("ServicesError" + error);
     }
   };
 
-  const UpdateProjectMemberService = async (
-    projectId: string,
-    userId: string,
-    authority: Auth
-  ) => {
-    try {
-      const response = await UpdateProjectMemberRepository(
-        projectId,
-        userId,
-        authority
-      );
-      return response;
-    } catch (error) {
-      console.log("ServicesError" + error);
-    }
-  };
-
-  const DeleteProjectMemberService = async (
-    projectId: string,
-    userId: string
-  ) => {
-    try {
-      const response = await DeleteProjectMemberRepository(projectId, userId);
-      return response;
-    } catch (error) {
-      console.log("ServicesError" + error);
-    }
-  };
+  const UpdateProjectMemberService = async (projectId: string, userId: string, authority: Auth) => {
+      try {
+        const response = UpdateProjectMemberRepository(
+          projectId,
+          userId,
+          authority
+        );
+        return response;
+      } catch (error) {
+        console.log("ServicesError" + error);
+      }
+    
+  const DeleteProjectMemberService = async (projectId: string, userId: string) => {
+      try {
+        const response = await DeleteProjectMemberRepository(projectId, userId);
+        return response;
+      } catch (error) {
+        console.log("ServicesError" + error);
+      }
+    },
+    
 
   return {
     GetProjectMembersService,

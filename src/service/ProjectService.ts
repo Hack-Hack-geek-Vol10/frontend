@@ -1,5 +1,5 @@
 import ProjectRepository from "@/repository/ProjectRepositories";
-
+import React from "react";
 export function useProjectService() {
   const {
     GetProjectRepository,
@@ -8,7 +8,7 @@ export function useProjectService() {
     DeleteProjectRepository,
   } = ProjectRepository();
 
-  const GetProjectService = (projectId: string) => {
+  const GetProjectService = React.useCallback((projectId: string) => {
     try {
       const { data, loading, error } = GetProjectRepository(projectId);
       if (loading) {
@@ -21,42 +21,36 @@ export function useProjectService() {
     } catch (error) {
       console.log("ServicesError" + error);
     }
-  };
+  }, []);
 
-  const CreateProjectService = async (title: string) => {
+  const CreateProjectService = React.useCallback((title: string) => {
     try {
-      const response = await CreateProjectRepository(title);
+      const response = CreateProjectRepository(title);
       return response;
     } catch (error) {
       console.log("ServicesError" + error);
     }
-  };
+  }, []);
 
-  const UpdateProjectService = async (
-    projectId: string,
-    title: string,
-    lastImage: string
-  ) => {
-    try {
-      const response = await UpdateProjectRepository(
-        projectId,
-        title,
-        lastImage
-      );
-      return response;
-    } catch (error) {
-      console.log("ServicesError" + error);
-    }
-  };
-
-  const DeleteProjectService = async (projectId: string) => {
+  const UpdateProjectService = React.useCallback(
+    (projectId: string, title: string, lastImage: string) => {
+      try {
+        const response = UpdateProjectRepository(projectId, title, lastImage);
+        return response;
+      } catch (error) {
+        console.log("ServicesError" + error);
+      }
+    },
+    []
+  );
+  const DeleteProjectService = React.useCallback(async (projectId: string) => {
     try {
       const response = await DeleteProjectRepository(projectId);
       return response;
     } catch (error) {
       console.log("ServicesError" + error);
     }
-  };
+  }, []);
 
   return {
     GetProjectService,
