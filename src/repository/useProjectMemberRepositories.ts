@@ -25,7 +25,7 @@ import {
   DeleteProjectMemberDocument,
 } from "@/generated/graphql";
 
-export default function ProjectMemberRepository() {
+export default function useProjectMemberRepository() {
   const [createProjectMember] = useMutation<
     CreateProjectMemberMutation,
     CreateProjectMemberMutationVariables
