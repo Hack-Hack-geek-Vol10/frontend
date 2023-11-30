@@ -2,7 +2,12 @@ import firebase from "firebase/app";
 import { createContext, useEffect, useState, VFC, ReactNode } from "react";
 import { auth } from "@/lib/firebase/client";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-export type User = firebase.User;
+export type User = {
+  uid: string;
+  displayName?: string;
+  photoURL?: string;
+  token?: string;
+};
 
 type AuthContextProps = {
   currentUser: User | null | undefined;
@@ -49,7 +54,11 @@ const AuthProvider: VFC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        setCurrentUser(user);
+        setCurrentUser({
+          uid: user.uid || "",
+          displayName: user.displayName || "",
+          photoURL: user.photoURL || "",
+        });
         setSignInCheck(true);
         console.log(currentUser);
       } else {
