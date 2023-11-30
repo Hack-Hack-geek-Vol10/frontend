@@ -48,7 +48,6 @@ jobs:
           repository: Hack-Hack-geek-Vol10/k8s
           token: ${{ secrets.GH_PAT }}
           ref: main
-          path: configs
           
     
       - name: Change manifest
