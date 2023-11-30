@@ -45,7 +45,7 @@ jobs:
       - name: Checkout another repo
         uses: actions/checkout@v3
         with:
-          repository: Hack-Hack-geek-Vol10/k8s
+          repository: schema-creator/k8s
           token: ${{ secrets.GH_PAT }}
           ref: main
           
