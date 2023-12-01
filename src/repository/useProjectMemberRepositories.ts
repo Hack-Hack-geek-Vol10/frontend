@@ -1,16 +1,10 @@
-import { useQuery, useMutation } from "@apollo/client";
-
-import {
-  GetProjectMembersQuery,
-  GetProjectMembersQueryVariables,
-  GetProjectMembersDocument,
-  Auth,
-} from "@/generated/graphql";
+import { useMutation } from "@apollo/client";
 
 import {
   CreateProjectMemberMutation,
   CreateProjectMemberMutationVariables,
   CreateProjectMemberDocument,
+  Auth,
 } from "@/generated/graphql";
 
 import {
@@ -41,17 +35,13 @@ export default function useProjectMemberRepository() {
     DeleteProjectMemberMutationVariables
   >(DeleteProjectMemberDocument);
 
-  function GetProjectMembersRepository(id: string) {
-    return useQuery<GetProjectMembersQuery, GetProjectMembersQueryVariables>(
-      GetProjectMembersDocument,
-      {
-        variables: { projectId: id },
-      }
-    );
-  }
-
   function CreateProjectMemberRepository(token: string) {
-    return createProjectMember({ variables: { token } });
+    try {
+      const response = createProjectMember({ variables: { token } });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function UpdateProjectMemberRepository(
@@ -59,17 +49,27 @@ export default function useProjectMemberRepository() {
     userId: string,
     authority: Auth
   ) {
-    return updateProjectMember({
-      variables: { projectId, userId, authority },
-    });
+    try {
+      const response = updateProjectMember({
+        variables: { projectId, userId, authority },
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function DeleteProjectMemberRepository(projectId: string, userId: string) {
-    return deleteProjectMember({ variables: { projectId, userId } });
+    try {
+      const response = deleteProjectMember({
+        variables: { projectId, userId },
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
-
   return {
-    GetProjectMembersRepository,
     CreateProjectMemberRepository,
     UpdateProjectMemberRepository,
     DeleteProjectMemberRepository,

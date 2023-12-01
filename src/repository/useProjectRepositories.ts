@@ -1,14 +1,5 @@
-import { useQuery, useMutation } from "@apollo/client";
-import {
-  GetProjectQuery,
-  GetProjectQueryVariables,
-  GetProjectDocument,
-} from "@/generated/graphql";
-import {
-  GetUserProjectsDocument,
-  GetUserProjectsQuery,
-  GetUserProjectsQueryVariables,
-} from "@/generated/graphql";
+import { useMutation } from "@apollo/client";
+
 import {
   CreateProjectMutation,
   CreateProjectMutationVariables,
@@ -41,25 +32,13 @@ export default function useProjectRepository() {
     DeleteProjectMutationVariables
   >(DeleteProjectDocument);
 
-  function GetProjectRepository(projectId: string) {
-    return useQuery<GetProjectQuery, GetProjectQueryVariables>(
-      GetProjectDocument,
-      {
-        variables: { projectId: projectId },
-      }
-    );
-  }
-  function GetProjectsRepository(userId: string) {
-    return useQuery<GetUserProjectsQuery, GetUserProjectsQueryVariables>(
-      GetProjectDocument,
-      {
-        variables: { userId: userId },
-      }
-    );
-  }
-
   function CreateProjectRepository(title: string) {
-    return createProject({ variables: { title: title } });
+    try {
+      const response = createProject({ variables: { title } });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function UpdateProjectRepository(
@@ -67,15 +46,25 @@ export default function useProjectRepository() {
     title: string,
     lastImage: string
   ) {
-    return updateProject({ variables: { projectId, title, lastImage } });
-  }
-  function DeleteProjectRepository(projectId: string) {
-    return deleteProject({ variables: { projectId } });
+    try {
+      const response = updateProject({
+        variables: { projectId, title, lastImage },
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
+  function DeleteProjectRepository(projectId: string) {
+    try {
+      const response = deleteProject({ variables: { projectId } });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return {
-    GetProjectRepository,
-    GetProjectsRepository,
     CreateProjectRepository,
     UpdateProjectRepository,
     DeleteProjectRepository,

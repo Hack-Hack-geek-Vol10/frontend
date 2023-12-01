@@ -1,29 +1,13 @@
 import useUserRepository from "@/repository/useUsersRepositories";
 import { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
-
-const GetUserService = (userId: string) => {
-  const { GetUserRepository } = useUserRepository();
-  try {
-    const { data, loading, error } = GetUserRepository(userId);
-    if (loading) {
-      console.log("Loading");
-    }
-    if (error) {
-      console.log("Error");
-    }
-    return data;
-  } catch (error) {
-    console.log("ServicesError" + error);
-  }
-};
+import { useQuery } from "@apollo/client";
 
 const CreateUserService = async (userId: string, name: string) => {
+  const { CreateUserRepository } = useUserRepository();
   const { currentUser } = useContext(AuthContext);
 
-  const { GetUserRepository, CreateUserRepository } = useUserRepository();
   try {
-    GetUserRepository(userId);
     if (currentUser?.uid === userId) {
       const response = await CreateUserRepository(name);
       console.log("登録完了");
@@ -56,9 +40,4 @@ const DeleteUserService = async (userId: string) => {
   }
 };
 
-export {
-  GetUserService,
-  CreateUserService,
-  UpdateUserService,
-  DeleteUserService,
-};
+export { CreateUserService, UpdateUserService, DeleteUserService };

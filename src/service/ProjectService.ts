@@ -1,37 +1,5 @@
 import ProjectRepository from "@/repository/useProjectRepositories";
 
-const GetProjectService = async (projectId: string) => {
-  const { GetProjectRepository } = ProjectRepository();
-  try {
-    const { data, loading, error } = GetProjectRepository(projectId);
-    if (loading) {
-      console.log("Loading");
-    }
-    if (error) {
-      console.log("Error");
-    }
-    return data;
-  } catch (error) {
-    console.log("ServicesError" + error);
-  }
-};
-
-const GetProjectsService = async (userId: string) => {
-  const { GetProjectsRepository } = ProjectRepository();
-  try {
-    const { data, loading, error } = GetProjectsRepository(userId);
-    if (loading) {
-      console.log("Loading");
-    }
-    if (error) {
-      console.log("Error");
-    }
-    return data;
-  } catch (error) {
-    console.log("ServicesError" + error);
-  }
-};
-
 const CreateProjectService = async (title: string) => {
   const { CreateProjectRepository } = ProjectRepository();
   try {
@@ -66,10 +34,4 @@ const DeleteProjectService = async (projectId: string) => {
   }
 };
 
-export {
-  GetProjectService,
-  GetProjectsService,
-  CreateProjectService,
-  UpdateProjectService,
-  DeleteProjectService,
-};
+export { CreateProjectService, UpdateProjectService, DeleteProjectService };

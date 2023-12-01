@@ -1,9 +1,4 @@
-import { useQuery, useMutation } from "@apollo/client";
-import {
-  GetUserQuery,
-  GetUserQueryVariables,
-  GetUserDocument,
-} from "@/generated/graphql";
+import { useMutation } from "@apollo/client";
 
 import {
   CreateUserMutation,
@@ -39,25 +34,38 @@ export default function useUsersRepository() {
     DeleteUserMutationVariables
   >(DeleteUserDocument);
 
-  function GetUserRepository(id: string) {
-    return useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, {
-      variables: { userId: id },
-    });
-  }
-
   function CreateUserRepository(name: string) {
-    return createUser({ variables: { name } });
+    try {
+      const response = createUser({ variables: { name } });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function UpdateUserRepository(userId: string, name: string) {
-    return updateUser({ variables: { userId, name } });
+    try {
+      const response = updateUser({
+        variables: { userId, name },
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
+
   function DeleteUserRepository(userId: string) {
-    return deleteUser({ variables: { userId } });
+    try {
+      const response = deleteUser({
+        variables: { userId },
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return {
-    GetUserRepository,
     CreateUserRepository,
     UpdateUserRepository,
     DeleteUserRepository,

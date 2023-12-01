@@ -1,21 +1,7 @@
 import ProjectMemberRepository from "@/repository/useProjectMemberRepositories";
 import { Auth } from "@/generated/graphql";
+import { useQuery } from "@apollo/client";
 
-const GetProjectMembersService = async (projectId: string) => {
-  const { GetProjectMembersRepository } = ProjectMemberRepository();
-  try {
-    const { data, loading, error } = GetProjectMembersRepository(projectId);
-    if (loading) {
-      console.log("Loading");
-    }
-    if (error) {
-      console.log("Error");
-    }
-    return data;
-  } catch (error) {
-    console.log("ServicesError" + error);
-  }
-};
 const CreateProjectMemberService = async (token: string) => {
   const { CreateProjectMemberRepository } = ProjectMemberRepository();
   try {
@@ -57,7 +43,6 @@ const DeleteProjectMemberService = async (
 };
 
 export {
-  GetProjectMembersService,
   CreateProjectMemberService,
   UpdateProjectMemberService,
   DeleteProjectMemberService,
