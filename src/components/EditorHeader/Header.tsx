@@ -2,9 +2,6 @@ import React, { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
 import { Box, Button, IconButton } from "@/lib/mui/muiRendering";
 import { useRouter } from "next/router";
-import LoginButton from "@/components/commons/LoginButton";
-import LogoutButton from "@/components/commons/LogoutButton";
-
 import ImportDropDownMenu from "@/components/EditorHeader/DropDown/ImportDropDownMenu";
 import ExportDropDownMenu from "@/components/EditorHeader/DropDown/ExportDropDownMenu";
 const Header = () => {
