@@ -4,6 +4,8 @@ import { Box, Button, IconButton } from "@/lib/mui/muiRendering";
 import { useRouter } from "next/router";
 import LoginButton from "@/components/commons/LoginButton";
 import LogoutButton from "@/components/commons/LogoutButton";
+
+import DropDownMenu from "@/components/commons/InportDropDownMenu";
 const Header = () => {
   const router = useRouter();
   const { currentUser } = useContext(AuthContext);
@@ -16,7 +18,11 @@ const Header = () => {
       justifyContent='space-between'
       padding={2}
       bgcolor='#123456'
-    ></Box>
+    >
+      <Box>
+        <DropDownMenu />
+      </Box>
+    </Box>
   );
 };
 

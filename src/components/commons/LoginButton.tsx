@@ -3,7 +3,6 @@ import { auth } from "@/lib/firebase/client";
 import "firebase/auth";
 import { Button } from "@mui/material";
 import { AuthContext } from "@/store/AuthContext";
-import { CreateUserService } from "@/service/UserServices";
 
 const LoginButton = () => {
   const { login, currentUser } = useContext(AuthContext);
@@ -13,7 +12,6 @@ const LoginButton = () => {
     try {
       await login();
       if (userId && userName) {
-        CreateUserService(userId, userName);
       }
     } catch (error) {
       console.error(error);

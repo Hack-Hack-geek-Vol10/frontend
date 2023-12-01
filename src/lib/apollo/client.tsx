@@ -7,7 +7,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = useContext(AuthContext).currentUser?.getIdToken();
+  const token = useContext(AuthContext).currentUser?.token;
   return {
     headers: {
       ...headers,
