@@ -5,7 +5,8 @@ import { useRouter } from "next/router";
 import LoginButton from "@/components/commons/LoginButton";
 import LogoutButton from "@/components/commons/LogoutButton";
 
-import DropDownMenu from "@/components/commons/InportDropDownMenu";
+import ImportDropDownMenu from "@/components/EditorHeader/DropDown/ImportDropDownMenu";
+import ExportDropDownMenu from "@/components/EditorHeader/DropDown/ExportDropDownMenu";
 const Header = () => {
   const router = useRouter();
   const { currentUser } = useContext(AuthContext);
@@ -20,7 +21,11 @@ const Header = () => {
       bgcolor='#123456'
     >
       <Box>
-        <DropDownMenu />
+        <ImportDropDownMenu />
+      </Box>
+
+      <Box>
+        <ExportDropDownMenu />
       </Box>
     </Box>
   );

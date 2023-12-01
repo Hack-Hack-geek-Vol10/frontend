@@ -3,6 +3,8 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
+import MysqlModal from "../ExportModal/MysqlModal";
+import Postgresql from "../ExportModal/Postgresql";
 function DropdownMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -30,9 +32,12 @@ function DropdownMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Menu Item 1</MenuItem>
-        <MenuItem onClick={handleClose}>Menu Item 2</MenuItem>
-        <MenuItem onClick={handleClose}>Menu Item 3</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <MysqlModal />
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Postgresql />
+        </MenuItem>
       </Menu>
     </div>
   );
