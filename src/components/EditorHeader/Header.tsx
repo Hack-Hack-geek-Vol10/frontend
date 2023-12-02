@@ -4,6 +4,7 @@ import { Box, Button, IconButton } from "@/lib/mui/muiRendering";
 import { useRouter } from "next/router";
 import ImportDropDownMenu from "@/components/EditorHeader/DropDown/ImportDropDownMenu";
 import ExportDropDownMenu from "@/components/EditorHeader/DropDown/ExportDropDownMenu";
+import LoginButton from "../commons/LoginButton";
 const Header = () => {
   const router = useRouter();
   const { currentUser } = useContext(AuthContext);
@@ -17,6 +18,9 @@ const Header = () => {
       padding={2}
       bgcolor='#123456'
     >
+      <Box>
+        <LoginButton />
+      </Box>
       <Box>
         <ImportDropDownMenu />
       </Box>
