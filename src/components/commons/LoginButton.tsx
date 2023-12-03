@@ -1,22 +1,23 @@
-import { use, useContext } from "react";
-import { auth } from "@/lib/firebase/client";
-import "firebase/auth";
+import { useContext } from "react";
 import { Button } from "@mui/material";
 import { AuthContext } from "@/store/AuthContext";
+import { useCreateUser } from "@/service/useUserServices";
 
-const LoginButton = () => {
+export const LoginButton = () => {
   const { login, currentUser } = useContext(AuthContext);
-  const userId = currentUser?.uid;
-  const userName = currentUser?.displayName;
+  const { createUserMutation } = useCreateUser();
+
   const handleLogin = async () => {
     try {
       await login();
-      if (userId && userName) {
+
+      if (currentUser) {
+        createUserMutation(currentUser!.displayName);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.log(err);
     }
   };
+
   return <Button onClick={handleLogin}>GoogleLogin</Button>;
 };
-export default LoginButton;
