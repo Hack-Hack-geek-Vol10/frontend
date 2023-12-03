@@ -18,8 +18,8 @@ type AuthContextProps = {
 const AuthContext = createContext<AuthContextProps>({
   currentUser: undefined,
   signInCheck: false,
-  logout: () => { },
-  login: async () => { },
+  logout: () => {},
+  login: async () => {},
 });
 
 const AuthProvider: VFC<{ children: ReactNode }> = ({ children }) => {

@@ -17,6 +17,7 @@ const Header = () => {
       bgcolor='#123456'
     >
       <LoginButton />
+      <LogoutButton />
     </Box>
   );
 };
