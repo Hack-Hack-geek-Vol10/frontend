@@ -1,7 +1,19 @@
 import { CardContent, CardMedia, Grid, Typography, Paper } from "@mui/material";
 import React from "react";
-
+import { useQuery } from "@apollo/client";
+import {
+  GetProjectQuery,
+  GetProjectQueryVariables,
+  GetProjectDocument,
+} from "@/generated/graphql";
 const ProjectCard = () => {
+  const { data, loading, error } = useQuery<
+    GetProjectQuery,
+    GetProjectQueryVariables
+  >(GetProjectDocument);
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error! {error.message}</div>;
+  console.log(data);
   return (
     <>
       <Typography variant='h3' sx={{ ml: 2 }}>
@@ -15,7 +27,7 @@ const ProjectCard = () => {
           padding: "20px",
         }}
       >
-        {[1, 2, 3, 4].map((item, index, detail) => (
+        {data.map((item) => (
           <Grid item xs={3} key={index}>
             <Paper
               elevation={5}
