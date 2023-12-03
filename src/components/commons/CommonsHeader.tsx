@@ -2,10 +2,11 @@ import React, { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
 import { Box, Button, IconButton } from "@/lib/mui/muiRendering";
 import { useRouter } from "next/router";
-import ImportDropDownMenu from "@/components/EditorHeader/DropDown/ImportDropDownMenu";
-import ExportDropDownMenu from "@/components/EditorHeader/DropDown/ExportDropDownMenu";
-import { LoginButton } from "../commons/LoginButton";
+import { LoginButton } from "@/components/commons/LoginButton";
+import LogoutButton from "@/components/commons/LogoutButton";
 const Header = () => {
+  const router = useRouter();
+
   return (
     <Box
       sx={{ position: "sticky", height: "62px", top: 0 }}
@@ -15,9 +16,7 @@ const Header = () => {
       padding={2}
       bgcolor='#123456'
     >
-      <Box>
-        <LoginButton />
-      </Box>
+      <LoginButton />
     </Box>
   );
 };
