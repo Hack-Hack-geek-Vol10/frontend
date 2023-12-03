@@ -4,7 +4,10 @@ import Box from "@mui/material/Box";
 
 import { useModal } from "@/hooks/useModal";
 import { IconButton, Modal } from "@/lib/mui/muiRendering";
-
+interface GeneralModalProps {
+  children: React.ReactNode;
+  buttonContent?: React.ReactNode;
+}
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -18,8 +21,8 @@ const style = {
 };
 export default function GeneralModal({
   children,
-  buttonContent = <></>, //Reactのコンポーネントを受け取る
-}) {
+  buttonContent = <></>,
+}: GeneralModalProps) {
   const { open, handleOpen, handleClose } = useModal();
   return (
     <>
