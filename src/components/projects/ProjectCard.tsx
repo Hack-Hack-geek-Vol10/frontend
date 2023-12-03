@@ -1,7 +1,7 @@
 import { CardContent, CardMedia, Grid, Typography, Paper } from "@mui/material";
 import React from "react";
 
-export const TeamCard = () => {
+const ProjectCard = () => {
   return (
     <>
       <Typography variant='h3' sx={{ ml: 2 }}>
@@ -46,3 +46,5 @@ export const TeamCard = () => {
     </>
   );
 };
+
+export default ProjectCard;

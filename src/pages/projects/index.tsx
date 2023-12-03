@@ -1,18 +1,15 @@
 import React, { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
-import Editor from "@/components/Editor";
-import Header from "@/components/EditorHeader/Header";
-
+import Header from "@/components/commons/CommonsHeader";
+import ProjectCard from "@/components/projects/ProjectCard";
+import CreateProjectModal from "@/components/projects/CreateProjectModal";
 const Index = () => {
-  const { currentUser } = useContext(AuthContext);
-
   return (
-    <div>
+    <>
       <Header />
-      <h1>projects</h1>
-
-      <Editor />
-    </div>
+      <ProjectCard />
+      <CreateProjectModal />
+    </>
   );
 };
 

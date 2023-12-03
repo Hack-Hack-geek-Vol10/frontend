@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, TextField, AddIcon } from "@/lib/mui/muiRendering";
 import { useMutation } from "@apollo/client";
 import {
   CreateProjectMutation,
   CreateProjectMutationVariables,
   CreateProjectDocument,
 } from "@/generated/graphql";
+import GeneralModal from "@/components/commons/GeneralModal";
+
 import { useRouter } from "next/router";
 
-export const CreateProject = () => {
+const CreateProject = () => {
   const [title, setTitle] = useState("");
 
   const router = useRouter();
@@ -27,7 +29,7 @@ export const CreateProject = () => {
   };
 
   return (
-    <Box>
+    <GeneralModal buttonContent={<AddIcon />}>
       <TextField
         label='プロジェクト名'
         variant='outlined'
@@ -37,6 +39,8 @@ export const CreateProject = () => {
       <Button variant='outlined' onClick={handleCreateProject}>
         Create Project
       </Button>
-    </Box>
+    </GeneralModal>
   );
 };
+
+export default CreateProject;
