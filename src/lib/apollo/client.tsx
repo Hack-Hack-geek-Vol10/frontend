@@ -3,11 +3,11 @@ import { setContext } from "@apollo/client/link/context";
 import { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
 const httpLink = createHttpLink({
-  uri: "http://localhost:8080/graphql",
+  uri: "https://sc-stage.seafood-dev.com/",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = useContext(AuthContext).currentUser?.token;
+  const token = localStorage.getItem("token");
   return {
     headers: {
       ...headers,

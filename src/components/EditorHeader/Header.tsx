@@ -4,11 +4,8 @@ import { Box, Button, IconButton } from "@/lib/mui/muiRendering";
 import { useRouter } from "next/router";
 import ImportDropDownMenu from "@/components/EditorHeader/DropDown/ImportDropDownMenu";
 import ExportDropDownMenu from "@/components/EditorHeader/DropDown/ExportDropDownMenu";
-import LoginButton from "../commons/LoginButton";
+import { LoginButton } from "../commons/LoginButton";
 const Header = () => {
-  const router = useRouter();
-  const { currentUser } = useContext(AuthContext);
-
   return (
     <Box
       sx={{ position: "sticky", height: "62px", top: 0 }}
@@ -20,13 +17,6 @@ const Header = () => {
     >
       <Box>
         <LoginButton />
-      </Box>
-      <Box>
-        <ImportDropDownMenu />
-      </Box>
-
-      <Box>
-        <ExportDropDownMenu />
       </Box>
     </Box>
   );

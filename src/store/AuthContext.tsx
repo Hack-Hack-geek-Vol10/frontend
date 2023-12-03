@@ -18,8 +18,8 @@ type AuthContextProps = {
 const AuthContext = createContext<AuthContextProps>({
   currentUser: undefined,
   signInCheck: false,
-  logout: () => {},
-  login: async () => {},
+  logout: () => { },
+  login: async () => { },
 });
 
 const AuthProvider: VFC<{ children: ReactNode }> = ({ children }) => {
@@ -58,6 +58,7 @@ const AuthProvider: VFC<{ children: ReactNode }> = ({ children }) => {
           displayName: user.displayName || "",
           photoURL: user.photoURL || "",
         });
+        localStorage.setItem("token", await user.getIdToken());
         setSignInCheck(true);
       } else {
         setSignInCheck(false);
