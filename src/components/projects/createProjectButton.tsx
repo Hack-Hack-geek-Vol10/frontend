@@ -9,6 +9,8 @@ import {
 import { useRouter } from "next/router";
 
 export const CreateProject = () => {
+  const [title, setTitle] = useState("");
+
   const router = useRouter();
 
   const [createProject, { data, loading, error }] = useMutation<
@@ -16,11 +18,8 @@ export const CreateProject = () => {
     CreateProjectMutationVariables
   >(CreateProjectDocument);
 
-  // 新たに追加したstate
-  const [title, setTitle] = useState("");
-
   const handleCreateProject = async () => {
-    const { data: newProject } = await createProject({
+    await createProject({
       variables: {
         title: title,
       },
