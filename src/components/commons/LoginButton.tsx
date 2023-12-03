@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Button } from "@mui/material";
 import { AuthContext } from "@/store/AuthContext";
 import {
@@ -8,38 +8,42 @@ import {
 } from "@/generated/graphql";
 import { GetUserDocument } from "@/generated/graphql";
 import { useMutation, useQuery } from "@apollo/client";
-import { get } from "http";
 
 export const LoginButton = () => {
   const { login, currentUser } = useContext(AuthContext);
   const userName = currentUser?.displayName;
-  const {
-    data: userData,
-    loading: userLoading,
-    error: userError,
-  } = useQuery(GetUserDocument);
+  const userId = currentUser?.uid;
 
-  useEffect(() => {
-    console.log("getUser");
-  }, [userData]);
+  const { data: userData } = useQuery(GetUserDocument, {
+    variables: {
+      userId: userId,
+    },
+    skip: !userId,
+  });
 
-  const [createUserMutation, { data, loading, error }] =
-    useMutation<CreateUserMutation>(CreateUserDocument);
+  const [createUserMutation] = useMutation<
+    CreateUserMutation,
+    CreateUserMutationVariables
+  >(CreateUserDocument);
 
   const handleLogin = async () => {
     try {
       await login();
-
-      if (userData && userData.username !== userName) {
-        createUserMutation({
+      if (userData && userName && userData.name !== userName) {
+        const response = await createUserMutation({
           variables: {
             name: userName,
           },
         });
+        return response.data;
+      } else {
+        console.log("登録済み");
       }
+      return userData;
     } catch (err) {
       console.log(err);
     }
   };
+
   return <Button onClick={handleLogin}>GoogleLogin</Button>;
 };
