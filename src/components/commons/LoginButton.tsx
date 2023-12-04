@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { Button } from "@mui/material";
 import { AuthContext } from "@/store/AuthContext";
+import { GetUserProjectsDocument } from "@/generated/graphql";
 import {
   CreateUserMutation,
-  CreateUserDocument,
   CreateUserMutationVariables,
+  CreateUserDocument,
 } from "@/generated/graphql";
-import { GetUserDocument } from "@/generated/graphql";
+
 import { useMutation, useQuery } from "@apollo/client";
 
 export const LoginButton = () => {
@@ -14,7 +15,7 @@ export const LoginButton = () => {
   const userName = currentUser?.displayName;
   const userId = currentUser?.uid;
 
-  const { data: userData } = useQuery(GetUserDocument, {
+  const { data: userData } = useQuery(GetUserProjectsDocument, {
     variables: {
       userId: userId,
     },
