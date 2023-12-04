@@ -1,5 +1,5 @@
 import { CardContent, CardMedia, Grid, Typography, Paper } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";
 import { useUserProjects } from "@/service/useUserServices";
@@ -10,7 +10,6 @@ const ProjectCardList = () => {
 
   const { data, loading, error } = useUserProjects(userId!);
   if (loading) return <p>loading...</p>;
-  if (error) return <p>error...</p>;
 
   return (
     <>

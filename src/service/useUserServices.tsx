@@ -1,19 +1,31 @@
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import {
-  GetUserProjectsDocument,
-  GetUserProjectsQuery,
-  GetUserProjectsQueryVariables,
+  GetUserDocument,
+  GetUserQuery,
+  GetUserQueryVariables,
 } from "@/generated/graphql";
 
-export const useUserProjects = (userId: string) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { data, loading, error } = useQuery<
-    GetUserProjectsQuery,
-    GetUserProjectsQueryVariables
-  >(GetUserProjectsDocument, {
-    variables: { userId: userId },
-    skip: !userId, //userIdがない場合はskip
-  });
+import {
+  CreateUserMutation,
+  CreateUserMutationVariables,
+  CreateUserDocument,
+} from "@/generated/graphql";
 
+export const useGetUser = (userId: string) => {
+  const { data, loading, error } = useQuery<
+    GetUserQuery,
+    GetUserQueryVariables
+  >(GetUserDocument, {
+    variables: { userId: userId },
+  });
   return { data, loading, error };
+};
+
+export const useCreateUser = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [createUser, { data, loading, error }] = useMutation<
+    CreateUserMutation,
+    CreateUserMutationVariables
+  >(CreateUserDocument);
+  return { createUser, data, loading, error };
 };

@@ -1,33 +1,22 @@
 import React, { useState } from "react";
-import { Box, Button, Grid, TextField, AddIcon } from "@/lib/mui/muiRendering";
-import { useMutation } from "@apollo/client";
-import {
-  CreateProjectMutation,
-  CreateProjectMutationVariables,
-  CreateProjectDocument,
-} from "@/generated/graphql";
+import { Button, TextField, AddIcon } from "@/lib/mui/muiRendering";
+import { useCreateProject } from "@/service/useProjectService";
 import GeneralModal from "@/components/commons/GeneralModal";
-
 import { useRouter } from "next/router";
 
 const CreateProject = () => {
   const [title, setTitle] = useState("");
-
+  const { createProject, data } = useCreateProject();
   const router = useRouter();
 
-  const [createProject, { data, loading, error }] = useMutation<
-    CreateProjectMutation,
-    CreateProjectMutationVariables
-  >(CreateProjectDocument);
-
   const handleCreateProject = async () => {
-    await createProject({
-      variables: {
-        title: title,
-      },
-    });
+    await createProject({ variables: { title } });
+    return data;
   };
 
+  if (data) {
+    router.push(`/projects/${data.createProject!.projectId}`);
+  }
   return (
     <GeneralModal buttonContent={<AddIcon />}>
       <TextField
