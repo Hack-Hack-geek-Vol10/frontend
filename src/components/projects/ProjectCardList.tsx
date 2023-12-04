@@ -8,9 +8,15 @@ const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
   const userId = currentUser?.uid;
   const { data, loading } = useGetUserProjects(userId!);
+
+  useEffect(() => {
+    console.log(data);
+  }, []);
+
   if (loading) {
     return <div>loading...</div>;
   }
+
   return (
     <>
       <Typography variant='h3' sx={{ ml: 2 }}>
@@ -24,7 +30,7 @@ const ProjectCardList = () => {
           padding: "20px",
         }}
       >
-        {data &&
+        {Array.isArray(data) &&
           data.map((item: any) => (
             <Grid item xs={3} key={item.id}>
               <Paper
@@ -43,4 +49,5 @@ const ProjectCardList = () => {
     </>
   );
 };
+
 export default ProjectCardList;
