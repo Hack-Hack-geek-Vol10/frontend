@@ -1,21 +1,19 @@
-import { CardContent, CardMedia, Grid, Typography, Paper } from "@mui/material";
-import React, { useEffect } from "react";
+import { Grid, Typography, Paper, Button } from "@/lib/mui/muiRendering";
+import { useMemo, useEffect, memo, useCallback } from "react";
 import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";
 import { useGetUserProjects } from "@/service/useProjectService";
+import { useRouter } from "next/router";
 
 const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
   const userId = currentUser?.uid;
+  const router = useRouter();
   const { data, loading } = useGetUserProjects(userId!);
 
-  useEffect(() => {
-    console.log(data);
-  }, []);
-
-  if (loading) {
-    return <div>loading...</div>;
-  }
+  const handleGoToProject = (projectId: string) => () => {
+    router.push(`/projects/${projectId}`);
+  };
 
   return (
     <>
@@ -30,18 +28,24 @@ const ProjectCardList = () => {
           padding: "20px",
         }}
       >
-        {Array.isArray(data) &&
-          data.map((item: any) => (
-            <Grid item xs={3} key={item.id}>
+        {Array.isArray(data?.projects) &&
+          data?.projects.map((item: any) => (
+            <Grid item xs={3} key={item.title}>
               <Paper
                 elevation={5}
-                style={{ borderRadius: "8px", backgroundColor: "white" }}
+                sx={{
+                  borderRadius: "8px",
+                  backgroundColor: "white",
+                  height: "100px",
+                }}
               >
-                <CardContent>
-                  <Typography variant='h6' gutterBottom>
-                    Card Title {item.title}
-                  </Typography>
-                </CardContent>
+                <Typography variant='h6' gutterBottom>
+                  Card Title {item.title}
+                </Typography>
+
+                <Button onClick={handleGoToProject(item.projectId)}>
+                  Go to Project
+                </Button>
               </Paper>
             </Grid>
           ))}
@@ -50,4 +54,4 @@ const ProjectCardList = () => {
   );
 };
 
-export default ProjectCardList;
+export default memo(ProjectCardList);
