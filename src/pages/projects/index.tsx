@@ -1,18 +1,25 @@
-import React, { useContext } from "react";
-import { AuthContext } from "@/store/AuthContext";
-import Editor from "@/components/Editor";
-import Header from "@/components/EditorHeader/Header";
+import React from "react";
+import Header from "@/components/commons/CommonsHeader";
+import ProjectCardList from "@/components/projects/ProjectCardList";
+import CreateProjectModal from "@/components/projects/CreateProjectModal";
+import { Box } from "@/lib/mui/muiRendering";
 
 const Index = () => {
-  const { currentUser } = useContext(AuthContext);
-
   return (
-    <div>
+    <>
       <Header />
-      <h1>projects</h1>
+      <ProjectCardList />
 
-      <Editor />
-    </div>
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: "30px",
+          right: "30px",
+        }}
+      >
+        <CreateProjectModal />
+      </Box>
+    </>
   );
 };
 
