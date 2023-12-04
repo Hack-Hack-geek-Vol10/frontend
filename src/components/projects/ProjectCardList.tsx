@@ -9,7 +9,7 @@ import {
 import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";
 
-const ProjectCard = () => {
+const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
   const userId = currentUser?.uid;
   const getData = async () => {
@@ -28,6 +28,8 @@ const ProjectCard = () => {
       console.log(data);
       return data;
     }
+
+    const data = getData();
     return (
       <>
         <Typography variant='h3' sx={{ ml: 2 }}>
@@ -41,8 +43,8 @@ const ProjectCard = () => {
             padding: "20px",
           }}
         >
-          {getData &&
-            getData.map((item: any) => (
+          {data &&
+            data.map((item: any) => (
               <Grid item xs={3} key={item.projectId}>
                 <Paper
                   elevation={5}
@@ -61,4 +63,4 @@ const ProjectCard = () => {
     );
   };
 };
-export default ProjectCard;
+export default ProjectCardList;
