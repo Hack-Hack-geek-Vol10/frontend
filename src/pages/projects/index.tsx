@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import { AuthContext } from "@/store/AuthContext";
+import React from "react";
 import Header from "@/components/commons/CommonsHeader";
-import ProjectCard from "@/components/projects/ProjectCard";
+import ProjectCardList from "@/components/projects/ProjectCardList";
 import CreateProjectModal from "@/components/projects/CreateProjectModal";
+
 const Index = () => {
   return (
     <>
       <Header />
-      <ProjectCard />
+      <ProjectCardList />
       <CreateProjectModal />
     </>
   );
