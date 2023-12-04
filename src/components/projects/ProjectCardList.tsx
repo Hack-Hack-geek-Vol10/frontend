@@ -2,15 +2,15 @@ import { CardContent, CardMedia, Grid, Typography, Paper } from "@mui/material";
 import React, { useEffect } from "react";
 import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";
-import { useUserProjects } from "@/service/useUserServices";
+import { useGetUserProjects } from "@/service/useProjectService";
 
 const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
   const userId = currentUser?.uid;
-
-  const { data, loading, error } = useUserProjects(userId!);
-  if (loading) return <p>loading...</p>;
-
+  const { data, loading } = useGetUserProjects(userId!);
+  if (loading) {
+    return <div>loading...</div>;
+  }
   return (
     <>
       <Typography variant='h3' sx={{ ml: 2 }}>

@@ -5,8 +5,8 @@ import { useCreateUser, useGetUser } from "@/service/useUserServices";
 
 export const LoginButton = () => {
   const { login, currentUser } = useContext(AuthContext);
-  const userId = currentUser!.uid;
-  const { data: userData } = useGetUser(userId);
+  const userId = currentUser?.uid;
+  const { data: userData } = useGetUser(userId!);
   const { createUser } = useCreateUser();
   const userName = currentUser?.displayName;
 
