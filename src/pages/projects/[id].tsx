@@ -7,9 +7,11 @@ const id = () => {
   return (
     <>
       <Header />
+
       <Box>
-        <Editor />
-        {/* <CustomNodeFlow /> */}
+        {/* <Editor /> */}
+
+        <CustomNodeFlow />
       </Box>
     </>
   );

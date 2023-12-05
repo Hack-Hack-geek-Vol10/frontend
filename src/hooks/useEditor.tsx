@@ -7,7 +7,7 @@ const useEditor = () => {
     setText(e.target.value);
   };
 
-  return { text, setText };
+  return { text, setText, handleChangeText };
 };
 
 export default useEditor;
