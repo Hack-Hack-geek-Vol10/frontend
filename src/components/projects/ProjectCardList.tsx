@@ -4,6 +4,8 @@ import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";
 import { useGetUserProjects } from "@/service/useProjectService";
 import { useRouter } from "next/router";
+import CardMedia from "@mui/material/CardMedia";
+import DeleteProjectButton from "@/components/projects/DeleteProjectButton";
 
 const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
@@ -16,6 +18,7 @@ const ProjectCardList = () => {
   };
 
   const projects = data?.projects;
+  console.log(projects);
   return (
     <>
       <Typography variant='h3' sx={{ ml: 2 }}>
@@ -40,6 +43,7 @@ const ProjectCardList = () => {
                   height: "100px",
                 }}
               >
+                <CardMedia title='eeeee' image={`${item.lastImage}`} />
                 <Typography variant='h6' gutterBottom>
                   Card Title {item.title}
                 </Typography>
@@ -50,6 +54,7 @@ const ProjectCardList = () => {
                 >
                   Go to Project
                 </Button>
+                <DeleteProjectButton projectId={item.projectId} />
               </Paper>
             </Grid>
           ))}
