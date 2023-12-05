@@ -23,6 +23,12 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
+      
+    - shell: bash
+      run: |
+        rm .env && touch .env
+        echo "${{ secrets.STAGE_ENV }}" >> .env
+
     - name: login to harbor registry
       uses: docker/login-action@v1
       with:
@@ -48,7 +54,8 @@ jobs:
           repository: schema-creator/k8s
           token: ${{ secrets.GH_PAT }}
           ref: main
-          
+      
+      
     
       - name: Change manifest
         run: |
