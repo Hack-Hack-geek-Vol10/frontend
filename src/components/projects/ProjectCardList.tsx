@@ -15,6 +15,7 @@ const ProjectCardList = () => {
     router.push(`/projects/${projectId}`);
   };
 
+  const projects = data?.projects;
   return (
     <>
       <Typography variant='h3' sx={{ ml: 2 }}>
@@ -28,9 +29,9 @@ const ProjectCardList = () => {
           padding: "20px",
         }}
       >
-        {Array.isArray(data?.projects) &&
-          data?.projects.map((item: any) => (
-            <Grid item xs={3} key={item.title}>
+        {Array.isArray(projects) &&
+          projects.map((item: any) => (
+            <Grid item xs={3} key={item.projectId}>
               <Paper
                 elevation={5}
                 sx={{
@@ -43,7 +44,10 @@ const ProjectCardList = () => {
                   Card Title {item.title}
                 </Typography>
 
-                <Button onClick={handleGoToProject(item.projectId)}>
+                <Button
+                  onClick={handleGoToProject(item.projectId)}
+                  variant='outlined'
+                >
                   Go to Project
                 </Button>
               </Paper>
@@ -54,4 +58,4 @@ const ProjectCardList = () => {
   );
 };
 
-export default memo(ProjectCardList);
+export default ProjectCardList;

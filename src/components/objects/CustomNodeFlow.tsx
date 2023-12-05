@@ -1,110 +1,105 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useCallback } from "react";
 import ReactFlow, {
+  addEdge,
+  Background,
   useNodesState,
   useEdgesState,
-  addEdge,
   MiniMap,
   Controls,
   Connection,
   Edge,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import { demodata } from "./data";
 
-import { CustomNode } from "./CustomNode";
+const initialNodes = [
+  {
+    id: "1",
+    type: "input",
+    data: { label: "Node 0" },
+    position: { x: 250, y: 5 },
+    className: "light",
+  },
+  {
+    id: "2",
+    data: { label: "Group A" },
+    position: { x: 100, y: 100 },
+    className: "light",
+    style: { backgroundColor: "rgba(255, 0, 0, 0.2)", width: 200, height: 200 },
+  },
+  {
+    id: "2a",
+    data: { label: "Node A.1" },
+    position: { x: 10, y: 50 },
+    parentNode: "2",
+  },
+  {
+    id: "3",
+    data: { label: "Node 1" },
+    position: { x: 320, y: 100 },
+    className: "light",
+  },
+  {
+    id: "4",
+    data: { label: "Group B" },
+    position: { x: 320, y: 200 },
+    className: "light",
+    style: { backgroundColor: "rgba(255, 0, 0, 0.2)", width: 300, height: 300 },
+    type: "group",
+  },
+  {
+    id: "4a",
+    data: { label: "Node B.1" },
+    position: { x: 15, y: 65 },
+    className: "light",
+    parentNode: "4",
+    extent: "parent",
+  },
+  {
+    id: "4b",
+    data: { label: "Group B.A" },
+    position: { x: 15, y: 120 },
+    className: "light",
+    style: {
+      backgroundColor: "rgba(255, 0, 255, 0.2)",
+      height: 150,
+      width: 270,
+    },
+    parentNode: "4",
+  },
+  {
+    id: "4b1",
+    data: { label: "Node B.A.1" },
+    position: { x: 20, y: 40 },
+    className: "light",
+    parentNode: "4b",
+  },
+  {
+    id: "4b2",
+    data: { label: "Node B.A.2" },
+    position: { x: 100, y: 100 },
+    className: "light",
+    parentNode: "4b",
+  },
+];
 
-const connectionLineStyle = { stroke: "#999" };
+const initialEdges = [
+  { id: "e1-2", source: "1", target: "2", animated: true },
+  { id: "e1-3", source: "1", target: "3" },
+  { id: "e2a-4a", source: "2a", target: "4a" },
+  { id: "e3-4b", source: "3", target: "4b" },
+  { id: "e4a-4b1", source: "4a", target: "4b1" },
+  { id: "e4a-4b2", source: "4a", target: "4b2" },
+  { id: "e4b1-4b2", source: "4b1", target: "4b2" },
+];
 
-const nodeTypes = { selectorNode: CustomNode };
+const NestedFlow = () => {
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-const defaultViewport = { x: 65, y: 0, zoom: 1 };
-
-const CustomNodeFlow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-
-  const objTables = useCallback((data: any) => {
-    // const tablesData = data.tables;
-    const tablesData = demodata.tables;
-    console.log(data);
-    const result = tablesData?.map(
-      (
-        table: { name: { toString: () => any }; columns: any[] },
-        index: number
-      ) => {
-        const row = Math.floor(index / 2); // 行番号を計算
-        const col = index % 2; // 列番号を計算
-        const objTable = {
-          id: table.name.toString(),
-          type: "selectorNode",
-          data: {
-            label: table.name,
-            columns: table.columns.map(
-              (column: { name: any; type: any; options: any }) => {
-                return {
-                  name: column.name,
-                  type: column.type,
-                  options: column.options,
-                };
-              }
-            ),
-          },
-          position: {
-            x: parseFloat(`${200 * col}`),
-            y: parseFloat(`${20 + table.columns.length * 60 * row}`),
-          },
-        };
-
-        return objTable;
-      }
-    );
-    console.log(result);
-    return result;
+  const onConnect = useCallback((connection: Edge | Connection) => {
+    setEdges((eds) => addEdge(connection, eds));
   }, []);
 
-  const objRelations = useCallback((data: any) => {
-    // const relations = data?.relations;
-    const relations = demodata.relations;
-
-    const result = relations?.map(
-      (
-        relation: {
-          to_col: { toString: () => string };
-          from_col: { toString: () => string };
-        },
-        index: any
-      ) => {
-        const target = relation.to_col.toString().replace(/^(.*?)\..*$/, "$1");
-        const source = relation.from_col
-          .toString()
-          .replace(/^(.*?)\..*$/, "$1");
-
-        const objRelation: any = {
-          id: `${source + "=>" + target}`,
-          source: source,
-          target: target,
-          type: "smoothstep",
-        };
-        return objRelation;
-      }
-    );
-    return result;
-  }, []);
-
-  useEffect(() => {
-    const objTablesData = objTables(demodata);
-    const objRelationsData = objRelations(demodata);
-    setNodes(objTablesData);
-    setEdges(objRelationsData);
-  }, [setEdges, setNodes, objTables, objRelations]);
-
-  const onConnect = useCallback(
-    (params: Connection | Edge) =>
-      setEdges((eds) =>
-        addEdge({ ...params, animated: true, style: { stroke: "#eee" } }, eds)
-      ),
-    [setEdges]
-  );
   return (
     <ReactFlow
       nodes={nodes}
@@ -112,17 +107,14 @@ const CustomNodeFlow = () => {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      nodeTypes={nodeTypes}
-      connectionLineStyle={connectionLineStyle}
-      defaultViewport={defaultViewport}
-      zoomOnScroll={true}
-      zoomOnDoubleClick={true}
-      className='download-image'
+      className='react-flow-subflows-example'
+      fitView
     >
       <MiniMap />
       <Controls />
+      <Background />
     </ReactFlow>
   );
 };
 
-export default CustomNodeFlow;
+export default NestedFlow;
