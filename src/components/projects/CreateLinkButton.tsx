@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { use, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
   Button,
@@ -15,7 +15,10 @@ const CreateLinkPullDown = () => {
   const { pullValue, handlePullDownChange, handleCreateLink } = useLink();
   const router = useRouter();
   const pageId = router.query.id as string;
-  handleCreateLink(pageId, pullValue);
+
+  useEffect(() => {
+    handleCreateLink(pageId, pullValue);
+  }, [pullValue]);
 
   const handleSelectChange = (event: SelectChangeEvent<Auth>) => {
     handlePullDownChange(event as React.ChangeEvent<{ value: unknown }>);
@@ -33,13 +36,6 @@ const CreateLinkPullDown = () => {
         <MenuItem value={Auth.ReadOnly}>ReadOnly</MenuItem>
         <MenuItem value={Auth.ReadWrite}>ReadWrite</MenuItem>
       </Select>
-      <Button
-        variant='contained'
-        color='primary'
-        onClick={() => handleCreateLink(pageId, pullValue)}
-      >
-        Create Link
-      </Button>
     </FormControl>
   );
 };
