@@ -4,9 +4,9 @@
 scalar Upload
 
 enum Auth {
-  READ_ONLY
-  READ_WRITE
-  OWNER
+  read_only
+  read_write
+  owner
 }
 
 type User {
@@ -43,12 +43,8 @@ type Mutation {
   createProject(title: String!): Project
   updateProject(projectId: ID!, title: String, lastImage: Upload): Project
   deleteProject(projectId: ID!): String
-  createInviteLink(projectId: ID!, authority: Auth!): String
+  createInviteLink(projectId: ID!,authority:Auth!): String
   createProjectMember(token: String!): ProjectMember
-  updateProjectMember(
-    projectId: ID!
-    userId: ID!
-    authority: Auth
-  ): ProjectMember
+  updateProjectMember(projectId: ID!, userId: ID!, authority: Auth): ProjectMember
   deleteProjectMember(projectId: ID!, userId: ID!): String
 }
