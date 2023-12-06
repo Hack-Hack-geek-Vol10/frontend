@@ -9,7 +9,7 @@ const id = () => {
       <Header />
 
       <Box>
-        <Editor />
+        {/* <Editor /> */}
 
         <CustomNodeFlow />
       </Box>
