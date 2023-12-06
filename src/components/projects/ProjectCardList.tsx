@@ -1,16 +1,25 @@
-import { CardContent, CardMedia, Grid, Typography, Paper } from "@mui/material";
-import React, { useEffect } from "react";
+import { Grid, Typography, Paper, Button, Box } from "@/lib/mui/muiRendering";
 import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";
 import { useGetUserProjects } from "@/service/useProjectService";
+import { useRouter } from "next/router";
+
+import DeleteProjectButton from "@/components/projects/DeleteProjectButton";
+import CardMedia from "@mui/material/CardMedia";
 
 const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
   const userId = currentUser?.uid;
-  const { data, loading } = useGetUserProjects(userId!);
-  if (loading) {
-    return <div>loading...</div>;
-  }
+  const router = useRouter();
+
+  const { data } = useGetUserProjects(userId!);
+
+  const handleGoToProject = (projectId: string) => () => {
+    router.push(`/projects/${projectId}`);
+  };
+
+  const projects = data?.projects;
+
   return (
     <>
       <Typography variant='h3' sx={{ ml: 2 }}>
@@ -19,23 +28,42 @@ const ProjectCardList = () => {
 
       <Grid
         container
+        xs={12}
         spacing={2}
         sx={{
           padding: "20px",
         }}
       >
-        {data &&
-          data.map((item: any) => (
-            <Grid item xs={3} key={item.id}>
+        {Array.isArray(projects) &&
+          projects.map((item: any) => (
+            <Grid item xs={3} key={item.projectId}>
               <Paper
                 elevation={5}
-                style={{ borderRadius: "8px", backgroundColor: "white" }}
+                sx={{
+                  borderRadius: "8px",
+                  backgroundColor: "white",
+                  height: "100px",
+                  padding: "10px", // Add padding
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between", // Adjust the position of title and buttons
+                }}
               >
-                <CardContent>
-                  <Typography variant='h6' gutterBottom>
-                    Card Title {item.title}
-                  </Typography>
-                </CardContent>
+                <CardMedia title='thumbnail' image={item.imageUrl} />
+
+                <Typography variant='h6' sx={{ ml: 1 }}>
+                  {item.title}
+                </Typography>
+
+                <Box>
+                  <Button
+                    onClick={handleGoToProject(item.projectId)}
+                    variant='outlined'
+                  >
+                    Go to Project
+                  </Button>
+                  <DeleteProjectButton projectId={item.projectId} />
+                </Box>
               </Paper>
             </Grid>
           ))}
@@ -43,4 +71,5 @@ const ProjectCardList = () => {
     </>
   );
 };
+
 export default ProjectCardList;

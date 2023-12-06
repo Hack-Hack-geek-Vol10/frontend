@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 const httpLink = createHttpLink({
-  uri: "https://sc-stage.seafood-dev.com/query",
+  uri: process.env.NEXT_PUBLIC_DEVELOP_BASE_URL,
 });
 
 const authLink = setContext((_, { headers }) => {

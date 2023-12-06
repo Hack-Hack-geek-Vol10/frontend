@@ -64,7 +64,7 @@ const AuthProvider: VFC<{ children: ReactNode }> = ({ children }) => {
         setSignInCheck(false);
       }
     });
-  }, [setSignInCheck, currentUser]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ currentUser, signInCheck, logout, login }}>
