@@ -8,13 +8,16 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
+import { useCreateInviteLink } from "@/service/useLinkServices";
 import useLink from "@/hooks/useLink";
 import { Auth } from "@/generated/graphql";
 
 const CreateLinkPullDown = () => {
-  const { pullValue, handlePullDownChange, handleCreateLink } = useLink();
+  const { pullValue, handlePullDownChange, handleCreateLink, data } = useLink();
   const router = useRouter();
   const pageId = router.query.id as string;
+
+  console.log(data);
 
   useEffect(() => {
     handleCreateLink(pageId, pullValue);

@@ -19,9 +19,9 @@ export type Scalars = {
 };
 
 export enum Auth {
-  Owner = 'OWNER',
-  ReadOnly = 'READ_ONLY',
-  ReadWrite = 'READ_WRITE'
+  Owner = 'owner',
+  ReadOnly = 'read_only',
+  ReadWrite = 'read_write'
 }
 
 export type Mutation = {

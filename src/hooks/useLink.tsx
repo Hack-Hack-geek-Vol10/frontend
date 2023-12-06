@@ -3,7 +3,7 @@ import { useCreateInviteLink } from "@/service/useLinkServices";
 import { Auth } from "@/generated/graphql";
 
 const useLink = () => {
-  const { createInviteLink } = useCreateInviteLink();
+  const { createInviteLink, data } = useCreateInviteLink();
   const [pullValue, setPullValue] = React.useState<Auth>(Auth.ReadOnly);
 
   const handlePullDownChange = (
@@ -23,6 +23,7 @@ const useLink = () => {
     }
   };
   return {
+    data,
     pullValue,
     setPullValue,
     handleCreateLink,
