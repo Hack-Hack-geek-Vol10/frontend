@@ -1,24 +1,39 @@
-import React from "react";
-import { useCreateInviteLink } from "@/service/useLinkServices";
+import React, { use } from "react";
 import { useRouter } from "next/router";
-import { Button } from "@/lib/mui/muiRendering";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
+import useLink from "@/hooks/useLink";
+import { Auth } from "@/generated/graphql";
 
-const CreateLinkButton = () => {
-  const { createInviteLink } = useCreateInviteLink();
+const CreateLinkPullDown = () => {
+  const { pullValue, handlePullDownChange, handleCreateLink } = useLink();
   const router = useRouter();
+  const pageId = router.query.id as string;
+  handleCreateLink(pageId, pullValue);
 
-  const handleCreateLink = () => {
-    const id = router.query.id as string;
-    if (id) {
-      createInviteLink({
-        variables: {
-          projectId: id,
-        },
-      });
-    }
+  const handleSelectChange = (event: SelectChangeEvent<Auth>) => {
+    handlePullDownChange(event as React.ChangeEvent<{ value: unknown }>);
   };
 
-  return <Button onClick={handleCreateLink}>CreateLinkButton</Button>;
+  return (
+    <FormControl variant='outlined'>
+      <InputLabel id='select-label-1'>Option 1</InputLabel>
+      <Select
+        labelId='select-label-1'
+        value={pullValue}
+        onChange={handleSelectChange}
+      >
+        <MenuItem value={Auth.Owner}>Owner</MenuItem>
+        <MenuItem value={Auth.ReadOnly}>ReadOnly</MenuItem>
+        <MenuItem value={Auth.ReadWrite}>ReadWrite</MenuItem>
+      </Select>
+    </FormControl>
+  );
 };
 
-export default CreateLinkButton;
+export default CreateLinkPullDown;
