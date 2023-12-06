@@ -1,0 +1,3 @@
+mutation CreateInviteLink($projectId: ID!, $authority: Auth!) {
+  createInviteLink(projectId: $projectId, authority: $authority)
+}

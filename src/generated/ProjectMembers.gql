@@ -1,5 +1,3 @@
-# GetProjectMembers.graphql
-
 query GetProjectMembers($projectId: ID!) {
   projectMembers(projectId: $projectId) {
     projectId
