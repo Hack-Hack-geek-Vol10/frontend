@@ -7,17 +7,21 @@ import { Box } from "@/lib/mui/muiRendering";
 const Index = () => {
   return (
     <>
-      <Header />
-      <ProjectCardList />
+      <Box>
+        <Header />
+        <Box>
+          <ProjectCardList />
+        </Box>
 
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: "30px",
-          right: "30px",
-        }}
-      >
-        <CreateProjectModal />
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "30px",
+            right: "30px",
+          }}
+        >
+          <CreateProjectModal />
+        </Box>
       </Box>
     </>
   );

@@ -1,24 +1,23 @@
-import { Grid, Typography, Paper, Button } from "@/lib/mui/muiRendering";
-import { useMemo, useEffect, memo, useCallback } from "react";
+import { Grid, Typography, Paper, Button, Box } from "@/lib/mui/muiRendering";
 import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";
 import { useGetUserProjects } from "@/service/useProjectService";
 import { useRouter } from "next/router";
-import CardMedia from "@mui/material/CardMedia";
 import DeleteProjectButton from "@/components/projects/DeleteProjectButton";
+import CardMedia from "@mui/material/CardMedia";
 
 const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
   const userId = currentUser?.uid;
   const router = useRouter();
-  const { data, loading } = useGetUserProjects(userId!);
+  const { data } = useGetUserProjects(userId!);
 
   const handleGoToProject = (projectId: string) => () => {
     router.push(`/projects/${projectId}`);
   };
 
   const projects = data?.projects;
-  console.log(projects);
+
   return (
     <>
       <Typography variant='h3' sx={{ ml: 2 }}>
@@ -27,6 +26,7 @@ const ProjectCardList = () => {
 
       <Grid
         container
+        xs={12}
         spacing={2}
         sx={{
           padding: "20px",
@@ -41,20 +41,27 @@ const ProjectCardList = () => {
                   borderRadius: "8px",
                   backgroundColor: "white",
                   height: "100px",
+                  padding: "10px", // Add padding
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between", // Adjust the position of title and buttons
                 }}
               >
-                <CardMedia title='eeeee' image={`${item.lastImage}`} />
-                <Typography variant='h6' gutterBottom>
-                  Card Title {item.title}
+                <CardMedia title='thumbnail' image={item.imageUrl} />
+
+                <Typography variant='h6' sx={{ ml: 1 }}>
+                  {item.title}
                 </Typography>
 
-                <Button
-                  onClick={handleGoToProject(item.projectId)}
-                  variant='outlined'
-                >
-                  Go to Project
-                </Button>
-                <DeleteProjectButton projectId={item.projectId} />
+                <Box>
+                  <Button
+                    onClick={handleGoToProject(item.projectId)}
+                    variant='outlined'
+                  >
+                    Go to Project
+                  </Button>
+                  <DeleteProjectButton projectId={item.projectId} />
+                </Box>
               </Paper>
             </Grid>
           ))}

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Button, TextField, AddIcon } from "@/lib/mui/muiRendering";
 import { useCreateProject } from "@/service/useProjectService";
 import GeneralModal from "@/components/commons/GeneralModal";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const CreateProject = () => {
   const [title, setTitle] = useState("");
@@ -14,9 +15,12 @@ const CreateProject = () => {
     return data;
   };
 
-  if (data) {
-    router.push(`/projects/${data.createProject!.projectId}`);
-  }
+  useEffect(() => {
+    if (data) {
+      router.push(`/projects/${data.createProject!.projectId}`);
+    }
+  }, [data]);
+
   return (
     <GeneralModal buttonContent={<AddIcon />}>
       <TextField
