@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Button, IconButton } from "@/lib/mui/muiRendering";
-
+import CreateLinkButton from "@/components/projects/CreateLinkButton";
 const Header = () => {
   return (
     <Box
@@ -10,7 +10,9 @@ const Header = () => {
       justifyContent='space-between'
       padding={2}
       bgcolor='#123456'
-    ></Box>
+    >
+      <CreateLinkButton />
+    </Box>
   );
 };
 

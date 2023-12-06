@@ -1,6 +1,7 @@
 import React, { use } from "react";
 import { useRouter } from "next/router";
 import {
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -32,6 +33,13 @@ const CreateLinkPullDown = () => {
         <MenuItem value={Auth.ReadOnly}>ReadOnly</MenuItem>
         <MenuItem value={Auth.ReadWrite}>ReadWrite</MenuItem>
       </Select>
+      <Button
+        variant='contained'
+        color='primary'
+        onClick={() => handleCreateLink(pageId, pullValue)}
+      >
+        Create Link
+      </Button>
     </FormControl>
   );
 };

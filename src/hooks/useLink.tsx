@@ -1,7 +1,6 @@
 import React from "react";
 import { useCreateInviteLink } from "@/service/useLinkServices";
 import { Auth } from "@/generated/graphql";
-import Router from "next/router";
 
 const useLink = () => {
   const { createInviteLink } = useCreateInviteLink();
