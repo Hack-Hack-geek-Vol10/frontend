@@ -1,4 +1,4 @@
-import Editor from "@/components/Editor";
+import Editor from "@/components/editor/Editor";
 import Header from "@/components/EditorHeader/Header";
 import { Box } from "@mui/material";
 import React from "react";
