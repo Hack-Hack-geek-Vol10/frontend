@@ -10,7 +10,7 @@ const useLink = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [pullValue, setPullValue] = useState<Auth>(Auth.Owner);
   const open = Boolean(anchorEl);
-  const router = useRouter();
+
   const pageId = router.query.id as string;
 
   const CreateLink = async (id: string, authority: Auth) => {

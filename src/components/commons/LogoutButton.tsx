@@ -1,16 +1,14 @@
 import { Button } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
-import { useRouter } from "next/router";
-
+import useTransition from "@/hooks/useTransition";
 const LogoutButton = () => {
-  const router = useRouter();
-
   const { logout } = useContext(AuthContext);
+  const { transitionPage } = useTransition();
   const handleLogout = async () => {
     try {
       await logout();
-      router.push("/");
+      transitionPage("/");
     } catch (err) {
       console.log(err);
     }

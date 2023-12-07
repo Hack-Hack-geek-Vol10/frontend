@@ -2,20 +2,19 @@ import { Grid, Typography, Paper, Button, Box } from "@/lib/mui/muiRendering";
 import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";
 import { useGetUserProjects } from "@/service/useProjectService";
-import { useRouter } from "next/router";
-
+import useTransition from "@/hooks/useTransition";
 import DeleteProjectButton from "@/components/projects/DeleteProjectButton";
 import CardMedia from "@mui/material/CardMedia";
 
 const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
+  const { transitionPage } = useTransition();
   const userId = currentUser?.uid;
-  const router = useRouter();
 
   const { data } = useGetUserProjects(userId!);
 
   const handleGoToProject = (projectId: string) => () => {
-    router.push(`/projects/${projectId}`);
+    transitionPage(`/projects/${projectId}`);
   };
 
   const projects = data?.projects;

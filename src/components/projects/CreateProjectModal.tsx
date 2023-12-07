@@ -1,14 +1,13 @@
-import React, { use, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, TextField, AddIcon } from "@/lib/mui/muiRendering";
 import { useCreateProject } from "@/service/useProjectService";
 import GeneralModal from "@/components/commons/GeneralModal";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import useTransition from "@/hooks/useTransition";
 
 const CreateProject = () => {
   const [title, setTitle] = useState("");
   const { createProject, data } = useCreateProject();
-  const router = useRouter();
+  const { transitionPage } = useTransition();
 
   const handleCreateProject = async () => {
     await createProject({ variables: { title } });
@@ -17,7 +16,7 @@ const CreateProject = () => {
 
   useEffect(() => {
     if (data) {
-      router.push(`/projects/${data.createProject!.projectId}`);
+      transitionPage(`/projects/${data.createProject!.projectId}`);
     }
   }, [data]);
 
