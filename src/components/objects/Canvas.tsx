@@ -15,7 +15,7 @@ import "reactflow/dist/style.css";
 
 import CustomNode from "./CustomNode";
 
-const initBgColor: string = "#1A192B";
+const initBgColor: string = "#666";
 
 const connectionLineStyle: React.CSSProperties = { stroke: "#fff" };
 const nodeTypes: ReactFlowProps["nodeTypes"] = {
@@ -122,7 +122,7 @@ const CustomNodeFlow: React.FC = () => {
     <Box
       sx={{
         width: "100%",
-        height: "100vh",
+        height: "calc(100vh - 62px)",
       }}
     >
       <ReactFlow

@@ -7,7 +7,8 @@ const Editor = () => {
   return (
     <Box
       sx={{
-        width: "40%",
+        width: "100%",
+        height: "calc(100vh - 65px)",
         borderRight: "1px solid #ccc",
       }}
     >
@@ -17,8 +18,8 @@ const Editor = () => {
         value={text}
         name='UNIQUE_ID_OF_DIV'
         width='100%'
+        height='100%'
         editorProps={{ $blockScrolling: true }}
-        height=' calc(100vh - 40px)'
       />
     </Box>
   );
