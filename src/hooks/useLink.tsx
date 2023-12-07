@@ -10,7 +10,7 @@ const useLink = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [pullValue, setPullValue] = useState<Auth>(Auth.Owner);
   const open = Boolean(anchorEl);
-
+  const router = useRouter();
   const pageId = router.query.id as string;
 
   const CreateLink = async (id: string, authority: Auth) => {
@@ -34,7 +34,7 @@ const useLink = () => {
     const link = data?.createInviteLink;
     if (link) {
       await CopyLink(link);
-      alert("Link is created!");
+      alert(`${pullValue} Link is created!`);
     } else {
       alert("Link is not created!");
     }
