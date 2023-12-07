@@ -1,41 +1,43 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Box } from "@mui/material";
 import ReactFlow, {
   useNodesState,
   useEdgesState,
   addEdge,
   MiniMap,
   Controls,
+  Edge,
+  Node,
+  Connection,
+  ReactFlowProps,
 } from "reactflow";
 import "reactflow/dist/style.css";
 
 import CustomNode from "./CustomNode";
 
-import "./index.css";
+const initBgColor: string = "#1A192B";
 
-const initBgColor = "#1A192B";
-
-const connectionLineStyle = { stroke: "#fff" };
-const snapGrid = [20, 20];
-const nodeTypes = {
-  selectorNode: ColorSelectorNode,
+const connectionLineStyle: React.CSSProperties = { stroke: "#fff" };
+const nodeTypes: ReactFlowProps["nodeTypes"] = {
+  selectorNode: CustomNode,
 };
 
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 
-const CustomNodeFlow = () => {
+const CustomNodeFlow: React.FC = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [bgColor, setBgColor] = useState(initBgColor);
+  const [bgColor, setBgColor] = useState<string>(initBgColor);
 
   useEffect(() => {
-    const onChange = (event: any) => {
-      setNodes((nds) =>
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setNodes((nds: Node[]) =>
         nds.map((node) => {
           if (node.id !== "2") {
             return node;
           }
 
-          const color = event.target.value;
+          const color: string = event.target.value;
 
           setBgColor(color);
 
@@ -109,30 +111,38 @@ const CustomNodeFlow = () => {
   }, []);
 
   const onConnect = useCallback(
-    (params) =>
-      setEdges((eds) =>
+    (params: Connection | Edge) =>
+      setEdges((eds: Edge[]) =>
         addEdge({ ...params, animated: true, style: { stroke: "#fff" } }, eds)
       ),
     []
   );
+
   return (
-    <ReactFlow
-      nodes={nodes}
-      edges={edges}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      onConnect={onConnect}
-      style={{ background: bgColor }}
-      nodeTypes={nodeTypes}
-      connectionLineStyle={connectionLineStyle}
-      snapToGrid={true}
-      defaultViewport={defaultViewport}
-      fitView
-      attributionPosition='bottom-left'
+    <Box
+      sx={{
+        width: "100%",
+        height: "100vh",
+      }}
     >
-      <MiniMap />
-      <Controls />
-    </ReactFlow>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        style={{ background: bgColor }}
+        nodeTypes={nodeTypes}
+        connectionLineStyle={connectionLineStyle}
+        snapToGrid={true}
+        defaultViewport={defaultViewport}
+        fitView
+        attributionPosition='bottom-left'
+      >
+        <MiniMap />
+        <Controls />
+      </ReactFlow>
+    </Box>
   );
 };
 

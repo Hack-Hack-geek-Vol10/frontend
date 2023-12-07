@@ -5,7 +5,8 @@ interface CustomNodeProps {
   data: any;
   isConnectable: boolean;
 }
-const CustomNode(({ data, isConnectable }) => {
+
+const CustomNode: React.FC<CustomNodeProps> = ({ data, isConnectable }) => {
   return (
     <>
       <Handle
@@ -15,15 +16,8 @@ const CustomNode(({ data, isConnectable }) => {
         onConnect={(params) => console.log("handle onConnect", params)}
         isConnectable={isConnectable}
       />
-      <div>
-        Custom Color Picker Node: <strong>{data.color}</strong>
-      </div>
-      <input
-        className='nodrag'
-        type='color'
-        onChange={data.onChange}
-        defaultValue={data.color}
-      />
+      <div>Custom Color Picker Node:</div>
+
       <Handle
         type='source'
         position={Position.Right}
@@ -40,6 +34,6 @@ const CustomNode(({ data, isConnectable }) => {
       />
     </>
   );
-});
+};
 
 export default memo(CustomNode);
