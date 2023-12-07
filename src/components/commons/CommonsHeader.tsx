@@ -13,13 +13,7 @@ const Header = () => {
     <Box
       sx={{ position: "sticky", height: "62px", top: 0, bgcolor: "#123456" }}
     >
-      <Box
-        display='flex'
-        alignItems='center'
-        justifyContent='space-between'
-        width={"50%"}
-        padding={2}
-      >
+      <Box display='flex' alignItems='center' width={"50%"} padding={2}>
         <Box>{signInCheck ? <LogoutButton /> : <LoginButton />}</Box>
         <Box>
           <Button
