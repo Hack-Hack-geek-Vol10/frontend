@@ -1,8 +1,7 @@
-import Editor from "@/components/editor/Editor";
 import Header from "@/components/EditorHeader/Header";
 import { Box } from "@mui/material";
 import React from "react";
-import CustomNodeFlow from "@/components/objects/CustomNodeFlow";
+import CustomNodeFlow from "@/components/objects/Canvas";
 const id = () => {
   return (
     <>
