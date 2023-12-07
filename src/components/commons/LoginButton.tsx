@@ -26,5 +26,18 @@ export const LoginButton = () => {
     }
   };
 
-  return <Button onClick={handleLogin}>GoogleLogin</Button>;
+  return (
+    <Button
+      sx={{
+        color: "#fff",
+        "&:hover": {
+          backgroundColor: "transparent",
+          opacity: [0.9, 0.8, 0.7],
+        },
+      }}
+      onClick={handleLogin}
+    >
+      GoogleLogin
+    </Button>
+  );
 };

@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import { useRouter } from "next/router";
 import { Button, MenuItem } from "@mui/material";
 import useLink from "@/hooks/useLink";
 import { Auth } from "@/generated/graphql";
 import Menu from "@mui/material/Menu";
-import clipboardCopy from "clipboard-copy";
 const CreateLinkPullDown = () => {
   const { MenuItemClick, handleClick, handleClose, anchorEl, open } = useLink();
 
