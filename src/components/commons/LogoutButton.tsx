@@ -13,6 +13,19 @@ const LogoutButton = () => {
       console.log(err);
     }
   };
-  return <Button onClick={handleLogout}>logout</Button>;
+  return (
+    <Button
+      sx={{
+        color: "#fff",
+        "&:hover": {
+          backgroundColor: "transparent",
+          opacity: [0.9, 0.8, 0.7],
+        },
+      }}
+      onClick={handleLogout}
+    >
+      logout
+    </Button>
+  );
 };
 export default LogoutButton;
