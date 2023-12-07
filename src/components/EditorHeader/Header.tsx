@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Button, IconButton } from "@/lib/mui/muiRendering";
-import CreateLinkButton from "@/components/projects/CreateLinkButton";
+import CreateLinkPullDown from "@/components/projects/CreateLinkPullDown";
 const Header = () => {
   return (
     <Box
@@ -11,7 +11,7 @@ const Header = () => {
       padding={2}
       bgcolor='#123456'
     >
-      <CreateLinkButton />
+      <CreateLinkPullDown />
     </Box>
   );
 };

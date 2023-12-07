@@ -1,47 +1,22 @@
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
-import { useCreateInviteLink } from "@/service/useLinkServices";
+import { Button, MenuItem } from "@mui/material";
 import useLink from "@/hooks/useLink";
 import { Auth } from "@/generated/graphql";
-import { useState } from "react";
 import Menu from "@mui/material/Menu";
-
+import clipboardCopy from "clipboard-copy";
 const CreateLinkPullDown = () => {
-  const {
-    handleCreateLink,
-    data,
-    handleMenuItemClick,
-    handleClick,
-    handleClose,
-    anchorEl,
-    open,
-    pullValue,
-    setPullValue,
-  } = useLink();
-  const router = useRouter();
-  const pageId = router.query.id as string;
-
-  useEffect(() => {
-    handleCreateLink(pageId, pullValue);
-  }, [pullValue]);
+  const { MenuItemClick, handleClick, handleClose, anchorEl, open } = useLink();
 
   return (
     <div>
       <Button
         aria-controls='customized-menu'
         aria-haspopup='true'
-        variant='contained'
+        variant='outlined'
         onClick={handleClick}
       >
-        Select Option
+        CreateLink
       </Button>
       <Menu
         id='customized-menu'
@@ -50,13 +25,11 @@ const CreateLinkPullDown = () => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => handleMenuItemClick(Auth.Owner)}>
-          Owner
-        </MenuItem>
-        <MenuItem onClick={() => handleMenuItemClick(Auth.ReadOnly)}>
+        <MenuItem onClick={() => MenuItemClick(Auth.Owner)}>Owner</MenuItem>
+        <MenuItem onClick={() => MenuItemClick(Auth.ReadOnly)}>
           ReadOnly
         </MenuItem>
-        <MenuItem onClick={() => handleMenuItemClick(Auth.ReadWrite)}>
+        <MenuItem onClick={() => MenuItemClick(Auth.ReadWrite)}>
           ReadWrite
         </MenuItem>
       </Menu>
