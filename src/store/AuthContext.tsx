@@ -23,9 +23,7 @@ const AuthContext = createContext<AuthContextProps>({
 });
 
 const AuthProvider: VFC<{ children: ReactNode }> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<User | null | undefined>(
-    undefined
-  );
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   const [signInCheck, setSignInCheck] = useState(false);
 

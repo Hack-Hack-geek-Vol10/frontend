@@ -1,20 +1,31 @@
 import { Button } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
-import { useRouter } from "next/router";
-
+import useTransition from "@/hooks/useTransition";
 const LogoutButton = () => {
-  const router = useRouter();
-
   const { logout } = useContext(AuthContext);
+  const { transitionPage } = useTransition();
   const handleLogout = async () => {
     try {
       await logout();
-      router.push("/");
+      transitionPage("/");
     } catch (err) {
       console.log(err);
     }
   };
-  return <Button onClick={handleLogout}>logout</Button>;
+  return (
+    <Button
+      sx={{
+        color: "#fff",
+        "&:hover": {
+          backgroundColor: "transparent",
+          opacity: [0.9, 0.8, 0.7],
+        },
+      }}
+      onClick={handleLogout}
+    >
+      logout
+    </Button>
+  );
 };
 export default LogoutButton;

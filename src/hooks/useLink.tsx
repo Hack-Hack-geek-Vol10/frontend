@@ -34,7 +34,7 @@ const useLink = () => {
     const link = data?.createInviteLink;
     if (link) {
       await CopyLink(link);
-      alert("Link is created!");
+      alert(`${pullValue} Link is created!`);
     } else {
       alert("Link is not created!");
     }

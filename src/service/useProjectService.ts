@@ -27,15 +27,6 @@ import {
   DeleteProjectMutationVariables,
 } from "@/generated/graphql";
 
-export const useCreateProject = () => {
-  const [createProject, { data, loading, error }] = useMutation<
-    CreateProjectMutation,
-    CreateProjectMutationVariables
-  >(CreateProjectDocument);
-
-  return { createProject, data, loading, error };
-};
-
 export const useGetUserProjects = (userId: string) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, loading, error } = useQuery<
@@ -58,6 +49,14 @@ export const useGetProject = (projectId: string) => {
   });
 
   return { data, loading, error };
+};
+export const useCreateProject = () => {
+  const [createProject, { data, loading, error }] = useMutation<
+    CreateProjectMutation,
+    CreateProjectMutationVariables
+  >(CreateProjectDocument);
+
+  return { createProject, data, loading, error };
 };
 
 export const useUpdateProject = () => {
