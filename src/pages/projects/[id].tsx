@@ -1,17 +1,31 @@
-import Editor from "@/components/editor/Editor";
 import Header from "@/components/EditorHeader/Header";
 import { Box } from "@mui/material";
 import React from "react";
-import CustomNodeFlow from "@/components/objects/CustomNodeFlow";
+import Canvas from "@/components/objects/Canvas";
+import Editor from "@/components/editor/Editor";
 const id = () => {
   return (
     <>
       <Header />
 
-      <Box>
-        {/* <Editor /> */}
+      <Box display={"flex"}>
+        <Box
+          sx={{
+            width: "40%",
+            height: "100%",
+          }}
+        >
+          <Editor />
+        </Box>
 
-        <CustomNodeFlow />
+        <Box
+          sx={{
+            width: "60%",
+            height: "100%",
+          }}
+        >
+          <Canvas />
+        </Box>
       </Box>
     </>
   );

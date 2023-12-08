@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 const MysqlModal = () => {
   return (
     <GeneralModal buttonContent={<Button>mysql</Button>}>
-      ;<div>mysql</div>
+      <div>mysql</div>
     </GeneralModal>
   );
 };
