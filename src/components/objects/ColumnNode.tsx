@@ -13,6 +13,7 @@ const ColumnNode: React.FC<CustomNodeProps> = ({ data, isConnectable }) => {
       <Box
         sx={{
           width: "100px",
+          height: "15px",
         }}
       >
         <Handle

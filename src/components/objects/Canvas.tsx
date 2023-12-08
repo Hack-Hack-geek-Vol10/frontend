@@ -46,15 +46,15 @@ const CustomNodeFlow: React.FC = () => {
         id: "1",
         type: "TableNode",
         data: { color: initBgColor },
-        style: { border: "1px solid #fff", padding: "4px" },
+        style: { border: "0.5px solid #fff", padding: "4px" },
         position: { x: 300, y: 100 },
       },
       {
-        id: "2",
+        id: "a",
         type: "ColumnNode",
         position: { x: 0, y: 20 },
         data: { color: initBgColor },
-        style: { border: "1px solid #fff", padding: "4px" },
+        style: { border: "0.5px solid #fff", padding: "4px" },
         parentNode: "1",
         extent: "parent",
         draggable: false,
@@ -90,8 +90,6 @@ const CustomNodeFlow: React.FC = () => {
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
         style={{ background: "#333" }}
         nodeTypes={nodeTypes}
         connectionLineStyle={connectionLineStyle}
@@ -100,7 +98,6 @@ const CustomNodeFlow: React.FC = () => {
         fitView
         attributionPosition='bottom-left'
       >
-        <MiniMap />
         <Controls />
       </ReactFlow>
     </Box>
