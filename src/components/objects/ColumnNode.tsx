@@ -20,8 +20,6 @@ const ColumnNode: React.FC<CustomNodeProps> = ({ data, isConnectable }) => {
           type='target'
           position={Position.Left}
           style={{ background: "#555" }}
-          onConnect={(params) => console.log("handle onConnect", params)}
-          isConnectable={isConnectable}
         />
         <Box
           sx={{

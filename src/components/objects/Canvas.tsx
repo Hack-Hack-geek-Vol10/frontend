@@ -28,7 +28,7 @@ const defaultViewport = { x: 0, y: 0, zoom: 1 };
 
 const CustomNodeFlow: React.FC = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [edges, setEdges] = useEdgesState([]);
 
   useEffect(() => {
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

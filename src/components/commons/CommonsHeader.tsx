@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
-import { Box, Button } from "@/lib/mui/muiRendering";
+import { Box, Button, IconButton } from "@/lib/mui/muiRendering";
 import { LoginButton } from "@/components/commons/LoginButton";
 import LogoutButton from "@/components/commons/LogoutButton";
 import useTransition from "@/hooks/useTransition";
+import "next/image";
 
 const Header = () => {
   const { signInCheck } = useContext(AuthContext);
-  const { transitionPage } = useTransition();
+  const { transitionPage, getPagePath } = useTransition();
 
   return (
     <Box
@@ -15,28 +16,40 @@ const Header = () => {
         position: "sticky",
         height: "52px",
         top: 0,
-        bgcolor: "#123456",
-        px: 2,
+        bgcolor: "#FFA560",
+        pr: 2,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
       }}
     >
-      <Box>
-        <Button
-          sx={{
-            color: "#fff",
-            alignItems: "center",
-            "&:hover": {
-              backgroundColor: "transparent",
-              opacity: [0.9, 0.8, 0.7],
-            },
+      <IconButton
+        sx={{
+          pl: 1,
+          width: "300px",
+          height: "100%",
+          "&:hover": {
+            backgroundColor: "transparent",
+            opacity: 0.6,
+          },
+        }}
+        onClick={() => {
+          getPagePath() === "/" || getPagePath() === "/docs"
+            ? transitionPage("/welcome")
+            : transitionPage("/projects");
+        }}
+      >
+        <img
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+            cursor: "pointer",
           }}
-          onClick={() => transitionPage("/projects")}
-        >
-          projectList
-        </Button>
-      </Box>
+          src='/antibg.png'
+          alt=''
+        />
+      </IconButton>
       <Box>{signInCheck ? <LogoutButton /> : <LoginButton />}</Box>
     </Box>
   );
