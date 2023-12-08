@@ -1,9 +1,9 @@
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
 import useTransition from "@/hooks/useTransition";
 const LogoutButton = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout, currentUser } = useContext(AuthContext);
   const { transitionPage } = useTransition();
   const handleLogout = async () => {
     try {
@@ -24,7 +24,10 @@ const LogoutButton = () => {
       }}
       onClick={handleLogout}
     >
-      logout
+      <Avatar
+        alt={currentUser?.displayName || ""}
+        src={currentUser?.photoURL || ""}
+      />
     </Button>
   );
 };

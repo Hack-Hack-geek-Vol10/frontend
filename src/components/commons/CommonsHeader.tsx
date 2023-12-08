@@ -11,25 +11,33 @@ const Header = () => {
 
   return (
     <Box
-      sx={{ position: "sticky", height: "62px", top: 0, bgcolor: "#123456" }}
+      sx={{
+        position: "sticky",
+        height: "52px",
+        top: 0,
+        bgcolor: "#123456",
+        px: 2,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
     >
-      <Box display='flex' alignItems='center' width={"50%"} padding={2}>
-        <Box>{signInCheck ? <LogoutButton /> : <LoginButton />}</Box>
-        <Box>
-          <Button
-            sx={{
-              color: "#fff",
-              "&:hover": {
-                backgroundColor: "transparent",
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
-            onClick={() => transitionPage("/projects")}
-          >
-            projectList
-          </Button>
-        </Box>
+      <Box>
+        <Button
+          sx={{
+            color: "#fff",
+            alignItems: "center",
+            "&:hover": {
+              backgroundColor: "transparent",
+              opacity: [0.9, 0.8, 0.7],
+            },
+          }}
+          onClick={() => transitionPage("/projects")}
+        >
+          projectList
+        </Button>
       </Box>
+      <Box>{signInCheck ? <LogoutButton /> : <LoginButton />}</Box>
     </Box>
   );
 };
