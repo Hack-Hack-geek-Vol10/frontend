@@ -13,40 +13,29 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 
-import CustomNode from "./CustomNode";
-
-const initBgColor: string = "#666";
-
-const connectionLineStyle: React.CSSProperties = { stroke: "#fff" };
+import ColumnNode from "./ColumnNode";
+import TableNode from "./TableNode";
 const nodeTypes: ReactFlowProps["nodeTypes"] = {
-  selectorNode: CustomNode,
+  ColumnNode: ColumnNode,
+  TableNode: TableNode,
 };
 
-const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
+const initBgColor: string = "#fff";
+
+const connectionLineStyle: React.CSSProperties = { stroke: "#fff" };
+
+const defaultViewport = { x: 0, y: 0, zoom: 1 };
 
 const CustomNodeFlow: React.FC = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [bgColor, setBgColor] = useState<string>(initBgColor);
 
   useEffect(() => {
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setNodes((nds: Node[]) =>
         nds.map((node) => {
-          if (node.id !== "2") {
-            return node;
-          }
-
-          const color: string = event.target.value;
-
-          setBgColor(color);
-
           return {
             ...node,
-            data: {
-              ...node.data,
-              color,
-            },
           };
         })
       );
@@ -55,31 +44,20 @@ const CustomNodeFlow: React.FC = () => {
     setNodes([
       {
         id: "1",
-        type: "input",
-        data: { label: "An input node" },
-        position: { x: 0, y: 50 },
-        sourcePosition: "right",
+        type: "TableNode",
+        data: { color: initBgColor },
+        style: { border: "1px solid #fff", padding: "4px" },
+        position: { x: 300, y: 100 },
       },
       {
         id: "2",
-        type: "selectorNode",
-        data: { onChange: onChange, color: initBgColor },
-        style: { border: "1px solid #777", padding: 10 },
-        position: { x: 300, y: 50 },
-      },
-      {
-        id: "3",
-        type: "output",
-        data: { label: "Output A" },
-        position: { x: 650, y: 25 },
-        targetPosition: "left",
-      },
-      {
-        id: "4",
-        type: "output",
-        data: { label: "Output B" },
-        position: { x: 650, y: 100 },
-        targetPosition: "left",
+        type: "ColumnNode",
+        position: { x: 0, y: 20 },
+        data: { color: initBgColor },
+        style: { border: "1px solid #fff", padding: "4px" },
+        parentNode: "1",
+        extent: "parent",
+        draggable: false,
       },
     ]);
 
@@ -88,23 +66,6 @@ const CustomNodeFlow: React.FC = () => {
         id: "e1-2",
         source: "1",
         target: "2",
-        animated: true,
-        style: { stroke: "#fff" },
-      },
-      {
-        id: "e2a-3",
-        source: "2",
-        target: "3",
-        sourceHandle: "a",
-        animated: true,
-        style: { stroke: "#fff" },
-      },
-      {
-        id: "e2b-4",
-        source: "2",
-        target: "4",
-        sourceHandle: "b",
-        animated: true,
         style: { stroke: "#fff" },
       },
     ]);
@@ -131,7 +92,7 @@ const CustomNodeFlow: React.FC = () => {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        style={{ background: bgColor }}
+        style={{ background: "#333" }}
         nodeTypes={nodeTypes}
         connectionLineStyle={connectionLineStyle}
         snapToGrid={true}
