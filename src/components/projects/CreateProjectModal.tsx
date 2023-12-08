@@ -21,7 +21,15 @@ const CreateProject = () => {
   }, [data]);
 
   return (
-    <GeneralModal buttonContent={<AddIcon />}>
+    <GeneralModal
+      buttonContent={
+        <AddIcon
+          sx={{
+            color: "black",
+          }}
+        />
+      }
+    >
       <TextField
         label='プロジェクト名'
         variant='outlined'

@@ -15,8 +15,10 @@ const Index = () => {
 
         <Box
           sx={{
+            bgcolor: "#FFA560",
+            borderRadius: "50%",
             position: "absolute",
-            bottom: "30px",
+            bottom: "20px",
             right: "30px",
           }}
         >

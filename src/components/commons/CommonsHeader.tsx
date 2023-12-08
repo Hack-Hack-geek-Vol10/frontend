@@ -10,6 +10,15 @@ const Header = () => {
   const { signInCheck } = useContext(AuthContext);
   const { transitionPage, getPagePath } = useTransition();
 
+  const handleTransition = () => {
+    if (getPagePath() === "/") {
+      transitionPage("/");
+    } else if (getPagePath() === "/docs") {
+      transitionPage("/");
+    } else {
+      transitionPage("/projects");
+    }
+  };
   return (
     <Box
       sx={{
@@ -33,11 +42,7 @@ const Header = () => {
             opacity: 0.6,
           },
         }}
-        onClick={() => {
-          getPagePath() === "/" || getPagePath() === "/docs"
-            ? transitionPage("/welcome")
-            : transitionPage("/projects");
-        }}
+        onClick={handleTransition}
       >
         <img
           style={{
