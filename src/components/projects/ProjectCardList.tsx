@@ -77,10 +77,19 @@ const ProjectCardList = () => {
                   {item.title}
                 </Typography>
 
-                <Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    px: 1,
+                  }}
+                >
                   <Button
                     onClick={handleGoToProject(item.projectId)}
-                    variant='outlined'
+                    sx={{
+                      color: "black",
+                    }}
                   >
                     Go to Project
                   </Button>

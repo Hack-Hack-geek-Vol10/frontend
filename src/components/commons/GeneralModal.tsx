@@ -39,7 +39,7 @@ export default function GeneralModal({
             sx={{
               position: "absolute",
               top: "0px",
-              left: "0px",
+              right: "0px",
             }}
           >
             <CloseIcon
