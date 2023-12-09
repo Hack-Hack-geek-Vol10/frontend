@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Box, Button } from "@/lib/mui/muiRendering";
-import Header from "@/components/commons/CommonsHeader";
+import Header from "@/components/commons/Header";
 import useTransition from "@/hooks/useTransition";
 
 export default function Home() {

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
-import { Box, Button, IconButton } from "@/lib/mui/muiRendering";
+import { Avatar, Box, Button, IconButton } from "@/lib/mui/muiRendering";
 import { LoginButton } from "@/components/auth/LoginButton";
 import LogoutButton from "@/components/auth/LogoutButton";
 import useTransition from "@/hooks/useTransition";
@@ -11,9 +11,7 @@ const Header = () => {
   const { transitionPage, getPagePath } = useTransition();
 
   const handleTransition = () => {
-    if (getPagePath() === "/") {
-      transitionPage("/");
-    } else if (getPagePath() === "/docs") {
+    if (getPagePath() === "/docs" || getPagePath() === "/projects") {
       transitionPage("/");
     } else {
       transitionPage("/projects");
@@ -44,16 +42,23 @@ const Header = () => {
         }}
         onClick={handleTransition}
       >
-        <img
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "contain",
-            cursor: "pointer",
+        <Box
+          sx={{
+            overflow: "hidden",
           }}
-          src='/antibg.png'
-          alt=''
-        />
+        >
+          <Avatar
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              cursor: "pointer",
+            }}
+            variant='square'
+            src='/antibg.png'
+            alt='logo'
+          />
+        </Box>
       </IconButton>
       <Box>{signInCheck ? <LogoutButton /> : <LoginButton />}</Box>
     </Box>

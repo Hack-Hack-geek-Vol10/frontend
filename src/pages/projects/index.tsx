@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "@/components/commons/CommonsHeader";
+import Header from "@/components/commons/Header";
 import ProjectCardList from "@/components/projects/ProjectCardList";
 import CreateProjectModal from "@/components/projects/CreateProjectModal";
 import { Box } from "@/lib/mui/muiRendering";

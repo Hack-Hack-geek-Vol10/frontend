@@ -11,8 +11,10 @@ const CreateLinkPullDown = () => {
       <Button
         aria-controls='customized-menu'
         aria-haspopup='true'
-        variant='outlined'
         onClick={handleClick}
+        sx={{
+          color: " black",
+        }}
       >
         CreateLink
       </Button>

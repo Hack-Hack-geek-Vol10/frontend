@@ -1,5 +1,5 @@
 import React from "react";
-import { useDeleteProject } from "@/service/useProjectService";
+import { useDeleteProject, useGetProject } from "@/service/useProjectService";
 import { IconButton, DeleteOutlineOutlinedIcon } from "@/lib/mui/muiRendering";
 interface Props {
   projectId: string;
@@ -7,6 +7,7 @@ interface Props {
 
 const DeleteProjectButton = (props: Props) => {
   const { projectId } = props;
+
   const { deleteProject } = useDeleteProject();
 
   const handleDeleteProject = async () => {
