@@ -1,13 +1,13 @@
 import React, { memo } from "react";
 import { Handle, Position } from "reactflow";
 import { Box, Typography } from "@/lib/mui/muiRendering";
+import { ColumnNode } from "@/types/objectDataInterface";
 
 interface CustomNodeProps {
-  data: any;
-  isConnectable: boolean;
+  data: ColumnNode;
 }
 
-const ColumnNode: React.FC<CustomNodeProps> = ({ data, isConnectable }) => {
+const ColumnNode: React.FC<CustomNodeProps> = ({ data }) => {
   return (
     <>
       <Box
@@ -43,7 +43,7 @@ const ColumnNode: React.FC<CustomNodeProps> = ({ data, isConnectable }) => {
                 alignItems: "center",
               }}
             >
-              カラム
+              {data.data.name}
             </Typography>
           </Box>
           <Box
@@ -59,7 +59,7 @@ const ColumnNode: React.FC<CustomNodeProps> = ({ data, isConnectable }) => {
                 fontSize: "0.5rem",
               }}
             >
-              type
+              {data.data.type}
             </Typography>
           </Box>
           <Box
@@ -74,18 +74,11 @@ const ColumnNode: React.FC<CustomNodeProps> = ({ data, isConnectable }) => {
                 textAlign: "center",
                 fontSize: "0.5rem",
               }}
-            >
-              enm
-            </Typography>
+            ></Typography>
           </Box>
         </Box>
 
-        <Handle
-          type='source'
-          position={Position.Right}
-          id='a'
-          isConnectable={isConnectable}
-        />
+        <Handle type='source' position={Position.Right} id='a' />
       </Box>
     </>
   );

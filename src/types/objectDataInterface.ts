@@ -12,6 +12,9 @@ export interface TableNode {
   id: string;
   type: string;
   position: { x: number; y: number };
+  data: {
+    name: string;
+  };
   style: {
     border: string;
     padding: string;
@@ -24,6 +27,10 @@ export interface ColumnNode {
   style: {
     border: string;
     padding: string;
+  };
+  data: {
+    name: string;
+    type: string;
   };
   parentNode: string;
   extent: string;

@@ -31,21 +31,11 @@ const CustomNodeFlow: React.FC = () => {
   const [edges, setEdges] = useEdgesState([]);
 
   useEffect(() => {
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setNodes((nds: Node[]) =>
-        nds.map((node) => {
-          return {
-            ...node,
-          };
-        })
-      );
-    };
-
     setNodes([
       {
         id: "1",
         type: "TableNode",
-        data: { color: initBgColor },
+        data: { name: "Table 1" },
         style: { border: "0.5px solid #fff", padding: "4px" },
         position: { x: 300, y: 100 },
       },
