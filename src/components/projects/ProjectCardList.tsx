@@ -1,10 +1,16 @@
-import { Grid, Typography, Paper, Button, Box } from "@/lib/mui/muiRendering";
+import {
+  Grid,
+  Typography,
+  Paper,
+  Button,
+  Box,
+  Avatar,
+} from "@/lib/mui/muiRendering";
 import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";
 import { useGetUserProjects } from "@/service/useProjectService";
 import useTransition from "@/hooks/useTransition";
 import DeleteProjectButton from "@/components/projects/DeleteProjectButton";
-import CardMedia from "@mui/material/CardMedia";
 
 const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
@@ -41,14 +47,31 @@ const ProjectCardList = () => {
                 sx={{
                   borderRadius: "8px",
                   backgroundColor: "white",
-                  height: "100px",
-                  padding: "10px",
+
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between", // Adjust the position of title and buttons
                 }}
               >
-                <CardMedia title='thumbnail' image={item.imageUrl} />
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "80px",
+                    overflow: "hidden",
+                    borderRadius: "8px 8px 0 0",
+                  }}
+                >
+                  <Avatar
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                    }}
+                    variant='square'
+                    src={item?.lastImage}
+                    alt='thumbnail'
+                  />
+                </Box>
 
                 <Typography variant='h6' sx={{ ml: 1 }}>
                   {item.title}
