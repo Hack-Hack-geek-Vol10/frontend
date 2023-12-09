@@ -27,12 +27,7 @@ export default function GeneralModal({
   return (
     <>
       <IconButton onClick={handleOpen}>{buttonContent}</IconButton>
-      <Modal
-        open={open}
-        onClose={handleOpen}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
+      <Modal open={open} onClose={handleOpen}>
         <Box sx={style}>
           <IconButton
             onClick={handleOpen}

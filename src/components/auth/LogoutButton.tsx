@@ -45,15 +45,16 @@ const LogoutButton = () => {
           </Typography>
           <Button
             onClick={handleLogout}
+            color='error'
+            variant='outlined'
             sx={{
               mt: 2,
-              color: "red",
               "&:hover": {
-                backgroundColor: "transparent",
                 opacity: [0.9, 0.8, 0.7],
+                color: "#fff",
+                backgroundColor: "#f44336",
               },
             }}
-            autoFocus
           >
             ログアウト
           </Button>
