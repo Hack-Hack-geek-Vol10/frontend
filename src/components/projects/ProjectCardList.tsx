@@ -16,7 +16,6 @@ const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
   const { transitionPage } = useTransition();
   const userId = currentUser?.uid;
-
   const { data } = useGetUserProjects(userId!);
 
   const handleGoToProject = (projectId: string) => () => {
@@ -27,10 +26,6 @@ const ProjectCardList = () => {
 
   return (
     <>
-      <Typography variant='h3' sx={{ ml: 2 }}>
-        Team
-      </Typography>
-
       <Grid
         container
         xs={12}
