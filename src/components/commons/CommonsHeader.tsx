@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
 import { Box, Button, IconButton } from "@/lib/mui/muiRendering";
-import { LoginButton } from "@/components/commons/LoginButton";
-import LogoutButton from "@/components/commons/LogoutButton";
+import { LoginButton } from "@/components/auth/LoginButton";
+import LogoutButton from "@/components/auth/LogoutButton";
 import useTransition from "@/hooks/useTransition";
 import "next/image";
 

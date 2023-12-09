@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 
 import { useModal } from "@/hooks/useModal";
-import { IconButton, Modal } from "@/lib/mui/muiRendering";
+import { IconButton, Modal, CloseIcon } from "@/lib/mui/muiRendering";
 interface GeneralModalProps {
   children: React.ReactNode;
   buttonContent?: React.ReactNode;
@@ -23,17 +23,36 @@ export default function GeneralModal({
   children,
   buttonContent = <></>,
 }: GeneralModalProps) {
-  const { open, handleOpen, handleClose } = useModal();
+  const { open, handleOpen } = useModal();
   return (
     <>
       <IconButton onClick={handleOpen}>{buttonContent}</IconButton>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={handleOpen}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box sx={style}>{children}</Box>
+        <Box sx={style}>
+          <IconButton
+            onClick={handleOpen}
+            sx={{
+              position: "absolute",
+              top: "0px",
+              left: "0px",
+            }}
+          >
+            <CloseIcon
+              sx={{
+                color: "black",
+                "&:hover": {
+                  opacity: [0.9, 0.8, 0.7],
+                },
+              }}
+            />
+          </IconButton>
+          {children}
+        </Box>
       </Modal>
     </>
   );

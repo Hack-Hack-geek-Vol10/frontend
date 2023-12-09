@@ -42,7 +42,7 @@ const ProjectCardList = () => {
                   borderRadius: "8px",
                   backgroundColor: "white",
                   height: "100px",
-                  padding: "10px", // Add padding
+                  padding: "10px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between", // Adjust the position of title and buttons

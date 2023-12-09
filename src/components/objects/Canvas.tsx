@@ -71,14 +71,6 @@ const CustomNodeFlow: React.FC = () => {
     ]);
   }, []);
 
-  const onConnect = useCallback(
-    (params: Connection | Edge) =>
-      setEdges((eds: Edge[]) =>
-        addEdge({ ...params, animated: true, style: { stroke: "#fff" } }, eds)
-      ),
-    []
-  );
-
   return (
     <Box
       sx={{
