@@ -47,7 +47,6 @@ const NestedList: React.FC = () => {
         </List>
       </Collapse>
       <Divider />
-      {/* Repeat the ListItem and Collapse blocks for each item with nested items */}
     </List>
   );
 };
