@@ -31,16 +31,6 @@ const CustomNodeFlow: React.FC = () => {
   const [edges, setEdges] = useEdgesState([]);
 
   useEffect(() => {
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setNodes((nds: Node[]) =>
-        nds.map((node) => {
-          return {
-            ...node,
-          };
-        })
-      );
-    };
-
     setNodes([
       {
         id: "1",
