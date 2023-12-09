@@ -78,12 +78,7 @@ const ColumnNode: React.FC<CustomNodeProps> = ({ data }) => {
           </Box>
         </Box>
 
-        <Handle
-          type='source'
-          position={Position.Right}
-          id='a'
-          isConnectable={isConnectable}
-        />
+        <Handle type='source' position={Position.Right} id='a' />
       </Box>
     </>
   );
