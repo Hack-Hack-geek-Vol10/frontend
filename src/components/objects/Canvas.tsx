@@ -61,6 +61,16 @@ const CustomNodeFlow: React.FC = () => {
       },
     ]);
 
+    setEdges([
+      {
+        id: "e1-2",
+        source: "1",
+        target: "2",
+        style: { stroke: "#fff" },
+      },
+    ]);
+  }, []);
+
   return (
     <Box
       sx={{

@@ -1,5 +1,3 @@
-import { tablesData } from "../components/objects/data";
-
 export interface Table {
   name: string;
   columns: Column[];
@@ -14,13 +12,19 @@ export interface TableNode {
   id: string;
   type: string;
   position: { x: number; y: number };
-  style: string | null;
+  style: {
+    border: string;
+    padding: string;
+  } | null;
 }
 export interface ColumnNode {
   id: string;
   type: string;
   position: { x: number; y: number };
-  style: string | null;
+  style: {
+    border: string;
+    padding: string;
+  };
   parentNode: string;
   extent: string;
   draggable: boolean;
@@ -30,5 +34,7 @@ export interface Edge {
   id: string;
   source: string;
   target: string;
-  type: string;
+  style: {
+    stroke: string;
+  };
 }
