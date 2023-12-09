@@ -35,7 +35,7 @@ const CustomNodeFlow: React.FC = () => {
       {
         id: "1",
         type: "TableNode",
-        data: { color: initBgColor },
+        data: { name: "Table 1" },
         style: { border: "0.5px solid #fff", padding: "4px" },
         position: { x: 300, y: 100 },
       },

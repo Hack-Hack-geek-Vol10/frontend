@@ -6,6 +6,7 @@ export const TableNodeData: TableNode[] = tablesData.tables.map((table) => {
     id: table.name,
     type: "TableNode",
     position: { x: 0, y: 0 },
+    data: { name: table.name },
     style: { border: "0.5px solid #fff", padding: "4px" },
   };
 });

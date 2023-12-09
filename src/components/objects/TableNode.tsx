@@ -1,13 +1,12 @@
 import React, { memo } from "react";
 import { Handle, Position } from "reactflow";
 import { Box, Typography } from "@/lib/mui/muiRendering";
-
-interface CustomNodeProps {
-  data: any;
-  isConnectable: boolean;
+import { TableNode } from "@/types/objectDataInterface";
+interface TableNodeProps {
+  data: TableNode;
 }
 
-const TableNode: React.FC<CustomNodeProps> = ({ data, isConnectable }) => {
+const TableNode: React.FC<TableNodeProps> = ({ data }) => {
   return (
     <>
       <Box
@@ -23,7 +22,7 @@ const TableNode: React.FC<CustomNodeProps> = ({ data, isConnectable }) => {
             textAlign: "left",
           }}
         >
-          TableName
+          {data.data.name}
         </Typography>
       </Box>
     </>
