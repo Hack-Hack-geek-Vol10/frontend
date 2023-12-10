@@ -15,7 +15,13 @@ const ColumnNode: React.FC<ColumnNode> = ({ data }) => {
         <Handle
           type='target'
           position={Position.Left}
-          style={{ background: "#555" }}
+          style={{
+            background: "#555",
+            width: "5px",
+            height: "5px",
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
         />
         <Box
           sx={{
@@ -74,7 +80,17 @@ const ColumnNode: React.FC<ColumnNode> = ({ data }) => {
           </Box>
         </Box>
 
-        <Handle type='source' position={Position.Right} id='a' />
+        <Handle
+          type='source'
+          position={Position.Right}
+          style={{
+            background: "#555",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: "5px",
+            height: "5px",
+          }}
+        />
       </Box>
     </>
   );
