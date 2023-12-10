@@ -5,6 +5,7 @@ import {
   getRectOfNodes,
   getTransformForBounds,
 } from "reactflow";
+import { Button } from "@/lib/mui/muiRendering";
 import { toPng } from "html-to-image";
 
 function downloadImage(dataUrl: string) {
@@ -32,10 +33,9 @@ function DownloadButton() {
 
     const element = document.querySelector(".react-flow__viewport");
 
-    //intanceof HTMLElement
     if (element instanceof HTMLElement) {
       toPng(element, {
-        backgroundColor: "#fff",
+        backgroundColor: "#111",
         width: imageWidth,
         height: imageHeight,
         style: {
@@ -51,9 +51,9 @@ function DownloadButton() {
 
   return (
     <Panel position='top-right'>
-      <button className='download-btn' onClick={onClick}>
+      <Button className='download-btn' onClick={onClick}>
         Download Image
-      </button>
+      </Button>
     </Panel>
   );
 }

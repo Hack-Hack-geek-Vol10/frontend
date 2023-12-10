@@ -44,7 +44,7 @@ const CustomNodeFlow: React.FC = () => {
         id: "a",
         type: "ColumnNode",
         position: { x: 0, y: 20 },
-        data: { color: initBgColor },
+        data: { name: "Column 1", type: "int" },
         style: { border: "0.5px solid #fff", padding: "4px" },
         parentNode: "1",
         extent: "parent",
