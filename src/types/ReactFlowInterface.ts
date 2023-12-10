@@ -8,6 +8,7 @@ export interface TableNode {
   style: {
     border: string;
     padding: string;
+    height: string;
   } | null;
 }
 export interface ColumnNode {
