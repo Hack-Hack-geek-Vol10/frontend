@@ -1,4 +1,4 @@
-import { TableNode, ColumnNode, Edge } from "@/types/objectDataInterface";
+import { TableNode, ColumnNode, Edge } from "@/types/ReactFlowInterface";
 import { tablesData } from "@/components/objects/dummy";
 
 export const TableNodeData: TableNode[] = tablesData.tables.map((table) => {
