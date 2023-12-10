@@ -1,12 +1,8 @@
 import React, { memo } from "react";
-import { Handle, Position } from "reactflow";
 import { Box, Typography } from "@/lib/mui/muiRendering";
-import { TableNode } from "@/types/objectDataInterface";
-interface TableNodeProps {
-  data: TableNode;
-}
+import { CustomTableNode } from "@/types/ReactFlowInterface";
 
-const TableNode: React.FC<TableNodeProps> = ({ data }) => {
+const TableNode: React.FC<CustomTableNode> = ({ data }) => {
   return (
     <>
       <Box
@@ -22,7 +18,7 @@ const TableNode: React.FC<TableNodeProps> = ({ data }) => {
             textAlign: "left",
           }}
         >
-          {data.data.name}
+          {data.name}
         </Typography>
       </Box>
     </>

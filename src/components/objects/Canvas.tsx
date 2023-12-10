@@ -15,6 +15,7 @@ import "reactflow/dist/style.css";
 
 import ColumnNode from "./ColumnNode";
 import TableNode from "./TableNode";
+import DownloadObjPng from "./DownloadObjPng";
 const nodeTypes: ReactFlowProps["nodeTypes"] = {
   ColumnNode: ColumnNode,
   TableNode: TableNode,
@@ -81,6 +82,7 @@ const CustomNodeFlow: React.FC = () => {
         attributionPosition='bottom-left'
       >
         <Controls />
+        <DownloadObjPng />
       </ReactFlow>
     </Box>
   );
