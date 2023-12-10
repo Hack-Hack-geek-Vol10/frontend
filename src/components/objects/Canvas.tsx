@@ -16,6 +16,7 @@ import "reactflow/dist/style.css";
 import ColumnNode from "./ColumnNode";
 import TableNode from "./TableNode";
 import DownloadObjPng from "./DownloadObjPng";
+import { initialElements } from "./DataFormat";
 const nodeTypes: ReactFlowProps["nodeTypes"] = {
   ColumnNode: ColumnNode,
   TableNode: TableNode,
@@ -32,25 +33,7 @@ const CustomNodeFlow: React.FC = () => {
   const [edges, setEdges] = useEdgesState([]);
 
   useEffect(() => {
-    setNodes([
-      {
-        id: "1",
-        type: "TableNode",
-        data: { name: "Table 1" },
-        style: { border: "0.5px solid #fff", padding: "4px" },
-        position: { x: 300, y: 100 },
-      },
-      {
-        id: "a",
-        type: "ColumnNode",
-        position: { x: 0, y: 20 },
-        data: { name: "Column 1", type: "int" },
-        style: { border: "0.5px solid #fff", padding: "4px" },
-        parentNode: "1",
-        extent: "parent",
-        draggable: false,
-      },
-    ]);
+    setNodes(initialElements);
 
     setEdges([
       {
