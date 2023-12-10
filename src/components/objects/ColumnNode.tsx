@@ -1,13 +1,9 @@
 import React, { memo } from "react";
 import { Handle, Position } from "reactflow";
 import { Box, Typography } from "@/lib/mui/muiRendering";
-import { ColumnNode } from "@/types/objectDataInterface";
+import { ColumnNode } from "@/types/ReactFlowInterface";
 
-interface CustomNodeProps {
-  data: ColumnNode;
-}
-
-const ColumnNode: React.FC<CustomNodeProps> = ({ data }) => {
+const ColumnNode: React.FC<ColumnNode> = ({ data }) => {
   return (
     <>
       <Box
@@ -19,7 +15,13 @@ const ColumnNode: React.FC<CustomNodeProps> = ({ data }) => {
         <Handle
           type='target'
           position={Position.Left}
-          style={{ background: "#555" }}
+          style={{
+            background: "#555",
+            width: "5px",
+            height: "5px",
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
         />
         <Box
           sx={{
@@ -43,7 +45,7 @@ const ColumnNode: React.FC<CustomNodeProps> = ({ data }) => {
                 alignItems: "center",
               }}
             >
-              {data.data.name}
+              {data.name}
             </Typography>
           </Box>
           <Box
@@ -59,7 +61,7 @@ const ColumnNode: React.FC<CustomNodeProps> = ({ data }) => {
                 fontSize: "0.5rem",
               }}
             >
-              {data.data.type}
+              {data.type}
             </Typography>
           </Box>
           <Box
@@ -78,7 +80,17 @@ const ColumnNode: React.FC<CustomNodeProps> = ({ data }) => {
           </Box>
         </Box>
 
-        <Handle type='source' position={Position.Right} id='a' />
+        <Handle
+          type='source'
+          position={Position.Right}
+          style={{
+            background: "#555",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: "5px",
+            height: "5px",
+          }}
+        />
       </Box>
     </>
   );
