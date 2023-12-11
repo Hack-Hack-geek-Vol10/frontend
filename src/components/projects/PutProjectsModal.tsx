@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   TextField,
@@ -8,7 +8,7 @@ import {
 } from "@/lib/mui/muiRendering";
 import { useUpdateProject } from "@/service/useProjectService";
 import GeneralModal from "@/components/commons/GeneralModal";
-import { useForm, Controller } from "react-hook-form";
+import useTransition from "@/hooks/useTransition";
 
 interface Props {
   projectId: string;
@@ -16,12 +16,12 @@ interface Props {
 
 const CreateProject = (props: Props) => {
   const { projectId } = props;
+  const [title, setTitle] = useState("");
   const { updateProject, data } = useUpdateProject();
+  const { transitionPage } = useTransition();
 
-  const { handleSubmit, control } = useForm();
-  const handleCreateProject = async (formData: any) => {
-    const { title, image } = formData;
-    await updateProject({ variables: { projectId, title, image } });
+  const handleCreateProject = async () => {
+    await updateProject({ variables: { projectId, title, lastImage } });
     return data;
   };
 
@@ -44,37 +44,31 @@ const CreateProject = (props: Props) => {
         >
           プロジェクト内容を更新
         </Typography>
-        <form onSubmit={handleSubmit(handleCreateProject)}>
-          <Controller
-            name='title'
-            control={control}
-            defaultValue=''
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label='プロジェクト名'
-                variant='outlined'
-                fullWidth
-              />
-            )}
-          />
-          <Controller
-            name='image'
-            control={control}
-            defaultValue=''
-            render={({ field }) => <input {...field} type='file' />}
-          />
-          <Box
+        <TextField
+          label='プロジェクト名'
+          variant='outlined'
+          fullWidth
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <input type='file' />
+
+        <Box
+          sx={{
+            textAlign: "right",
+          }}
+        >
+          <Button
+            variant='outlined'
+            onClick={handleCreateProject}
+            disabled={title === ""}
             sx={{
-              textAlign: "right",
               mt: 2,
             }}
           >
-            <Button type='submit' variant='outlined'>
-              Update
-            </Button>
-          </Box>
-        </form>
+            Update
+          </Button>
+        </Box>
       </Box>
     </GeneralModal>
   );
