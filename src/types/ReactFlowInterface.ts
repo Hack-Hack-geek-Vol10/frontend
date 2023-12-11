@@ -9,7 +9,7 @@ export interface TableNode {
     border: string;
     padding: string;
     height: string;
-  } | null;
+  };
 }
 export interface ColumnNode {
   id: string;
