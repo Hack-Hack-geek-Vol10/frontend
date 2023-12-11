@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Button,
   TextField,
@@ -8,7 +8,7 @@ import {
 } from "@/lib/mui/muiRendering";
 import { useUpdateProject } from "@/service/useProjectService";
 import GeneralModal from "@/components/commons/GeneralModal";
-import useTransition from "@/hooks/useTransition";
+import { useForm, Controller } from "react-hook-form";
 
 interface Props {
   projectId: string;
@@ -16,12 +16,12 @@ interface Props {
 
 const CreateProject = (props: Props) => {
   const { projectId } = props;
-  const [title, setTitle] = useState("");
   const { updateProject, data } = useUpdateProject();
-  const { transitionPage } = useTransition();
 
-  const handleCreateProject = async () => {
-    await updateProject({ variables: { projectId, title, lastImage } });
+  const { handleSubmit, control } = useForm();
+  const handleCreateProject = async (formData: any) => {
+    const { title, image } = formData;
+    await updateProject({ variables: { projectId, title, image } });
     return data;
   };
 
@@ -44,30 +44,37 @@ const CreateProject = (props: Props) => {
         >
           プロジェクト内容を更新
         </Typography>
-        <TextField
-          label='プロジェクト名'
-          variant='outlined'
-          fullWidth
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-
-        <Box
-          sx={{
-            textAlign: "right",
-          }}
-        >
-          <Button
-            variant='outlined'
-            onClick={handleCreateProject}
-            disabled={title === ""}
+        <form onSubmit={handleSubmit(handleCreateProject)}>
+          <Controller
+            name='title'
+            control={control}
+            defaultValue=''
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label='プロジェクト名'
+                variant='outlined'
+                fullWidth
+              />
+            )}
+          />
+          <Controller
+            name='image'
+            control={control}
+            defaultValue=''
+            render={({ field }) => <input {...field} type='file' />}
+          />
+          <Box
             sx={{
+              textAlign: "right",
               mt: 2,
             }}
           >
-            Update
-          </Button>
-        </Box>
+            <Button type='submit' variant='outlined'>
+              Update
+            </Button>
+          </Box>
+        </form>
       </Box>
     </GeneralModal>
   );
