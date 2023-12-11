@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { useGetUserProjects } from "@/service/useProjectService";
 import useTransition from "@/hooks/useTransition";
 import DeleteProjectButton from "@/components/projects/DeleteProjectButton";
-import PutProjectsModal from "@/components/projects/PutProjectsModal";
+import CardTitle from "./CardTitle";
 const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
   const { transitionPage } = useTransition();
@@ -68,9 +68,11 @@ const ProjectCardList = () => {
                   />
                 </Box>
 
-                <Typography variant='h6' sx={{ ml: 1 }}>
-                  {item.title}
-                </Typography>
+                <CardTitle
+                  projectId={item.projectId}
+                  title={item.title}
+                  lastImage={item.lastImage}
+                />
 
                 <Box
                   sx={{
@@ -89,7 +91,6 @@ const ProjectCardList = () => {
                     Go to Project
                   </Button>
                   <DeleteProjectButton projectId={item.projectId} />
-                  <PutProjectsModal projectId={item.projectId} />
                 </Box>
               </Paper>
             </Grid>
