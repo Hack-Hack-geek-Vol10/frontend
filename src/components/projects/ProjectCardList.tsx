@@ -36,16 +36,16 @@ const ProjectCardList = () => {
       >
         {Array.isArray(projects) &&
           projects.map((item: any) => (
-            <Grid item xs={3} key={item.projectId}>
+            <Grid item xs={3} key={item.projectId} sx={{}}>
               <Paper
                 elevation={5}
                 sx={{
+                  height: "150px",
                   borderRadius: "8px",
                   backgroundColor: "white",
-
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "space-between", // Adjust the position of title and buttons
+                  justifyContent: "space-between",
                 }}
               >
                 <Box

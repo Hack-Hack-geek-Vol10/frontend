@@ -32,8 +32,16 @@ const CardTitle = (props: Props) => {
   return (
     <>
       {!open ? (
-        <IconButton onClick={handleOpen}>
-          <Typography variant='h6' sx={{ ml: 1 }}>
+        <IconButton
+          onClick={handleOpen}
+          sx={{
+            textAlign: "left",
+            justifyContent: "left",
+            p: 0,
+            ml: 1,
+          }}
+        >
+          <Typography variant='h6' sx={{ ml: 1, textAlign: "left" }}>
             {title}
           </Typography>
         </IconButton>
@@ -42,21 +50,31 @@ const CardTitle = (props: Props) => {
           <Box
             sx={{
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+
+              textAlign: "left",
+              justifyContent: "space-between",
+              px: 1,
             }}
           >
             <TextField
               sx={{
-                width: "80%",
+                width: "50%",
                 mx: 1,
+                textAlign: "left",
               }}
               label={`${title}`}
               variant='standard'
               value={titleState}
               onChange={handleTitle}
-            ></TextField>
-            <BorderColorSharpIcon onClick={handleUpdateProject} />
+            />
+            <BorderColorSharpIcon
+              sx={{
+                position: "relative",
+                top: "50%",
+                ml: 1,
+              }}
+              onClick={handleUpdateProject}
+            />
           </Box>
         </>
       )}
