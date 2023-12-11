@@ -51,6 +51,7 @@ const CreateProject = (props: Props) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+
         <Box
           sx={{
             textAlign: "right",
