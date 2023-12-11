@@ -1,5 +1,5 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 const uploadLink = createUploadLink({
   uri: process.env.NEXT_PUBLIC_DEVELOP_BASE_URL,
