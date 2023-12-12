@@ -264,6 +264,20 @@ export type PostEditorSubscriptionVariables = Exact<{
 
 export type PostEditorSubscription = { __typename?: 'Subscription', postEditor?: { __typename?: 'Save', saveId: string, editor: string, object: string } | null };
 
+export type CreateSaveMutationVariables = Exact<{
+  input: CreateSaveInput;
+}>;
+
+
+export type CreateSaveMutation = { __typename?: 'Mutation', createSave?: string | null };
+
+export type GetSaveQueryVariables = Exact<{
+  projectId: Scalars['ID']['input'];
+}>;
+
+
+export type GetSaveQuery = { __typename?: 'Query', save?: { __typename?: 'Save', saveId: string, editor: string, object: string } | null };
+
 export type GetUserQueryVariables = Exact<{
   userId: Scalars['ID']['input'];
 }>;
@@ -703,6 +717,79 @@ export function usePostEditorSubscription(baseOptions: Apollo.SubscriptionHookOp
       }
 export type PostEditorSubscriptionHookResult = ReturnType<typeof usePostEditorSubscription>;
 export type PostEditorSubscriptionResult = Apollo.SubscriptionResult<PostEditorSubscription>;
+export const CreateSaveDocument = gql`
+    mutation CreateSave($input: CreateSaveInput!) {
+  createSave(input: $input)
+}
+    `;
+export type CreateSaveMutationFn = Apollo.MutationFunction<CreateSaveMutation, CreateSaveMutationVariables>;
+
+/**
+ * __useCreateSaveMutation__
+ *
+ * To run a mutation, you first call `useCreateSaveMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateSaveMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createSaveMutation, { data, loading, error }] = useCreateSaveMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateSaveMutation(baseOptions?: Apollo.MutationHookOptions<CreateSaveMutation, CreateSaveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateSaveMutation, CreateSaveMutationVariables>(CreateSaveDocument, options);
+      }
+export type CreateSaveMutationHookResult = ReturnType<typeof useCreateSaveMutation>;
+export type CreateSaveMutationResult = Apollo.MutationResult<CreateSaveMutation>;
+export type CreateSaveMutationOptions = Apollo.BaseMutationOptions<CreateSaveMutation, CreateSaveMutationVariables>;
+export const GetSaveDocument = gql`
+    query GetSave($projectId: ID!) {
+  save(projectId: $projectId) {
+    saveId
+    editor
+    object
+  }
+}
+    `;
+
+/**
+ * __useGetSaveQuery__
+ *
+ * To run a query within a React component, call `useGetSaveQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSaveQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSaveQuery({
+ *   variables: {
+ *      projectId: // value for 'projectId'
+ *   },
+ * });
+ */
+export function useGetSaveQuery(baseOptions: Apollo.QueryHookOptions<GetSaveQuery, GetSaveQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSaveQuery, GetSaveQueryVariables>(GetSaveDocument, options);
+      }
+export function useGetSaveLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSaveQuery, GetSaveQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSaveQuery, GetSaveQueryVariables>(GetSaveDocument, options);
+        }
+export function useGetSaveSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetSaveQuery, GetSaveQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetSaveQuery, GetSaveQueryVariables>(GetSaveDocument, options);
+        }
+export type GetSaveQueryHookResult = ReturnType<typeof useGetSaveQuery>;
+export type GetSaveLazyQueryHookResult = ReturnType<typeof useGetSaveLazyQuery>;
+export type GetSaveSuspenseQueryHookResult = ReturnType<typeof useGetSaveSuspenseQuery>;
+export type GetSaveQueryResult = Apollo.QueryResult<GetSaveQuery, GetSaveQueryVariables>;
 export const GetUserDocument = gql`
     query GetUser($userId: ID!) {
   user(userId: $userId) {
