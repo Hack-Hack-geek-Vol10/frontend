@@ -10,7 +10,7 @@ interface EditorProps {
   data: any;
 }
 
-const Editor: React.FC<EditorProps> = (props) => {
+const Editor: React.FC<EditorProps> = () => {
   const { currentUser } = useContext(AuthContext);
   const [text, setText] = useState<string>("");
   const userId = currentUser?.uid;
@@ -25,8 +25,7 @@ const Editor: React.FC<EditorProps> = (props) => {
     }
   }, [data, loading, error]);
 
-  const handleChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = e.target.value;
+  const handleChangeText = (newValue: string) => {
     setText(newValue);
     // ここでnewValueをサーバーに送信するミューテーションを呼び出す
   };

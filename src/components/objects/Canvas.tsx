@@ -22,10 +22,11 @@ const CustomNodeFlow: React.FC = (props: any) => {
   const { TableNodeData, ColumnNodeData, EdgeData, projectId, title } = props;
 
   const NodeData = TableNodeData.concat(ColumnNodeData);
-  const nodeTypes: ReactFlowProps["nodeTypes"] = {
+  const nodeTypes: ReactFlowProps[] = {
     ColumnNode: ColumnNode,
     TableNode: TableNode,
   };
+
   useEffect(() => {
     setNodes(NodeData);
     setEdges(EdgeData);
