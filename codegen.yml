@@ -11,3 +11,5 @@ generates:
       withHooks: true
       withComponent: false
       withHOC: false
+      scalars:
+      Upload: File

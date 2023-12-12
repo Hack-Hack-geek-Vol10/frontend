@@ -3,21 +3,17 @@ import { Box } from "@mui/material";
 import ReactFlow, {
   useNodesState,
   useEdgesState,
-  addEdge,
-  MiniMap,
   Controls,
-  Edge,
-  Node,
-  Connection,
   ReactFlowProps,
 } from "reactflow";
 import "reactflow/dist/style.css";
-
+import { useGetProject } from "@/service/useProjectService";
 import ColumnNode from "./ColumnNode";
 import TableNode from "./TableNode";
 import DownloadObjPng from "./DownloadObjPng";
 import { initialElements } from "./DataFormat";
-const nodeTypes: ReactFlowProps["nodeTypes"] = {
+import useTransition from "@/hooks/useTransition";
+const nodeTypes: ReactFlowProps[] = {
   ColumnNode: ColumnNode,
   TableNode: TableNode,
 };
@@ -31,7 +27,8 @@ const defaultViewport = { x: 0, y: 0, zoom: 1 };
 const CustomNodeFlow: React.FC = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges] = useEdgesState([]);
-
+  const { data } = useGetProject("projectId");
+  const { getPagePath } = useTransition();
   useEffect(() => {
     setNodes(initialElements);
 
@@ -65,7 +62,10 @@ const CustomNodeFlow: React.FC = () => {
         attributionPosition='bottom-left'
       >
         <Controls />
-        <DownloadObjPng />
+        <DownloadObjPng
+          projectId={data?.project?.projectId}
+          title={data?.project?.title}
+        />
       </ReactFlow>
     </Box>
   );

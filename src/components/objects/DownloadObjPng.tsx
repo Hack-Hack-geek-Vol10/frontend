@@ -7,6 +7,7 @@ import {
 } from "reactflow";
 import { Button } from "@/lib/mui/muiRendering";
 import { toPng } from "html-to-image";
+import { useUpdateProject } from "@/service/useProjectService";
 
 function downloadImage(dataUrl: string) {
   const a = document.createElement("a");
@@ -20,8 +21,19 @@ const imageWidth = 1024;
 const imageHeight = 768;
 
 function DownloadButton() {
+  const { updateProject, data } = useUpdateProject();
+  const handleCreateProject = async (
+    projectId: string,
+    title: string,
+    lastImage: File
+  ) => {
+    await updateProject({ variables: { projectId, title, lastImage } });
+    return data;
+  };
   const { getNodes } = useReactFlow();
+
   const onClick = () => {
+    handleCreateProject("projectId", "title", new File([""], "lastImage"));
     const nodesBounds = getRectOfNodes(getNodes());
     const transform = getTransformForBounds(
       nodesBounds,
