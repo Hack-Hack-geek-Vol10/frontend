@@ -28,18 +28,26 @@ const useEditorSubscriptionService = (userId: string) => {
 
   return { data, loading, error };
 };
-export { useEditorSubscriptionService };
 
-const useSaveService = (userId: string) => {
-  const [createSave] = useMutation<
+const useCreateSaveService = (
+  editor: string,
+  object: string,
+  projectId: string
+) => {
+  const [createSave, { data, loading, error }] = useMutation<
     CreateSaveMutation,
     CreateSaveMutationVariables
-  >(CreateSaveDocument);
-
-  const { data, loading, error } = useQuery<
-    GetSaveQuery,
-    GetSaveQueryVariables
-  >(GetSaveDocument);
+  >(CreateSaveDocument, {
+    variables: {
+      input: {
+        editor: editor,
+        object: object,
+        projectId: projectId,
+      },
+    },
+  });
 
   return { createSave, data, loading, error };
 };
+
+export { useEditorSubscriptionService, useCreateSaveService };
