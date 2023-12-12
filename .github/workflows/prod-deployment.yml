@@ -52,8 +52,8 @@ jobs:
     
       - name: Change manifest
         run: |
-          cd frontend/product
-          yq -i '.spec.template.spec.containers[0].image = "${{ secrets.HARBOR_REGISTRY }}/${{ github.repository }}:${{ github.sha }}"' 'deployment.yaml'
+          cd backend/product
+          yq -i '.spec.template.spec.containers[0].image = "${{ secrets.HARBOR_REGISTRY }}/${{ github.repository }}:${{ github.sha }}"' 'frontend.yaml'
       
       - name: push repository
         run: |
