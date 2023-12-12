@@ -3,7 +3,7 @@ import { Box } from "@/lib/mui/muiRendering";
 import ReactAce from "react-ace/lib/ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
-import { useEditorSubscriptionService } from "@/service/useSubscriptionService";
+import { useEditorSubscriptionService } from "@/service/useSaveService";
 import { AuthContext } from "@/store/AuthContext";
 
 interface EditorProps {

@@ -1,7 +1,0 @@
-subscription PostEditor($userId: ID!) {
-  postEditor(userId: $userId) {
-    saveId
-    editor
-    object
-  }
-}

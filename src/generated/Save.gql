@@ -1,0 +1,20 @@
+subscription PostEditor($userId: ID!) {
+  postEditor(userId: $userId) {
+    saveId
+    editor
+    object
+  }
+}
+ Mutation CreateSave($userId: ID!, $editor: String!, $object: String!) {
+  createSave(userId: $userId, editor: $editor, object: $object) {
+    id
+  }
+}
+
+Query GetSave($projectId: ID!) {
+  getSave(projectId: $projectId){
+    id
+    editor
+    object
+  }
+}
