@@ -6,10 +6,12 @@ import Editor from "@/components/editor/Editor";
 import useTransition from "@/hooks/useTransition";
 import { useEditorSubscriptionService } from "@/service/useSaveService";
 import DataFormat from "@/components/objects/DataFormat";
-
+import { useGetProject } from "@/service/useProjectService";
 const Id = () => {
   const { getPagePath } = useTransition();
   const projectId = getPagePath().split("/")[2];
+  const { data: projectData } = useGetProject(projectId!);
+
   const { data, loading, error } = useEditorSubscriptionService(projectId!);
 
   const editorData = data?.postEditor?.editor;
@@ -42,6 +44,8 @@ const Id = () => {
             EdgeData={EdgeData}
             loading={loading}
             error={error}
+            projectId={projectId!}
+            title={projectData?.project?.title!}
           />
         </Box>
       </Box>

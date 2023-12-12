@@ -7,7 +7,6 @@ import ReactFlow, {
   ReactFlowProps,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import { useGetProject } from "@/service/useProjectService";
 import ColumnNode from "./ColumnNode";
 import TableNode from "./TableNode";
 import DownloadObjPng from "./DownloadObjPng";
@@ -20,7 +19,8 @@ const defaultViewport = { x: 0, y: 0, zoom: 1 };
 const CustomNodeFlow: React.FC = (props: any) => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges] = useEdgesState([]);
-  const { TableNodeData, ColumnNodeData, EdgeData } = props.data;
+  const { TableNodeData, ColumnNodeData, EdgeData, projectId, title } = props;
+
   const NodeData = TableNodeData.concat(ColumnNodeData);
   const nodeTypes: ReactFlowProps["nodeTypes"] = {
     ColumnNode: ColumnNode,
@@ -51,10 +51,7 @@ const CustomNodeFlow: React.FC = (props: any) => {
         attributionPosition='bottom-left'
       >
         <Controls />
-        <DownloadObjPng
-          projectId={data?.project?.projectId}
-          title={data?.project?.title}
-        />
+        <DownloadObjPng />
       </ReactFlow>
     </Box>
   );
