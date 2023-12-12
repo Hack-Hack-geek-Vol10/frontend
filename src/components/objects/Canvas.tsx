@@ -7,12 +7,11 @@ import ReactFlow, {
   ReactFlowProps,
 } from "reactflow";
 import "reactflow/dist/style.css";
-
+import { useGetProject } from "@/service/useProjectService";
 import ColumnNode from "./ColumnNode";
 import TableNode from "./TableNode";
 import DownloadObjPng from "./DownloadObjPng";
-
-const initBgColor: string = "#fff";
+import useTransition from "@/hooks/useTransition";
 
 const connectionLineStyle: React.CSSProperties = { stroke: "#fff" };
 
@@ -25,7 +24,6 @@ const CustomNodeFlow: React.FC = (props: any) => {
   const NodeData = TableNodeData.concat(ColumnNodeData);
   const nodeTypes: ReactFlowProps["nodeTypes"] = {
     ColumnNode: ColumnNode,
-
     TableNode: TableNode,
   };
   useEffect(() => {
@@ -53,7 +51,10 @@ const CustomNodeFlow: React.FC = (props: any) => {
         attributionPosition='bottom-left'
       >
         <Controls />
-        <DownloadObjPng />
+        <DownloadObjPng
+          projectId={data?.project?.projectId}
+          title={data?.project?.title}
+        />
       </ReactFlow>
     </Box>
   );

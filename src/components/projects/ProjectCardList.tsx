@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { useGetUserProjects } from "@/service/useProjectService";
 import useTransition from "@/hooks/useTransition";
 import DeleteProjectButton from "@/components/projects/DeleteProjectButton";
-
+import CardTitle from "./CardTitle";
 const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
   const { transitionPage } = useTransition();
@@ -36,16 +36,16 @@ const ProjectCardList = () => {
       >
         {Array.isArray(projects) &&
           projects.map((item: any) => (
-            <Grid item xs={3} key={item.projectId}>
+            <Grid item xs={3} key={item.projectId} sx={{}}>
               <Paper
                 elevation={5}
                 sx={{
+                  height: "150px",
                   borderRadius: "8px",
                   backgroundColor: "white",
-
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "space-between", // Adjust the position of title and buttons
+                  justifyContent: "space-between",
                 }}
               >
                 <Box
@@ -68,9 +68,11 @@ const ProjectCardList = () => {
                   />
                 </Box>
 
-                <Typography variant='h6' sx={{ ml: 1 }}>
-                  {item.title}
-                </Typography>
+                <CardTitle
+                  projectId={item.projectId}
+                  title={item.title}
+                  lastImage={item.lastImage}
+                />
 
                 <Box
                   sx={{
