@@ -2,8 +2,12 @@ import React from "react";
 import { Box } from "@/lib/mui/muiRendering";
 import ReactAce from "react-ace/lib/ace";
 import useEditor from "@/hooks/useEditor";
-const Editor = () => {
-  const { text, setText } = useEditor();
+const Editor = (props: any) => {
+  const [text, setText] = React.useState("");
+  const { data } = props;
+  const handleChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(data);
+  };
   return (
     <Box
       sx={{
@@ -14,9 +18,9 @@ const Editor = () => {
     >
       <ReactAce
         theme='monokai'
-        onChange={setText}
-        value={text}
+        value={data}
         name='UNIQUE_ID_OF_DIV'
+        onChange={handleChangeText}
         width='100%'
         height='100%'
         editorProps={{ $blockScrolling: true }}
