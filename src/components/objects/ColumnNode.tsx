@@ -3,11 +3,7 @@ import { Handle, Position } from "reactflow";
 import { Box, Typography } from "@/lib/mui/muiRendering";
 import { ColumnNode } from "@/types/ReactFlowInterface";
 
-const ColumnNode: React.FC<
-  React.HTMLAttributes<HTMLDivElement> & {
-    data: ColumnNode;
-  }
-> = ({ data }) => {
+const ColumnNode: React.FC<ColumnNode> = ({ data }) => {
   return (
     <>
       <Box

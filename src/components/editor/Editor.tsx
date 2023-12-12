@@ -7,7 +7,7 @@ import { useEditorSubscriptionService } from "@/service/useSubscriptionService";
 import { AuthContext } from "@/store/AuthContext";
 
 interface EditorProps {
-  // ここにpropsの型定義を追加する
+  data: any;
 }
 
 const Editor: React.FC<EditorProps> = (props) => {
