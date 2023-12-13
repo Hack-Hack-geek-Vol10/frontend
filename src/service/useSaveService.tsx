@@ -16,38 +16,43 @@ import {
   GetSaveQuery,
 } from "@/generated/graphql";
 
-const useEditorSubscriptionService = (userId: string) => {
+const useEditorSubscriptionService = (projectId: string) => {
   const { data, loading, error } = useSubscription<
     PostEditorSubscription,
     PostEditorSubscriptionVariables
   >(PostEditorDocument, {
     variables: {
-      userId: userId,
+      projectId: projectId,
     },
   });
 
   return { data, loading, error };
 };
 
-const useCreateSaveService = (
-  editor: string,
-  object: string,
-  projectId: string
-) => {
+const useCreateSaveService = () => {
   const [createSave, { data, loading, error }] = useMutation<
     CreateSaveMutation,
     CreateSaveMutationVariables
-  >(CreateSaveDocument, {
-    variables: {
-      input: {
-        editor: editor,
-        object: object,
-        projectId: projectId,
-      },
-    },
-  });
+  >(CreateSaveDocument);
 
   return { createSave, data, loading, error };
 };
 
-export { useEditorSubscriptionService, useCreateSaveService };
+const useGetSaveService = (projectId: string) => {
+  const { data, loading, error } = useQuery<
+    GetSaveQuery,
+    GetSaveQueryVariables
+  >(GetSaveDocument, {
+    variables: {
+      projectId: projectId,
+    },
+  });
+
+  return { data, loading, error };
+};
+
+export {
+  useGetSaveService,
+  useEditorSubscriptionService,
+  useCreateSaveService,
+};

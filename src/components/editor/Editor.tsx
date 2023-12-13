@@ -6,30 +6,22 @@ import "ace-builds/src-noconflict/theme-monokai";
 import { useEditorSubscriptionService } from "@/service/useSaveService";
 import { AuthContext } from "@/store/AuthContext";
 
-const Editor: React.FC = () => {
+const Editor: React.FC = (props: any) => {
   const { currentUser } = useContext(AuthContext);
   const [text, setText] = useState<string>("");
-  const userId = currentUser?.uid;
-
-  // サブスクリプションからデータを受け取る
-  const { data, loading, error } = useEditorSubscriptionService(userId!);
+  const { data } = props;
 
   // サブスクリプションのデータが更新されたら、エディタの状態を更新
   useEffect(() => {
-    if (data && data.postEditor && !loading && !error) {
+    if (data && data.postEditor) {
       setText(data.postEditor?.editor); // `someField`は受け取ったデータの適切なフィールド
     }
-  }, [data, loading, error]);
+  }, [data]);
 
   const handleChangeText = (newValue: string) => {
     setText(newValue);
     // ここでnewValueをサーバーに送信するミューテーションを呼び出す
   };
-
-  // エラーハンドリング
-  if (error) {
-    return <div>エラーが発生しました: {error.message}</div>;
-  }
 
   return (
     <Box

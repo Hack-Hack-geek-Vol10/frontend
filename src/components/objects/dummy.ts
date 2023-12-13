@@ -2,6 +2,7 @@ export const tablesData = {
   tables: [
     {
       name: "users",
+      position: { x: 0, y: 0 },
       columns: [
         {
           name: "id",
@@ -23,6 +24,7 @@ export const tablesData = {
 
     {
       name: "likes",
+      position: { x: 0, y: 0 },
       columns: [
         {
           name: "id",
@@ -45,14 +47,8 @@ export const tablesData = {
   relations: [
     {
       id: "users.id,likes.id",
-      from_col: "users.id",
-      to_col: "likes.id",
-    },
-  ],
-  enums: [
-    {
-      name: "hoge",
-      fields: ["fuga", "foo", "bar"],
+      from: "users.id",
+      to: "likes.id",
     },
   ],
 };

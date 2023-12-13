@@ -1,24 +1,45 @@
 import Header from "@/components/EditorHeader/Header";
 import { Box } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Canvas from "@/components/objects/Canvas";
 import Editor from "@/components/editor/Editor";
 import useTransition from "@/hooks/useTransition";
-import { useEditorSubscriptionService } from "@/service/useSaveService";
+import {
+  useEditorSubscriptionService,
+  useCreateSaveService,
+} from "@/service/useSaveService";
 import DataFormat from "@/components/objects/DataFormat";
 import { tablesData } from "@/components/objects/dummy";
 const Id = () => {
   const { getPagePath } = useTransition();
+  const { createSave } = useCreateSaveService();
   const projectId = getPagePath().split("/")[2];
-  // const { data: projectData } = useGetProject(projectId!);
 
-  // const { data, loading, error } = useEditorSubscriptionService(projectId!);
+  const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
 
-  // const editorData = data?.postEditor?.editor;
-  // const objData = data?.postEditor?.object;
-  // const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(objData);
+  const editorData = SubscriptionData?.postEditor?.editor;
+
   const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(tablesData);
+  const Post = [
+    ...TableNodeData,
+    ...ColumnNodeData,
+    ...EdgeData,
+  ] as unknown as string;
 
+  console.log(SubscriptionData);
+  useEffect(() => {
+    if (editorData && Post) {
+      createSave({
+        variables: {
+          input: {
+            projectId: projectId!,
+            editor: editorData,
+            object: Post,
+          },
+        },
+      });
+    }
+  }, [SubscriptionData]);
   return (
     <>
       <Header />
@@ -31,7 +52,7 @@ const Id = () => {
           }}
         >
           <Editor />
-          {/* <Editor data={editorData} /> */}
+          <Editor data={editorData} />
         </Box>
 
         <Box
