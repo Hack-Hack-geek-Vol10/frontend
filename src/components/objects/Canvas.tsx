@@ -7,39 +7,36 @@ import ReactFlow, {
   ReactFlowProps,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import { useGetProject } from "@/service/useProjectService";
 import ColumnNode from "./ColumnNode";
 import TableNode from "./TableNode";
 import DownloadObjPng from "./DownloadObjPng";
-import { initialElements } from "./DataFormat";
-import useTransition from "@/hooks/useTransition";
-const nodeTypes: ReactFlowProps[] = {
-  ColumnNode: ColumnNode,
-  TableNode: TableNode,
-};
-
-const initBgColor: string = "#fff";
-
+import { TableInterface, ColumnInterface } from "@/types/objectDataInterface";
+import { EdgeInterface } from "@/types/ReactFlowInterface";
 const connectionLineStyle: React.CSSProperties = { stroke: "#fff" };
 
 const defaultViewport = { x: 0, y: 0, zoom: 1 };
 
-const CustomNodeFlow: React.FC = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges] = useEdgesState([]);
-  const { data } = useGetProject("projectId");
-  const { getPagePath } = useTransition();
-  useEffect(() => {
-    setNodes(initialElements);
+interface CustomNodeFlowProps {
+  TableNodeData: TableInterface[];
+  ColumnNodeData: ColumnInterface[];
+  EdgeData: EdgeInterface[];
+}
+type NodeData = TableInterface & ColumnInterface;
 
-    setEdges([
-      {
-        id: "e1-2",
-        source: "1",
-        target: "2",
-        style: { stroke: "#fff" },
-      },
-    ]);
+const Canvas: any = ({ ...props }: CustomNodeFlowProps) => {
+  const [nodes, setNodes, onNodesChange] = useNodesState<NodeData>([]);
+  const [edges, setEdges] = useEdgesState([]);
+  const { TableNodeData, ColumnNodeData, EdgeData } = props;
+
+  const NodeData: any = [...TableNodeData, ...ColumnNodeData];
+  const nodeTypes: any = {
+    ColumnNode: ColumnNode,
+    TableNode: TableNode,
+  };
+
+  useEffect(() => {
+    setNodes(NodeData);
+    setEdges(EdgeData);
   }, []);
 
   return (
@@ -62,13 +59,10 @@ const CustomNodeFlow: React.FC = () => {
         attributionPosition='bottom-left'
       >
         <Controls />
-        <DownloadObjPng
-          projectId={data?.project?.projectId}
-          title={data?.project?.title}
-        />
+        <DownloadObjPng />
       </ReactFlow>
     </Box>
   );
 };
 
-export default CustomNodeFlow;
+export default Canvas;

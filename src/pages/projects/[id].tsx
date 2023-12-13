@@ -3,7 +3,22 @@ import { Box } from "@mui/material";
 import React from "react";
 import Canvas from "@/components/objects/Canvas";
 import Editor from "@/components/editor/Editor";
-const id = () => {
+import useTransition from "@/hooks/useTransition";
+import { useEditorSubscriptionService } from "@/service/useSaveService";
+import DataFormat from "@/components/objects/DataFormat";
+import { tablesData } from "@/components/objects/dummy";
+const Id = () => {
+  const { getPagePath } = useTransition();
+  const projectId = getPagePath().split("/")[2];
+  // const { data: projectData } = useGetProject(projectId!);
+
+  // const { data, loading, error } = useEditorSubscriptionService(projectId!);
+
+  // const editorData = data?.postEditor?.editor;
+  // const objData = data?.postEditor?.object;
+  // const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(objData);
+  const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(tablesData);
+
   return (
     <>
       <Header />
@@ -16,6 +31,7 @@ const id = () => {
           }}
         >
           <Editor />
+          {/* <Editor data={editorData} /> */}
         </Box>
 
         <Box
@@ -24,11 +40,15 @@ const id = () => {
             height: "100%",
           }}
         >
-          <Canvas />
+          <Canvas
+            TableNodeData={TableNodeData}
+            ColumnNodeData={ColumnNodeData}
+            EdgeData={EdgeData}
+          />
         </Box>
       </Box>
     </>
   );
 };
 
-export default id;
+export default Id;

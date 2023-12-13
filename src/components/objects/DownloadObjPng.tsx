@@ -27,7 +27,7 @@ function DownloadButton() {
     title: string,
     lastImage: File
   ) => {
-    await updateProject({ variables: { projectId, title, lastImage } });
+    // await updateProject({ variables: { projectId, title, lastImage } });
     return data;
   };
   const { getNodes } = useReactFlow();
@@ -44,15 +44,16 @@ function DownloadButton() {
     );
 
     const element = document.querySelector(".react-flow__viewport");
-
+    const imgHightStr = imageHeight.toString();
+    const imgWidthStr = imageWidth.toString();
     if (element instanceof HTMLElement) {
       toPng(element, {
         backgroundColor: "#111",
         width: imageWidth,
         height: imageHeight,
         style: {
-          width: imageWidth,
-          height: imageHeight,
+          width: imgHightStr,
+          height: imgWidthStr,
           transform: `translate(${transform[0]}px, ${transform[1]}px) scale(${transform[2]})`,
         },
       }).then(downloadImage);

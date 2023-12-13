@@ -1,50 +1,55 @@
-import { TableNode, ColumnNode, Edge } from "@/types/ReactFlowInterface";
-import { tablesData } from "@/components/objects/dummy";
-export const TableNodeData: TableNode[] = tablesData.tables.map(
-  (table, index) => {
-    const tableHeight = table.columns.length * 23;
-    return {
-      id: table.name,
-      type: "TableNode",
-      position: { x: 0, y: index * 200 },
-      data: { name: table.name },
-      style: {
-        border: "0.5px solid #fff",
-        padding: "4px",
-        height: `${tableHeight}px`,
-      },
-    };
-  }
-);
+import { from } from "@apollo/client";
+import {
+  TableNodeInterface,
+  ColumnNodeInterface,
+  EdgeInterface,
+} from "@/types/ReactFlowInterface";
 
-export const ColumnNodeData: ColumnNode[] = tablesData.tables
-  .map((table) => {
-    return table.columns.map((column, index) => {
-      const positionY = index * 23 + 22;
+const DataFormat = (objData: any) => {
+  const TableNodeData: TableNodeInterface[] = objData.tables.map(
+    (table: any, index: number) => {
+      const tableHeight = table.columns.length * 23;
       return {
-        id: `${table.name}.${column.name}`.toString(),
-        type: "ColumnNode",
-        position: { x: 0, y: positionY },
-        data: { name: column.name, type: column.type },
-        style: { border: "0.5px solid #fff", padding: "4px" },
-        parentNode: table.name.toString(),
-        extent: "parent",
-        draggable: false,
+        id: table.name,
+        type: "TableNode",
+        position: { x: 0, y: index * 200 },
+        data: { name: table.name },
+        style: {
+          border: "0.5px solid #fff",
+          padding: "4px",
+          height: `${tableHeight}px`,
+        },
       };
-    });
-  })
-  .flat();
+    }
+  );
 
-export const EdgeData: Edge[] = tablesData.relations.map((relation) => {
-  return {
-    id: relation.id,
-    source: relation.from_col,
-    target: relation.to_col,
-    style: { stroke: "#fff" },
-  };
-});
+  const ColumnNodeData: ColumnNodeInterface[] = objData.tables
+    .map((table: any) => {
+      return table.columns.map((column: any, index: number) => {
+        const positionY = index * 23 + 22;
+        return {
+          id: `${table.name}.${column.name}`.toString(),
+          type: "ColumnNode",
+          position: { x: 0, y: positionY },
+          data: { name: column.name, type: column.type },
+          style: { border: "0.5px solid #fff", padding: "4px" },
+          parentNode: table.name.toString(),
+          extent: "parent",
+          draggable: false,
+        };
+      });
+    })
+    .flat();
 
-export const initialElements = TableNodeData.concat(
-  ColumnNodeData,
-  TableNodeData
-);
+  const EdgeData: EdgeInterface[] = objData.relations.map((relation: any) => {
+    return {
+      id: relation.id,
+      source: relation.from_col,
+      target: relation.to_col,
+      style: { stroke: "#fff" },
+    };
+  });
+  return { TableNodeData, ColumnNodeData, EdgeData };
+};
+
+export default DataFormat;

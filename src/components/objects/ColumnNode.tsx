@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import { Handle, Position } from "reactflow";
 import { Box, Typography } from "@/lib/mui/muiRendering";
-import { ColumnNode } from "@/types/ReactFlowInterface";
+import { ColumnNodeInterface } from "@/types/ReactFlowInterface";
 
-const ColumnNode: React.FC<ColumnNode> = ({ data }) => {
+const ColumnNode: React.FC<ColumnNodeInterface> = ({ data }) => {
   return (
     <>
       <Box
