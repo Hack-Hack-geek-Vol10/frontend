@@ -1,5 +1,5 @@
-subscription PostEditor($userId: ID!) {
-  postEditor(userId: $userId) {
+subscription PostEditor($projectId: ID!) {
+  postEditor(projectId: $projectId) {
     saveId
     editor
     object

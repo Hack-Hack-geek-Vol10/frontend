@@ -171,7 +171,7 @@ export type Subscription = {
 
 
 export type SubscriptionPostEditorArgs = {
-  userId: Scalars['ID']['input'];
+  projectId: Scalars['ID']['input'];
 };
 
 export type User = {
@@ -258,7 +258,7 @@ export type DeleteProjectMutationVariables = Exact<{
 export type DeleteProjectMutation = { __typename?: 'Mutation', deleteProject?: string | null };
 
 export type PostEditorSubscriptionVariables = Exact<{
-  userId: Scalars['ID']['input'];
+  projectId: Scalars['ID']['input'];
 }>;
 
 
@@ -686,8 +686,8 @@ export type DeleteProjectMutationHookResult = ReturnType<typeof useDeleteProject
 export type DeleteProjectMutationResult = Apollo.MutationResult<DeleteProjectMutation>;
 export type DeleteProjectMutationOptions = Apollo.BaseMutationOptions<DeleteProjectMutation, DeleteProjectMutationVariables>;
 export const PostEditorDocument = gql`
-    subscription PostEditor($userId: ID!) {
-  postEditor(userId: $userId) {
+    subscription PostEditor($projectId: ID!) {
+  postEditor(projectId: $projectId) {
     saveId
     editor
     object
@@ -707,7 +707,7 @@ export const PostEditorDocument = gql`
  * @example
  * const { data, loading, error } = usePostEditorSubscription({
  *   variables: {
- *      userId: // value for 'userId'
+ *      projectId: // value for 'projectId'
  *   },
  * });
  */
