@@ -6,11 +6,7 @@ import "ace-builds/src-noconflict/theme-monokai";
 import { useEditorSubscriptionService } from "@/service/useSaveService";
 import { AuthContext } from "@/store/AuthContext";
 
-interface EditorProps {
-  data: any;
-}
-
-const Editor: React.FC<EditorProps> = () => {
+const Editor: React.FC = () => {
   const { currentUser } = useContext(AuthContext);
   const [text, setText] = useState<string>("");
   const userId = currentUser?.uid;

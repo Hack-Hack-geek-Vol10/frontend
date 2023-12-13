@@ -1,8 +1,8 @@
-export interface Table {
+export interface TableInterface {
   name: string;
-  columns: Column[];
+  columns: ColumnInterface[];
 }
-export interface Column {
+export interface ColumnInterface {
   name: string;
   type: string;
   options: string[] | null;

@@ -1,7 +1,12 @@
-import { TableNode, ColumnNode, Edge } from "@/types/ReactFlowInterface";
+import { from } from "@apollo/client";
+import {
+  TableNodeInterface,
+  ColumnNodeInterface,
+  EdgeInterface,
+} from "@/types/ReactFlowInterface";
 
 const DataFormat = (objData: any) => {
-  const TableNodeData: TableNode[] = objData.tables.map(
+  const TableNodeData: TableNodeInterface[] = objData.tables.map(
     (table: any, index: number) => {
       const tableHeight = table.columns.length * 23;
       return {
@@ -18,7 +23,7 @@ const DataFormat = (objData: any) => {
     }
   );
 
-  const ColumnNodeData: ColumnNode[] = objData.tables
+  const ColumnNodeData: ColumnNodeInterface[] = objData.tables
     .map((table: any) => {
       return table.columns.map((column: any, index: number) => {
         const positionY = index * 23 + 22;
@@ -36,7 +41,7 @@ const DataFormat = (objData: any) => {
     })
     .flat();
 
-  const EdgeData: Edge[] = objData.relations.map((relation: any) => {
+  const EdgeData: EdgeInterface[] = objData.relations.map((relation: any) => {
     return {
       id: relation.id,
       source: relation.from_col,

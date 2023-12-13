@@ -1,4 +1,4 @@
-export interface TableNode {
+export interface TableNodeInterface {
   id: string;
   type: string;
   position: { x: number; y: number };
@@ -11,7 +11,7 @@ export interface TableNode {
     height: string;
   };
 }
-export interface ColumnNode {
+export interface ColumnNodeInterface {
   id: string;
   type: string;
   position: { x: number; y: number };
@@ -29,7 +29,7 @@ export interface ColumnNode {
   draggable: boolean;
 }
 
-export interface Edge {
+export interface EdgeInterface {
   id: string;
   source: string;
   target: string;
