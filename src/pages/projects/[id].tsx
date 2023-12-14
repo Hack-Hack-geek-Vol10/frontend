@@ -33,14 +33,15 @@ const Id = () => {
     ...ColumnNodeData,
     ...EdgeData,
   ] as unknown as string;
-
+  const PostByte = new TextEncoder().encode(Post); //送信するデータをバイトに変換
+  const textByte = new TextEncoder().encode(text); //送信するデータをバイトに変換
   useEffect(() => {
     createSave({
       variables: {
         input: {
           projectId: projectId!,
-          editor: text,
-          object: Post,
+          editor: textByte,
+          object: PostByte,
         },
       },
     });

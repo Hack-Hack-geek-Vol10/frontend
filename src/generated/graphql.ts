@@ -15,6 +15,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  Bytes: { input: any; output: any; }
   Upload: { input: any; output: any; }
 };
 
@@ -26,7 +27,7 @@ export enum Auth {
 
 export type CreateSaveInput = {
   editor: Scalars['String']['input'];
-  object: Scalars['String']['input'];
+  object: Scalars['Bytes']['input'];
   projectId: Scalars['ID']['input'];
 };
 
@@ -160,7 +161,7 @@ export type QueryUserArgs = {
 export type Save = {
   __typename?: 'Save';
   editor: Scalars['String']['output'];
-  object: Scalars['String']['output'];
+  object: Scalars['Bytes']['output'];
   saveId: Scalars['ID']['output'];
 };
 
@@ -262,7 +263,7 @@ export type PostEditorSubscriptionVariables = Exact<{
 }>;
 
 
-export type PostEditorSubscription = { __typename?: 'Subscription', postEditor?: { __typename?: 'Save', saveId: string, editor: string, object: string } | null };
+export type PostEditorSubscription = { __typename?: 'Subscription', postEditor?: { __typename?: 'Save', saveId: string, editor: string, object: any } | null };
 
 export type CreateSaveMutationVariables = Exact<{
   input: CreateSaveInput;
@@ -276,7 +277,7 @@ export type GetSaveQueryVariables = Exact<{
 }>;
 
 
-export type GetSaveQuery = { __typename?: 'Query', save?: { __typename?: 'Save', saveId: string, editor: string, object: string } | null };
+export type GetSaveQuery = { __typename?: 'Query', save?: { __typename?: 'Save', saveId: string, editor: string, object: any } | null };
 
 export type GetUserQueryVariables = Exact<{
   userId: Scalars['ID']['input'];
