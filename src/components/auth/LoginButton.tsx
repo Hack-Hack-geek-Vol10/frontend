@@ -8,19 +8,17 @@ export const LoginButton = () => {
   const userId = currentUser?.uid;
   const { data: userData } = useGetUser(userId!);
   const { createUser } = useCreateUser();
-  const userName = currentUser?.displayName;
+  const firebaseUserName = currentUser?.displayName;
 
   const handleLogin = async () => {
     try {
       await login();
-      if (userData && userName && userData.user!.name !== userName) {
+      if (!userData && firebaseUserName) {
         await createUser({
-          variables: { name: userName },
+          variables: { name: firebaseUserName },
         });
-      } else {
-        console.log("登録済み");
+        return userData;
       }
-      return userData;
     } catch (err) {
       console.log(err);
     }
