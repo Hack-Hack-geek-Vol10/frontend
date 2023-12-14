@@ -1,9 +1,8 @@
 import Header from "@/components/editor/EditorHeader/Header";
-import { Box } from "@mui/material";
+import { Box } from "@/lib/mui/muiRendering";
 import React, { useContext, useEffect } from "react";
 import Canvas from "@/components/objects/Canvas";
 import Editor from "@/components/editor/Editor";
-import useTransition from "@/hooks/useTransition";
 import {
   useEditorSubscriptionService,
   useCreateSaveService,
@@ -13,26 +12,21 @@ import DataFormat from "@/components/objects/DataFormat";
 import { tablesData } from "@/components/objects/dummy";
 import { EditorProvider, EditorContext } from "@/store/EditorContext";
 const Id = () => {
-  const { getPagePath } = useTransition();
   const { createSave } = useCreateSaveService();
   const { text } = useContext(EditorContext);
-
   const router = useRouter();
   const { id } = router.query;
   const projectId = id as string;
 
   const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
-  {
-    SubscriptionData?.postEditor?.object;
-  }
+
+  SubscriptionData?.postEditor?.object;
+
   const objData = SubscriptionData?.postEditor?.object;
   const editorData = SubscriptionData?.postEditor?.editor;
 
   //送信するデータの整形
   const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(tablesData);
-  // console.log(TableNodeData);
-  // console.log(ColumnNodeData);
-  // console.log(EdgeData);
 
   const Post = [
     ...TableNodeData,
@@ -52,10 +46,9 @@ const Id = () => {
         },
       });
     }
-
-    // console.log(SubscriptionData?.postEditor!.object);
-    console.log(SubscriptionData?.postEditor!.editor);
+    console.log("Post", Post);
   }, [text, Post, editorData]);
+  console.log("text", text);
   return (
     <EditorProvider>
       <Header />

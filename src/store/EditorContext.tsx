@@ -3,13 +3,13 @@ import React, { createContext, useState, ReactNode } from "react";
 interface EditorContextProps {
   text: string;
   setText: (value: string) => void;
-  createSave: () => void;
+  handleCreateSave: () => void;
 }
 
 const EditorContext = createContext<EditorContextProps>({
   text: "",
   setText: () => {},
-  createSave: () => {},
+  handleCreateSave: () => {},
 });
 
 const EditorProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -19,7 +19,7 @@ const EditorProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   return (
-    <EditorContext.Provider value={{ text, setText }}>
+    <EditorContext.Provider value={{ text, setText, handleCreateSave }}>
       {children}
     </EditorContext.Provider>
   );

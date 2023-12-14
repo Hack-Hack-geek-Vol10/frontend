@@ -23,9 +23,12 @@ const Editor = (props: Props) => {
       <ReactAce
         value={text}
         onChange={(value) => {
-          setText(value.toString());
+          if (data === null || data === undefined) {
+            setText(value.toString());
+          }
+          setText(data);
+          console.log("data" + data);
         }}
-        name='UNIQUE_ID_OF_DIV'
         width='100%'
         height='100%'
         editorProps={{ $blockScrolling: true }}
