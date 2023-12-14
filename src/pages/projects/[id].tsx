@@ -10,10 +10,11 @@ import {
 import { useRouter } from "next/router";
 import DataFormat from "@/components/objects/DataFormat";
 import { tablesData } from "@/components/objects/dummy";
-import { EditorProvider, EditorContext } from "@/store/EditorContext";
+import { EditorContext } from "@/store/EditorContext";
 const Id = () => {
   const { createSave } = useCreateSaveService();
   const { text } = useContext(EditorContext);
+  console.log("id text", text);
   const router = useRouter();
   const { id } = router.query;
   const projectId = id as string;
@@ -23,7 +24,6 @@ const Id = () => {
   //受け取ったデータ
   const objData = SubscriptionData?.postEditor?.object; //byte
   const editorData = SubscriptionData?.postEditor?.editor; //string
-
   //obj stringに変換
   const objDataString = new TextDecoder().decode(objData);
   console.log("objDataString", objDataString);
@@ -40,19 +40,21 @@ const Id = () => {
   const PostByte = new TextEncoder().encode(Post);
 
   useEffect(() => {
-    createSave({
-      variables: {
-        input: {
-          projectId: projectId!,
-          editor: text,
-          object: PostByte,
+    if (text) {
+      createSave({
+        variables: {
+          input: {
+            projectId: projectId!,
+            editor: text,
+            object: PostByte,
+          },
         },
-      },
-    });
+      });
+    }
   }, [text]);
-  console.log("text", text);
+
   return (
-    <EditorProvider>
+    <>
       <Header />
 
       <Box display={"flex"}>
@@ -78,7 +80,7 @@ const Id = () => {
           />
         </Box>
       </Box>
-    </EditorProvider>
+    </>
   );
 };
 

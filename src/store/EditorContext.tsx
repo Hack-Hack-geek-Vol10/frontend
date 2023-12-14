@@ -12,8 +12,6 @@ const EditorContext = createContext<EditorContextProps>({
 
 const EditorProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [text, setText] = useState<string>("");
-  console.log("text", text);
-
   return (
     <EditorContext.Provider value={{ text, setText }}>
       {children}
