@@ -20,11 +20,13 @@ const Id = () => {
 
   const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
 
-  SubscriptionData?.postEditor?.object;
-
-  const objData = SubscriptionData?.postEditor?.object;
-  const editorData = SubscriptionData?.postEditor?.editor;
-
+  const objData = SubscriptionData?.postEditor?.object; //byte
+  const editorData = SubscriptionData?.postEditor?.editor; //byte
+  //byteを文字列に変換
+  const editorDataString = new TextDecoder().decode(
+    editorData as unknown as Uint8Array
+  );
+  const objDataString = new TextDecoder().decode(objData);
   //送信するデータの整形
   const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(tablesData);
 
@@ -34,21 +36,17 @@ const Id = () => {
     ...EdgeData,
   ] as unknown as string;
   const PostByte = new TextEncoder().encode(Post); //送信するデータをバイトに変換
-  const textByte = new TextEncoder().encode(text); //送信するデータをバイトに変換
   useEffect(() => {
     createSave({
       variables: {
         input: {
           projectId: projectId!,
-          editor: textByte,
+          editor: text,
           object: PostByte,
         },
       },
     });
-
-    console.log("Post", Post);
-    console;
-  }, [text, Post, editorData]);
+  }, [text]);
   console.log("text", text);
   return (
     <EditorProvider>
@@ -61,7 +59,7 @@ const Id = () => {
             height: "100%",
           }}
         >
-          <Editor data={editorData!} />
+          <Editor data={editorDataString!} />
         </Box>
 
         <Box
