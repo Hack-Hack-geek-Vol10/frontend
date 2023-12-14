@@ -7,7 +7,11 @@ import { useCreateSaveService } from "@/service/useSaveService";
 import { AuthContext } from "@/store/AuthContext";
 import useEditor from "@/hooks/useEditor";
 
-const Editor: React.FC = (props: any) => {
+interface Props {
+  data: string;
+  loading?: boolean;
+}
+const Editor = (props: Props) => {
   const { currentUser } = useContext(AuthContext);
   const { data, loading } = props;
   const { text, setText } = useEditor();
