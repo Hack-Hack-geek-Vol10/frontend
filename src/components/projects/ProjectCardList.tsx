@@ -7,17 +7,18 @@ import {
   Avatar,
 } from "@/lib/mui/muiRendering";
 import { AuthContext } from "@/store/AuthContext";
-import { useContext } from "react";
+import { use, useContext } from "react";
 import { useGetUserProjects } from "@/service/useProjectService";
 import useTransition from "@/hooks/useTransition";
 import DeleteProjectButton from "@/components/projects/DeleteProjectButton";
 import CardTitle from "./CardTitle";
+import { useEffect } from "react";
 const ProjectCardList = () => {
   const { currentUser } = useContext(AuthContext);
   const { transitionPage } = useTransition();
   const userId = currentUser?.uid;
-  const { data } = useGetUserProjects(userId!);
 
+  const { data, loading, error } = useGetUserProjects(userId!);
   const handleGoToProject = (projectId: string) => () => {
     transitionPage(`/projects/${projectId}`);
   };

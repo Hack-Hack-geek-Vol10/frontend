@@ -8,6 +8,7 @@ import {
   useEditorSubscriptionService,
   useCreateSaveService,
 } from "@/service/useSaveService";
+import { useRouter } from "next/router";
 import DataFormat from "@/components/objects/DataFormat";
 import { tablesData } from "@/components/objects/dummy";
 import { EditorProvider, EditorContext } from "@/store/EditorContext";
@@ -15,14 +16,24 @@ const Id = () => {
   const { getPagePath } = useTransition();
   const { createSave } = useCreateSaveService();
   const { text } = useContext(EditorContext);
-  const projectId = getPagePath().split("/")[2];
+
+  const router = useRouter();
+  const { id } = router.query;
+  const projectId = id as string;
 
   const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
-
+  {
+    SubscriptionData?.postEditor?.object;
+  }
   const objData = SubscriptionData?.postEditor?.object;
   const editorData = SubscriptionData?.postEditor?.editor;
 
+  //送信するデータの整形
   const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(tablesData);
+  // console.log(TableNodeData);
+  // console.log(ColumnNodeData);
+  // console.log(EdgeData);
+
   const Post = [
     ...TableNodeData,
     ...ColumnNodeData,
@@ -30,7 +41,7 @@ const Id = () => {
   ] as unknown as string;
 
   useEffect(() => {
-    if (text && Post) {
+    if (text && Post && editorData) {
       createSave({
         variables: {
           input: {
@@ -43,9 +54,8 @@ const Id = () => {
     }
 
     // console.log(SubscriptionData?.postEditor!.object);
-    // console.log(SubscriptionData?.postEditor!.editor);
-    console.log();
-  }, [text]);
+    console.log(SubscriptionData?.postEditor!.editor);
+  }, [text, Post, editorData]);
   return (
     <EditorProvider>
       <Header />

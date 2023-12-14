@@ -10,6 +10,7 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : "",
+      credentials: process.env.NEXT_PUBLIC_BASE_URL,
     },
   };
 });
