@@ -10,7 +10,7 @@ import {
 } from "@/service/useSaveService";
 import DataFormat from "@/components/objects/DataFormat";
 import { tablesData } from "@/components/objects/dummy";
-const Id = () => {
+const Id =  () => {
   const { getPagePath } = useTransition();
   const { createSave } = useCreateSaveService();
   const projectId = getPagePath().split("/")[2];

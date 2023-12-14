@@ -3,25 +3,20 @@ import { Box } from "@/lib/mui/muiRendering";
 import ReactAce from "react-ace/lib/ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
-import { useEditorSubscriptionService } from "@/service/useSaveService";
+import { useCreateSaveService } from "@/service/useSaveService";
 import { AuthContext } from "@/store/AuthContext";
+import useEditor from "@/hooks/useEditor";
 
 const Editor: React.FC = (props: any) => {
   const { currentUser } = useContext(AuthContext);
-  const [text, setText] = useState<string>("");
-  const { data } = props;
-
+  const { data, loading } = props;
+  const { text, setText, handleChangeText } = useEditor();
   // サブスクリプションのデータが更新されたら、エディタの状態を更新
   useEffect(() => {
-    if (data && data.postEditor) {
-      setText(data.postEditor?.editor); // `someField`は受け取ったデータの適切なフィールド
+    if (!loading && data) {
+      setText(data);
     }
   }, [data]);
-
-  const handleChangeText = (newValue: string) => {
-    setText(newValue);
-    // ここでnewValueをサーバーに送信するミューテーションを呼び出す
-  };
 
   return (
     <Box
