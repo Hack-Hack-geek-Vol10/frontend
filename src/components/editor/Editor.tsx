@@ -12,7 +12,9 @@ const Editor = (props: Props) => {
   const { text, setText } = useContext(EditorContext);
   const { data } = props;
   useEffect(() => {
-    setText(data);
+    if (data) {
+      setText(data);
+    }
   }, [data]);
   return (
     <Box

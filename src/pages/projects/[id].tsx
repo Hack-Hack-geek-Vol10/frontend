@@ -39,6 +39,11 @@ const Id = () => {
   //送信するデータをバイトに変換
   const PostByte = new TextEncoder().encode(Post);
 
+  // Uint8Array を通常の文字列に変換
+  const binaryString = String.fromCharCode.apply(null, PostByte);
+
+  // 文字列を Base64 に変換
+  const base64Data = btoa(binaryString);
   useEffect(() => {
     if (text) {
       createSave({
@@ -46,7 +51,7 @@ const Id = () => {
           input: {
             projectId: projectId!,
             editor: text,
-            object: PostByte,
+            object: base64Data,
           },
         },
       });
