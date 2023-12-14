@@ -10,9 +10,11 @@ import {
 } from "@/service/useSaveService";
 import DataFormat from "@/components/objects/DataFormat";
 import { tablesData } from "@/components/objects/dummy";
+import useEditor from "@/hooks/useEditor";
 const Id = () => {
   const { getPagePath } = useTransition();
   const { createSave } = useCreateSaveService();
+  const { text } = useEditor();
   const projectId = getPagePath().split("/")[2];
 
   const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
@@ -33,7 +35,7 @@ const Id = () => {
         variables: {
           input: {
             projectId: projectId!,
-            editor: editorData,
+            editor: text,
             object: Post,
           },
         },
@@ -51,7 +53,7 @@ const Id = () => {
             height: "100%",
           }}
         >
-          <Editor data={editorData} />
+          <Editor data={editorData!} />
         </Box>
 
         <Box

@@ -9,16 +9,14 @@ import useEditor from "@/hooks/useEditor";
 
 interface Props {
   data: string;
-  loading?: boolean;
 }
 const Editor = (props: Props) => {
-  const { currentUser } = useContext(AuthContext);
-  const { data, loading } = props;
+  const { data } = props;
   const { text, setText } = useEditor();
 
   // サブスクリプションのデータが更新されたら、エディタの状態を更新
   useEffect(() => {
-    if (!loading && data) {
+    if (data) {
       setText(data);
     }
   }, [data, setText]);
