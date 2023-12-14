@@ -21,11 +21,8 @@ const Id = () => {
   const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
 
   const objData = SubscriptionData?.postEditor?.object; //byte
-  const editorData = SubscriptionData?.postEditor?.editor; //byte
-  //byteを文字列に変換
-  const editorDataString = new TextDecoder().decode(
-    editorData as unknown as Uint8Array
-  );
+  const editorData = SubscriptionData?.postEditor?.editor; //string
+  //stringに変換
   const objDataString = new TextDecoder().decode(objData);
   //送信するデータの整形
   const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(tablesData);
@@ -59,7 +56,7 @@ const Id = () => {
             height: "100%",
           }}
         >
-          <Editor data={editorDataString!} />
+          <Editor data={editorData!} />
         </Box>
 
         <Box
