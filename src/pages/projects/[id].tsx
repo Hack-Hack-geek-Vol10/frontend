@@ -1,6 +1,6 @@
 import Header from "@/components/editor/EditorHeader/Header";
 import { Box } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Canvas from "@/components/objects/Canvas";
 import Editor from "@/components/editor/Editor";
 import useTransition from "@/hooks/useTransition";
@@ -10,15 +10,16 @@ import {
 } from "@/service/useSaveService";
 import DataFormat from "@/components/objects/DataFormat";
 import { tablesData } from "@/components/objects/dummy";
-import useEditor from "@/hooks/useEditor";
+import { EditorProvider, EditorContext } from "@/store/EditorContext";
 const Id = () => {
   const { getPagePath } = useTransition();
   const { createSave } = useCreateSaveService();
-  const { text } = useEditor();
+  const { text } = useContext(EditorContext);
   const projectId = getPagePath().split("/")[2];
 
   const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
 
+  const objData = SubscriptionData?.postEditor?.object;
   const editorData = SubscriptionData?.postEditor?.editor;
 
   const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(tablesData);
@@ -28,9 +29,8 @@ const Id = () => {
     ...EdgeData,
   ] as unknown as string;
 
-  console.log(SubscriptionData);
   useEffect(() => {
-    if (editorData && Post) {
+    if (text && Post) {
       createSave({
         variables: {
           input: {
@@ -41,9 +41,13 @@ const Id = () => {
         },
       });
     }
-  }, [SubscriptionData]);
+
+    // console.log(SubscriptionData?.postEditor!.object);
+    // console.log(SubscriptionData?.postEditor!.editor);
+    console.log();
+  }, [text]);
   return (
-    <>
+    <EditorProvider>
       <Header />
 
       <Box display={"flex"}>
@@ -69,7 +73,7 @@ const Id = () => {
           />
         </Box>
       </Box>
-    </>
+    </EditorProvider>
   );
 };
 
