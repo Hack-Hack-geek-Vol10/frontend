@@ -1,4 +1,4 @@
-import Header from "@/components/EditorHeader/Header";
+import Header from "@/components/editor/EditorHeader/Header";
 import { Box } from "@mui/material";
 import React, { useEffect } from "react";
 import Canvas from "@/components/objects/Canvas";
@@ -51,7 +51,7 @@ const Id = () => {
             height: "100%",
           }}
         >
-        <Editor data={editorData} />
+          <Editor data={editorData} />
         </Box>
 
         <Box
