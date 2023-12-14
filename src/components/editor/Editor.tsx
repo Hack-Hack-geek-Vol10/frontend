@@ -25,11 +25,7 @@ const Editor = (props: Props) => {
       <ReactAce
         value={text}
         onChange={(value) => {
-          if (data === null || data === undefined) {
-            setText(value.toString());
-          } else {
-            setText(data);
-          }
+          setText(value);
         }}
         width='100%'
         height='100%'

@@ -20,10 +20,13 @@ const Id = () => {
 
   const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
 
+  //受け取ったデータ
   const objData = SubscriptionData?.postEditor?.object; //byte
   const editorData = SubscriptionData?.postEditor?.editor; //string
-  //stringに変換
+
+  //obj stringに変換
   const objDataString = new TextDecoder().decode(objData);
+  console.log("objDataString", objDataString);
   //送信するデータの整形
   const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(tablesData);
 
@@ -32,7 +35,10 @@ const Id = () => {
     ...ColumnNodeData,
     ...EdgeData,
   ] as unknown as string;
-  const PostByte = new TextEncoder().encode(Post); //送信するデータをバイトに変換
+
+  //送信するデータをバイトに変換
+  const PostByte = new TextEncoder().encode(Post);
+
   useEffect(() => {
     createSave({
       variables: {
