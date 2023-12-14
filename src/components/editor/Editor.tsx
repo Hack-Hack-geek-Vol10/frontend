@@ -11,7 +11,9 @@ interface Props {
 const Editor = (props: Props) => {
   const { text, setText } = useContext(EditorContext);
   const { data } = props;
-
+  useEffect(() => {
+    setText(data);
+  }, [data]);
   return (
     <Box
       sx={{
@@ -25,9 +27,9 @@ const Editor = (props: Props) => {
         onChange={(value) => {
           if (data === null || data === undefined) {
             setText(value.toString());
+          } else {
+            setText(data);
           }
-          setText(data);
-          console.log("data" + data);
         }}
         width='100%'
         height='100%'

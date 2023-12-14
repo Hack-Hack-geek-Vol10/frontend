@@ -35,18 +35,18 @@ const Id = () => {
   ] as unknown as string;
 
   useEffect(() => {
-    if (text && Post && editorData) {
-      createSave({
-        variables: {
-          input: {
-            projectId: projectId!,
-            editor: text,
-            object: Post,
-          },
+    createSave({
+      variables: {
+        input: {
+          projectId: projectId!,
+          editor: text,
+          object: Post,
         },
-      });
-    }
+      },
+    });
+
     console.log("Post", Post);
+    console;
   }, [text, Post, editorData]);
   console.log("text", text);
   return (

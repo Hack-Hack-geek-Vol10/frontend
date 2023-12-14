@@ -13,7 +13,7 @@ export const LoginButton = () => {
   const handleLogin = async () => {
     try {
       await login();
-      if (!userData && firebaseUserName) {
+      if (firebaseUserName) {
         await createUser({
           variables: { name: firebaseUserName },
         });
