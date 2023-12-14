@@ -10,13 +10,14 @@ import useEditor from "@/hooks/useEditor";
 const Editor: React.FC = (props: any) => {
   const { currentUser } = useContext(AuthContext);
   const { data, loading } = props;
-  const { text, setText, handleChangeText } = useEditor();
+  const { text, setText } = useEditor();
+
   // サブスクリプションのデータが更新されたら、エディタの状態を更新
   useEffect(() => {
     if (!loading && data) {
       setText(data);
     }
-  }, [data]);
+  }, [data, setText]);
 
   return (
     <Box
@@ -29,7 +30,13 @@ const Editor: React.FC = (props: any) => {
       <ReactAce
         theme='monokai'
         value={text}
-        onChange={handleChangeText}
+        onChange={(e) => {
+          if (e) {
+            console.error("Event object is not as expected");
+            return;
+          }
+          setText(e.toString());
+        }}
         name='UNIQUE_ID_OF_DIV'
         width='100%'
         height='100%'
