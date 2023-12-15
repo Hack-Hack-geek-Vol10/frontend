@@ -9,8 +9,11 @@ const useTransition = () => {
   const transitionPage = (path: string) => {
     router.push(path);
   };
+  const Reload = () => {
+    router.reload();
+  };
 
-  return { transitionPage, getPagePath };
+  return { transitionPage, getPagePath, Reload };
 };
 
 export default useTransition;

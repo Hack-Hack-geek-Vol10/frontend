@@ -41,7 +41,7 @@ const Id = () => {
   // Uint8Array を通常の文字列に変換
   const PostObjString = Array.from(PostObjByte)
     .map((byte) => String.fromCharCode(byte))
-    .join("");
+    .join(""); //string
 
   // 文字列をBase64に変換
   const base64Data = btoa(PostObjString);

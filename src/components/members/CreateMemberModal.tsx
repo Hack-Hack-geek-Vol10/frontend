@@ -13,14 +13,18 @@ const CreateMemberModal = () => {
   const { currentUser } = useContext(AuthContext);
   const userId = currentUser?.uid;
   const [link, setLink] = useState("");
-  const { transitionPage } = useTransition();
+  const { transitionPage, Reload } = useTransition();
 
-  const handleCreateProjectMember = (link: string) => {
-    createProjectMember({
-      variables: {
-        token: link,
-      },
-    });
+  const handleCreateProjectMember = async (link: string) => {
+    try {
+      await createProjectMember({
+        variables: {
+          token: link,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <GeneralModal buttonContent={<GroupsIcon />}>
@@ -36,7 +40,7 @@ const CreateMemberModal = () => {
         disabled={link === null}
         onClick={async () => {
           await handleCreateProjectMember(link);
-          transitionPage("/projects/");
+          Reload();
         }}
       >
         Join
