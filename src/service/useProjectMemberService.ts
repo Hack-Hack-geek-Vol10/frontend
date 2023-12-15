@@ -36,12 +36,12 @@ const useGetProjectMemberService = (projectId: string) => {
   return { data, loading, error };
 };
 const useCreateProjectMemberService = () => {
-  const [createProjectMember, { loading, error }] = useMutation<
+  const [createProjectMember, { data, loading, error }] = useMutation<
     CreateProjectMemberMutation,
     CreateProjectMemberMutationVariables
   >(CreateProjectMemberDocument);
 
-  return { createProjectMember, loading, error };
+  return { createProjectMember, data, loading, error };
 };
 
 const useUpdateProjectMemberService = () => {
