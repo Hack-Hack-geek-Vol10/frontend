@@ -19,12 +19,9 @@ const Id = () => {
   const projectId = id as string;
 
   const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
-  console.log(SubscriptionData);
   //受け取ったデータ
   const objData = SubscriptionData?.postEditor?.object; //byte
   const editorData = SubscriptionData?.postEditor?.editor; //string
-  //obj stringに変換
-  const objDataString = new TextDecoder().decode(objData);
 
   //送信するデータの整形
 
@@ -43,8 +40,6 @@ const Id = () => {
     .map((byte) => String.fromCharCode(byte))
     .join(""); //string
 
-  // 文字列をBase64に変換
-  const base64Data = btoa(PostObjString);
   useEffect(() => {
     if (text) {
       createSave({
@@ -52,7 +47,7 @@ const Id = () => {
           input: {
             projectId: projectId!,
             editor: text,
-            object: base64Data,
+            object: PostObjString,
           },
         },
       });
