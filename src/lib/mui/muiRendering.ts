@@ -1,7 +1,7 @@
 export * from "@mui/material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-
+import GroupsIcon from "@mui/icons-material/Groups";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
@@ -13,6 +13,7 @@ export { default as Textarea } from "@mui/joy/Textarea";
 export { default as JoyBadge } from "@mui/joy/Badge";
 export {
   AddIcon,
+  GroupsIcon,
   BorderColorSharpIcon,
   CloseIcon,
   GitHubIcon,

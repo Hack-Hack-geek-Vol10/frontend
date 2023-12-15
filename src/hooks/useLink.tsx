@@ -25,7 +25,7 @@ const useLink = () => {
   };
 
   const CopyLink = (link: string) => {
-    clipboardCopy(`http://localhost:3000/projects/${pageId}/invite/${link}`);
+    clipboardCopy(`${link}`);
   };
 
   const MenuItemClick = async (value: Auth) => {

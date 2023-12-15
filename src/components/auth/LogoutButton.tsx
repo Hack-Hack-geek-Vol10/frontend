@@ -56,7 +56,7 @@ const LogoutButton = () => {
               },
             }}
           >
-            ログアウト
+            Logout
           </Button>
         </Box>
       </GeneralModal>
