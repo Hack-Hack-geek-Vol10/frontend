@@ -3,6 +3,7 @@ import Header from "@/components/commons/Header";
 import ProjectCardList from "@/components/projects/ProjectCardList";
 import CreateProjectModal from "@/components/projects/CreateProjectModal";
 import { Box, Typography } from "@/lib/mui/muiRendering";
+import CreateMemberModal from "@/components/members/CreateMemberModal";
 
 const Index = () => {
   return (
@@ -26,6 +27,17 @@ const Index = () => {
           }}
         >
           <CreateProjectModal />
+        </Box>
+        <Box
+          sx={{
+            bgcolor: "#FFA560",
+            borderRadius: "50%",
+            position: "absolute",
+            bottom: "65px",
+            right: "30px",
+          }}
+        >
+          <CreateMemberModal />
         </Box>
       </Box>
     </>

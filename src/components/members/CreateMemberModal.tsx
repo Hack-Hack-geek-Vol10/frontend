@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";
+import { GroupsIcon } from "@/lib/mui/muiRendering";
 const CreateMemberModal = () => {
   const { createProjectMember, data, loading, error } =
     useCreateProjectMemberService();
@@ -23,7 +24,7 @@ const CreateMemberModal = () => {
     });
   };
   return (
-    <GeneralModal>
+    <GeneralModal buttonContent={<GroupsIcon />}>
       <Typography>メンバー追加</Typography>
 
       <TextField
