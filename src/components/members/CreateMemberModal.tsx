@@ -3,18 +3,17 @@ import GeneralModal from "../commons/GeneralModal";
 import { Button, TextField, Typography } from "@mui/material";
 import { useCreateProjectMemberService } from "@/service/useProjectMemberService";
 import { useState } from "react";
-import { useRouter } from "next/router";
 import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";
 import { GroupsIcon } from "@/lib/mui/muiRendering";
+import useTransition from "@/hooks/useTransition";
 const CreateMemberModal = () => {
   const { createProjectMember, data, loading, error } =
     useCreateProjectMemberService();
   const { currentUser } = useContext(AuthContext);
   const userId = currentUser?.uid;
   const [link, setLink] = useState("");
-
-  const router = useRouter();
+  const { transitionPage } = useTransition();
 
   const handleCreateProjectMember = (link: string) => {
     createProjectMember({
@@ -35,8 +34,9 @@ const CreateMemberModal = () => {
       />
       <Button
         disabled={link === null}
-        onClick={() => {
-          handleCreateProjectMember(link);
+        onClick={async () => {
+          await handleCreateProjectMember(link);
+          transitionPage("/projects/");
         }}
       >
         Join
