@@ -19,12 +19,23 @@ import {
 } from "@/types/ReactFlowInterface";
 const Id = () => {
   const { createSave } = useCreateSaveService();
-  const { text } = useContext(EditorContext);
+  const { text, setText } = useContext(EditorContext);
   const router = useRouter();
   const { id } = router.query;
   const projectId = id as string;
 
-  const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
+  const { data: SubscriptionData, loading } = useEditorSubscriptionService(
+    projectId!
+  );
+  if (!loading) {
+    console.log(SubscriptionData);
+  }
+  useEffect(() => {
+    if (SubscriptionData && !loading && SubscriptionData?.postEditor?.editor) {
+      setText(SubscriptionData?.postEditor.editor);
+    }
+  }, [SubscriptionData]);
+
   //受け取ったデータ
   const editorData = SubscriptionData?.postEditor?.editor;
 

@@ -11,7 +11,6 @@ const CreateMemberModal = () => {
   const { createProjectMember, data, loading, error } =
     useCreateProjectMemberService();
   const { currentUser } = useContext(AuthContext);
-  const userId = currentUser?.uid;
   const [link, setLink] = useState("");
   const { transitionPage, Reload } = useTransition();
 
@@ -54,7 +53,6 @@ const CreateMemberModal = () => {
             disabled={link === null}
             onClick={async () => {
               await handleCreateProjectMember(link);
-              Reload();
             }}
             sx={{
               mt: 2,

@@ -24,11 +24,27 @@ interface TablesData {
 
 function parseTableDefinition(definition: string): TablesData {
   const tables: Table[] = [];
-  const relations: Relation[] = []; // この部分は関連性の定義に基づいて拡張する必要がある
+  const relations: Relation[] = [];
 
   definition.split("\n\n").forEach((tableDef) => {
+    if (!tableDef.includes("table ")) {
+      // This handles the relations
+      const relationMatch = tableDef.match(/(\w+)\.(\w+) > (\w+)\.(\w+)/);
+      if (relationMatch) {
+        const [_, fromTable, fromColumn, toTable, toColumn] = relationMatch;
+        relations.push({
+          id: fromTable + "To" + toTable,
+          from: fromTable + "." + fromColumn,
+          to: toTable + "." + toColumn,
+        });
+      }
+      return;
+    }
+
+    // Below is the existing logic to parse tables and columns
     const lines = tableDef.split("\n");
-    const tableName = lines[0].split(" ")[1];
+    const tableName = lines[0].split(" ")[1]; //ここでtable名を取得している
+
     const columns: Column[] = lines.slice(1, -1).map((line) => {
       const [name, type] = line.split(" ");
       const options = type.match(/\[(.*?)\]/)?.[1].split(",") || [];

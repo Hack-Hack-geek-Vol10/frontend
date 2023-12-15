@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { use, useContext, useEffect, useState } from "react";
 import { Box } from "@/lib/mui/muiRendering";
 import ReactAce from "react-ace/lib/ace";
 import "ace-builds/src-noconflict/mode-json";
@@ -10,12 +10,10 @@ interface Props {
 }
 const Editor = (props: Props) => {
   const { text, setText } = useContext(EditorContext);
-  const { data } = props;
+
   useEffect(() => {
-    if (data) {
-      setText(data);
-    }
-  }, [data]);
+    setText(props.data);
+  }, [props.data]);
   return (
     <Box
       sx={{
