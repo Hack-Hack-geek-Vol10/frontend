@@ -14,36 +14,37 @@ import { EditorContext } from "@/store/EditorContext";
 const Id = () => {
   const { createSave } = useCreateSaveService();
   const { text } = useContext(EditorContext);
-  console.log("id text", text);
   const router = useRouter();
   const { id } = router.query;
   const projectId = id as string;
 
   const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
-
+  console.log(SubscriptionData);
   //受け取ったデータ
   const objData = SubscriptionData?.postEditor?.object; //byte
   const editorData = SubscriptionData?.postEditor?.editor; //string
   //obj stringに変換
   const objDataString = new TextDecoder().decode(objData);
-  console.log("objDataString", objDataString);
+
   //送信するデータの整形
+
   const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(tablesData);
 
-  const Post = [
+  const PostObj = [
     ...TableNodeData,
     ...ColumnNodeData,
     ...EdgeData,
   ] as unknown as string;
-
   //送信するデータをバイトに変換
-  const PostByte = new TextEncoder().encode(Post);
+  const PostObjByte = new TextEncoder().encode(PostObj);
 
   // Uint8Array を通常の文字列に変換
-  const binaryString = String.fromCharCode.apply(null, PostByte);
+  const PostObjString = Array.from(PostObjByte)
+    .map((byte) => String.fromCharCode(byte))
+    .join("");
 
-  // 文字列を Base64 に変換
-  const base64Data = btoa(binaryString);
+  // 文字列をBase64に変換
+  const base64Data = btoa(PostObjString);
   useEffect(() => {
     if (text) {
       createSave({
