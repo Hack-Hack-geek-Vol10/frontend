@@ -43,10 +43,10 @@ const CreateProject = () => {
             mb: 2,
           }}
         >
-          プロジェクトを作成
+          Create Project
         </Typography>
         <TextField
-          label='プロジェクト名'
+          label='Project Name'
           variant='outlined'
           fullWidth
           value={title}
@@ -61,9 +61,6 @@ const CreateProject = () => {
             variant='outlined'
             onClick={handleCreateProject}
             disabled={title === ""}
-            sx={{
-              mt: 2,
-            }}
           >
             Create
           </Button>

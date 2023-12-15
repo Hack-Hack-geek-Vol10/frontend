@@ -1,6 +1,6 @@
 import React from "react";
 import GeneralModal from "../commons/GeneralModal";
-import { Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useCreateProjectMemberService } from "@/service/useProjectMemberService";
 import { useState } from "react";
 import { AuthContext } from "@/store/AuthContext";
@@ -28,23 +28,42 @@ const CreateMemberModal = () => {
   };
   return (
     <GeneralModal buttonContent={<GroupsIcon />}>
-      <Typography>メンバー追加</Typography>
+      <Box>
+        <Typography
+          sx={{
+            textAlign: "center",
+            mb: 2,
+          }}
+        >
+          Join Project
+        </Typography>
 
-      <TextField
-        label='招待ID'
-        variant='outlined'
-        fullWidth
-        onChange={(e) => setLink(e.target.value)}
-      />
-      <Button
-        disabled={link === null}
-        onClick={async () => {
-          await handleCreateProjectMember(link);
-          Reload();
-        }}
-      >
-        Join
-      </Button>
+        <TextField
+          label='Join ID'
+          variant='outlined'
+          fullWidth
+          onChange={(e) => setLink(e.target.value)}
+        />
+        <Box
+          sx={{
+            textAlign: "right",
+          }}
+        >
+          <Button
+            variant='outlined'
+            disabled={link === null}
+            onClick={async () => {
+              await handleCreateProjectMember(link);
+              Reload();
+            }}
+            sx={{
+              mt: 2,
+            }}
+          >
+            Join
+          </Button>
+        </Box>
+      </Box>
     </GeneralModal>
   );
 };
