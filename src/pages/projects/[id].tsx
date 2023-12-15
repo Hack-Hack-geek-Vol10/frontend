@@ -1,6 +1,6 @@
 import Header from "@/components/editor/EditorHeader/Header";
 import { Box } from "@/lib/mui/muiRendering";
-import React, { useContext, useEffect } from "react";
+import React, { use, useContext, useEffect } from "react";
 import Canvas from "@/components/objects/Canvas";
 import Editor from "@/components/editor/Editor";
 import {
@@ -9,8 +9,14 @@ import {
 } from "@/service/useSaveService";
 import { useRouter } from "next/router";
 import DataFormat from "@/components/objects/DataFormat";
-import { tablesData } from "@/components/objects/dummy";
+
 import { EditorContext } from "@/store/EditorContext";
+import StringDataFormat from "@/components/objects/StringDataFormat";
+import {
+  ColumnNodeInterface,
+  EdgeInterface,
+  TableNodeInterface,
+} from "@/types/ReactFlowInterface";
 const Id = () => {
   const { createSave } = useCreateSaveService();
   const { text } = useContext(EditorContext);
@@ -20,25 +26,23 @@ const Id = () => {
 
   const { data: SubscriptionData } = useEditorSubscriptionService(projectId!);
   //受け取ったデータ
-  const objData = SubscriptionData?.postEditor?.object; //byte
-  const editorData = SubscriptionData?.postEditor?.editor; //string
+  const editorData = SubscriptionData?.postEditor?.editor;
 
-  //送信するデータの整形
+  let TableNodeData: TableNodeInterface[] = [];
+  let ColumnNodeData: ColumnNodeInterface[] = [];
+  let EdgeData: EdgeInterface[] = [];
 
-  const { TableNodeData, ColumnNodeData, EdgeData } = DataFormat(tablesData);
+  if (editorData) {
+    const { tables, relations } = StringDataFormat(editorData);
+    console.log(tables);
 
-  const PostObj = [
-    ...TableNodeData,
-    ...ColumnNodeData,
-    ...EdgeData,
-  ] as unknown as string;
-  //送信するデータをバイトに変換
-  const PostObjByte = new TextEncoder().encode(PostObj);
-
-  // Uint8Array を通常の文字列に変換
-  const PostObjString = Array.from(PostObjByte)
-    .map((byte) => String.fromCharCode(byte))
-    .join(""); //string
+    const dataFormatResult = DataFormat(tables, relations);
+    if (dataFormatResult.TableNodeData && dataFormatResult.ColumnNodeData) {
+      TableNodeData = dataFormatResult.TableNodeData;
+      ColumnNodeData = dataFormatResult.ColumnNodeData;
+    }
+  }
+  const post = { ...TableNodeData, ...ColumnNodeData, ...EdgeData };
 
   useEffect(() => {
     if (text) {
@@ -47,12 +51,14 @@ const Id = () => {
           input: {
             projectId: projectId!,
             editor: text,
-            object: PostObjString,
+            object: JSON.stringify(post),
           },
         },
       });
     }
   }, [text]);
+
+  //送信するデータをバイトに変換
 
   return (
     <>

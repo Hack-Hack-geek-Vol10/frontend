@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import ReactFlow, {
   useNodesState,
   useEdgesState,
   Controls,
   ReactFlowProps,
+  Node,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import ColumnNode from "./ColumnNode";
@@ -21,23 +22,25 @@ interface CustomNodeFlowProps {
   ColumnNodeData: ColumnInterface[];
   EdgeData: EdgeInterface[];
 }
-type NodeData = TableInterface & ColumnInterface;
 
 const Canvas: any = ({ ...props }: CustomNodeFlowProps) => {
-  const [nodes, setNodes, onNodesChange] = useNodesState<NodeData>([]);
-  const [edges, setEdges] = useEdgesState([]);
+  const [nodes, setNodes] = useState<Node[]>([]);
+  const [edges, setEdges] = useState<EdgeInterface[]>([]);
   const { TableNodeData, ColumnNodeData, EdgeData } = props;
 
-  const NodeData: any = [...TableNodeData, ...ColumnNodeData];
+  useEffect(() => {
+    const NodeData: any = [
+      ...TableNodeData.map((data) => ({ ...data, type: "TableNode" })),
+      ...ColumnNodeData.map((data) => ({ ...data, type: "ColumnNode" })),
+    ];
+    setNodes(NodeData);
+    setEdges(EdgeData);
+  }, [TableNodeData, ColumnNodeData, EdgeData, setNodes, setEdges]);
+
   const nodeTypes: any = {
     ColumnNode: ColumnNode,
     TableNode: TableNode,
   };
-
-  useEffect(() => {
-    setNodes(NodeData);
-    setEdges(EdgeData);
-  }, []);
 
   return (
     <Box
@@ -49,7 +52,6 @@ const Canvas: any = ({ ...props }: CustomNodeFlowProps) => {
       <ReactFlow
         nodes={nodes}
         edges={edges}
-        onNodesChange={onNodesChange}
         style={{ background: "#333" }}
         nodeTypes={nodeTypes}
         connectionLineStyle={connectionLineStyle}

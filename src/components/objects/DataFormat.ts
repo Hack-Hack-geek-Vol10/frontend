@@ -1,16 +1,25 @@
-import { from } from "@apollo/client";
 import {
   TableNodeInterface,
   ColumnNodeInterface,
   EdgeInterface,
+  CustomTableNode,
+  CustomColumnNode,
 } from "@/types/ReactFlowInterface";
 
-const DataFormat = (objData: any) => {
-  const TableNodeData: TableNodeInterface[] = objData.tables.map(
-    (table: any, index: number) => {
+function convertToVisualizationData(
+  tables: any,
+  relations: any
+): {
+  TableNodeData: TableNodeInterface[];
+  ColumnNodeData: ColumnNodeInterface[];
+  EdgeData: EdgeInterface[];
+} {
+  const TableNodeData: TableNodeInterface[] = tables.map(
+    (table: any, index: any) => {
       const tableHeight = table.columns.length * 23;
       const positionY = index * 200;
       const positionX = index * 50;
+
       return {
         id: table.name,
         type: "TableNode",
@@ -25,17 +34,18 @@ const DataFormat = (objData: any) => {
     }
   );
 
-  const ColumnNodeData: ColumnNodeInterface[] = objData.tables
+  const ColumnNodeData: ColumnNodeInterface[] = tables
     .map((table: any) => {
-      return table.columns.map((column: any, index: number) => {
+      return table.columns.map((column: any, index: any) => {
         const ColumnNodePositionY = index * 23 + 22;
+
         return {
-          id: `${table.name}.${column.name}`.toString(),
+          id: `${table.name}.${column.name}`,
           type: "ColumnNode",
           position: { x: 0, y: ColumnNodePositionY },
           data: { name: column.name, type: column.type },
           style: { border: "0.5px solid #fff", padding: "4px" },
-          parentNode: table.name.toString(),
+          parentNode: table.name,
           extent: "parent",
           draggable: false,
         };
@@ -43,7 +53,7 @@ const DataFormat = (objData: any) => {
     })
     .flat();
 
-  const EdgeData: EdgeInterface[] = objData.relations.map((relation: any) => {
+  const EdgeData: EdgeInterface[] = relations.map((relation: any) => {
     return {
       id: relation.id,
       source: relation.from,
@@ -51,7 +61,8 @@ const DataFormat = (objData: any) => {
       style: { stroke: "#fff" },
     };
   });
-  return { TableNodeData, ColumnNodeData, EdgeData };
-};
 
-export default DataFormat;
+  return { TableNodeData, ColumnNodeData, EdgeData };
+}
+
+export default convertToVisualizationData;

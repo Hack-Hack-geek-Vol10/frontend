@@ -21,7 +21,6 @@ export const tablesData = {
         },
       ],
     },
-
     {
       name: "likes",
       position: { x: 0, y: 0 },
