@@ -38,7 +38,7 @@ function convertToVisualizationData(
     .map((table: any) => {
       return table.columns.map((column: any, index: any) => {
         const ColumnNodePositionY = index * 23 + 22;
-
+        console.log("id" + `${table.name}.${column.name}`);
         return {
           id: `${table.name}.${column.name}`,
           type: "ColumnNode",
@@ -54,6 +54,10 @@ function convertToVisualizationData(
     .flat();
 
   const EdgeData: EdgeInterface[] = relations.map((relation: any) => {
+    console.log("relation" + relation);
+    console.log("relation" + relation.id);
+    console.log("relation" + relation.from);
+    console.log("relation" + relation.to);
     return {
       id: relation.id,
       source: relation.from,

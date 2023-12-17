@@ -27,9 +27,12 @@ function parseTableDefinition(definition: string): TablesData {
   const relations: Relation[] = [];
 
   definition.split("\n\n").forEach((tableDef) => {
+    //
     if (!tableDef.includes("table ")) {
+      //
       // This handles the relations
-      const relationMatch = tableDef.match(/(\w+)\.(\w+) > (\w+)\.(\w+)/);
+      const relationMatch = tableDef.match(/(\w+)\.(\w+) > (\w+)\.(\w+)/); //
+      console.log("relationMatch" + relationMatch);
       if (relationMatch) {
         const [_, fromTable, fromColumn, toTable, toColumn] = relationMatch;
         relations.push({
@@ -37,6 +40,7 @@ function parseTableDefinition(definition: string): TablesData {
           from: fromTable + "." + fromColumn,
           to: toTable + "." + toColumn,
         });
+        console.log("relations" + relations);
       }
       return;
     }
@@ -44,10 +48,14 @@ function parseTableDefinition(definition: string): TablesData {
     // Below is the existing logic to parse tables and columns
     const lines = tableDef.split("\n");
     const tableName = lines[0].split(" ")[1]; //ここでtable名を取得している
-
+    console.log(lines);
     const columns: Column[] = lines.slice(1, -1).map((line) => {
-      const [name, type] = line.split(" ");
-      const options = type.match(/\[(.*?)\]/)?.[1].split(",") || [];
+      console.log("lines.split" + line.slice(1, -1));
+      const name = line.match(/`.*?`/)?.[0] || ""; //ここで`で囲まれた文字列を取得している
+      const type = line.match(/-\s.*?$/)?.[0] || "";
+      // -の後の文字列を取得している
+      const options = line.match(/\[.*?\]/g) || []; //ここで[]で囲まれた文字列を取得している
+
       return {
         name: name.trim(),
         type: type.replace(/\[.*?\]/, "").trim(),

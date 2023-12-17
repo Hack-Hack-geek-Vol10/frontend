@@ -2,7 +2,12 @@ import React from "react";
 import "next/image";
 import { Avatar, Box, Button, IconButton } from "@/lib/mui/muiRendering";
 import CreateLinkPullDown from "@/components/projects/CreateLinkPullDown";
+import { useContext } from "react";
+import { AuthContext } from "@/store/AuthContext";
+import { LoginButton } from "@/components/auth/LoginButton";
+import LogoutButton from "@/components/auth/LogoutButton";
 const Header = () => {
+  const { signInCheck } = useContext(AuthContext);
   return (
     <Box
       sx={{ position: "sticky", height: "62px", top: 0 }}
@@ -37,6 +42,7 @@ const Header = () => {
       <Box>
         <CreateLinkPullDown />
       </Box>
+      <Box>{signInCheck ? <LogoutButton /> : <LoginButton />}</Box>
     </Box>
   );
 };
