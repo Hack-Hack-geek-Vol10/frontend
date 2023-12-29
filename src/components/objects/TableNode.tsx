@@ -8,12 +8,11 @@ const TableNode: React.FC<CustomTableNode> = ({ data }) => {
       <Box
         sx={{
           width: "100px",
-          height: "100px",
+          height: "200px",
         }}
       >
         <Typography
           sx={{
-            fontSize: "0.6rem",
             color: "#fff",
             textAlign: "left",
           }}
