@@ -6,7 +6,7 @@ import {
   Box,
   Typography,
 } from "@/lib/mui/muiRendering";
-import { useCreateProject } from "@/apis/useProjectService";
+import { useCreateProject } from "@/apis/useProject";
 import GeneralModal from "@/components/commons/GeneralModal";
 import useTransition from "@/hooks/useTransition";
 

@@ -8,7 +8,7 @@ import {
 } from "@/lib/mui/muiRendering";
 import { AuthContext } from "@/store/AuthContext";
 import { use, useContext } from "react";
-import { useGetUserProjects } from "@/apis/useProjectService";
+import { useGetUserProjects } from "@/apis/useProject";
 import useTransition from "@/hooks/useTransition";
 import DeleteProjectButton from "@/components/projects/DeleteProjectButton";
 import CardTitle from "./CardTitle";

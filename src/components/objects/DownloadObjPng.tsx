@@ -7,7 +7,7 @@ import {
 } from "reactflow";
 import { Button } from "@/lib/mui/muiRendering";
 import { toPng } from "html-to-image";
-import { useUpdateProject } from "@/apis/useProjectService";
+import { useUpdateProject } from "@/apis/useProject";
 
 function downloadImage(dataUrl: string) {
   const a = document.createElement("a");

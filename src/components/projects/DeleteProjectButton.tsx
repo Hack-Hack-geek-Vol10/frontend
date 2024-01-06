@@ -1,5 +1,5 @@
 import React from "react";
-import { useDeleteProject, useGetProject } from "@/apis/useProjectService";
+import { useDeleteProject, useGetProject } from "@/apis/useProject";
 import { IconButton, DeleteOutlineOutlinedIcon } from "@/lib/mui/muiRendering";
 interface Props {
   projectId: string;
