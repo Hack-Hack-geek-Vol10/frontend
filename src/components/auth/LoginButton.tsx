@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Button } from "@mui/material";
 import { AuthContext } from "@/store/AuthContext";
-import { useCreateUser, useGetUser } from "@/service/useUserServices";
+import { useCreateUser, useGetUser } from "@/apis/useUserServices";
 
 export const LoginButton = () => {
   const { login, currentUser } = useContext(AuthContext);

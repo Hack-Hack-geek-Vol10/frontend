@@ -1,5 +1,5 @@
 import React from "react";
-import { useCreateInviteLink } from "@/service/useLinkServices";
+import { useCreateInviteLink } from "@/apis/useLinkServices";
 import { Auth } from "@/generated/graphql";
 import { useState } from "react";
 import clipboardCopy from "clipboard-copy";

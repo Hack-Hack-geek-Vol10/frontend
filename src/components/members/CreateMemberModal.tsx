@@ -1,7 +1,7 @@
 import React from "react";
 import GeneralModal from "../commons/GeneralModal";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { useCreateProjectMemberService } from "@/service/useProjectMemberService";
+import { useCreateProjectMemberService } from "@/apis/useProjectMemberService";
 import { useState } from "react";
 import { AuthContext } from "@/store/AuthContext";
 import { useContext } from "react";

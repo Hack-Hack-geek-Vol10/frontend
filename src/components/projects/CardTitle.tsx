@@ -6,7 +6,7 @@ import {
   Box,
 } from "@/lib/mui/muiRendering";
 import useTitle from "@/hooks/useTitle";
-import { useUpdateProject } from "@/service/useProjectService";
+import { useUpdateProject } from "@/apis/useProjectService";
 
 interface Props {
   projectId: string;
